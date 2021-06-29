@@ -1,0 +1,37 @@
+@import "~assets/styles/colors";
+@import "~assets/styles/theme";
+@import "~assets/styles/variables";
+
+.wrapper_preview {
+  margin: 15px 35px;
+  border: 2px ridge #fff;
+}
+.wrapper_preview_title {
+  background-color: #eee;
+  padding: 10px;
+}
+.more_info_tooltip {
+  font-size: 16px;
+  color: $blueExport;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: underline;
+  &:hover {cursor: pointer;}
+}
+.wrapper_preview_content {padding: 10px;}
+.help{
+  color: $blue;
+  display: block;
+}
+/deep/ .mat-checkbox-layout{white-space: unset;}
+span {
+  font-size: 16px;
+  font-family: $baseFont;
+}
+
+.star{
+  margin-left: 3px;
+  color: $warn;
+  font-size: 16px !important;
+  vertical-align: middle;
+}

@@ -1,0 +1,29 @@
+<form class="form-fields" [formGroup]="parentForm">
+  <app-form-input *ngFor="let item of inputs"
+                  [label]="item.label"
+                  labelWidth="100px"
+                  [required]=item.required>
+
+    <app-input *ngIf="item.type=='text'"
+               type="text"
+               [control]='parentForm.get(item.controlName)'
+               [validationErrors]="parentForm.get(item.controlName).errors"
+               input-transclude-slot>
+    </app-input>
+
+    <app-textarea *ngIf="item.type=='textarea'"
+                  [control]="parentForm.get(item.controlName)"
+                  [validationErrors]="parentForm.get(item.controlName).errors"
+                  input-transclude-slot>
+    </app-textarea>
+
+    <ng-select *ngIf="item.type==='select'"
+               [items]="item.items"
+               bindLabel="name"
+               bindValue="id"
+               input-transclude-slot>
+    </ng-select>
+  </app-form-input>
+
+</form>
+

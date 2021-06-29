@@ -1,0 +1,5 @@
+<app-select-input [options]="countries" valueField='iso2' textField="value" [control]="countriesControl"
+  [validationErrors]="countriesControl.errors" placeholder="Country code"></app-select-input>
+<app-input (keydown)="numericKeyDown($event)"  [control]="control" [validationErrors]="control.errors"
+  input-transclude-slot></app-input>
+

@@ -1,0 +1,103 @@
+@import "../../../../assets/styles/theme";
+@import "../../../../assets/styles/colors";
+
+
+app-textarea{
+  /deep/ textarea{height: 80px !important;}
+  &.one-row { /deep/ textarea{ height: 29px !important; } }
+}
+app-form-input {
+  /deep/ .input-content {align-items: flex-start;}
+}
+.left-side{
+  width: 65%;
+  margin-right: 15px;
+}
+.right-side{width: 35%;}
+form{
+  margin: 10px 0px;
+  .form-content {display: flex;}
+}
+.label_set_btns{margin-left: 5px;}
+
+app-config-block {
+  /deep/ .block{margin-top: 0px;}
+  .config-block-content{margin-left: 15px;}
+}
+
+.can_comment_input_block {
+  align-items: flex-start;
+  display: flex;
+}
+.font-size-checkbox{font-size: 0.8em;}
+.range_block{margin-top: 15px;}
+.range-from,.range-to{
+  margin-left: 25px;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  .range_input_label{
+    width: 15%;
+    font-size: 0.9em;
+  }
+  .range_input_number{
+    width: 23%;
+    margin-right: 5px;
+  }
+}
+.checkbox_onerow {
+  display: flex;
+  app-input {
+    margin-right: 7px;
+    width: 28vw;
+  }
+}
+.question_options {
+  font-size: 0.8em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 85%;
+  mat-checkbox {
+    margin-right: 15px;
+    width: 45%
+  }
+}
+.add_option{
+  /deep/ button.icon-button{
+    width: auto;
+    padding: 0px 5px;
+    margin-bottom: 10px;
+  }
+}
+.option_row{
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9em;
+  margin-bottom: 6px;
+  .short_option_input{width: 19%;}
+  .long_option_input{width: 59%;}
+}
+
+.with-error{border: 1px solid $warn;}
+.minmax_message{
+  color: $warning_red;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.used_in {
+  font-size: 12px;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: darkred;
+
+  .label {
+    float: left;
+    width: 120px;
+    text-align: right;
+    margin-right: 5px;
+  }
+  .data { padding-left: 125px }
+}

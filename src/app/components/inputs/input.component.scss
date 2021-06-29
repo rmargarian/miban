@@ -1,0 +1,28 @@
+@import "../../../assets/styles/theme";
+@import "../../../assets/styles/colors";
+
+.input {
+  width: 100%;
+  border-width: 1px;
+  font-size: 13px;
+  height: 27px;
+  padding: 4px;
+
+
+  &.with-error{
+    border: 1px solid $warn;
+  }
+
+  &[disabled]{
+    background: $disabled-bg;
+  }
+}
+
+:host {
+  display: block;
+
+  .error_message {
+    font-size: 11px;
+    color: #f44336;
+  }
+}

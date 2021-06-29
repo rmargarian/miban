@@ -1,0 +1,25 @@
+@import "~assets/styles/tabs";
+@import "~assets/styles/menu";
+
+:host {
+
+  .template_content { margin-left: 100px }
+
+  .questions_btns {
+    display: flex;
+
+    #search-input{
+      background-color: white;
+      border-radius: 4px;
+    }
+  }
+
+
+  .users_count {
+    color: #fff;
+    font-size: 13px;
+    height: $headerItemsHeight;
+    line-height: $headerItemsHeight;
+    white-space: nowrap;
+  }
+}

@@ -1,0 +1,22 @@
+<app-answer-wrapper
+  [moreInfo]="moreInfo"
+  [questionText]="questionText"
+  [help]="help"
+  [isMandatory]="isMandatory"
+  [labelText]="labelText"
+  [commentRows]="commentRows"
+  [withComment]="withComment"
+  [commentControl]="commentControl">
+
+  <app-input type="text"
+             #inputComponent
+             class="numeric-answer-input"
+             [control]="control"
+             [notTooltip]=[notTooltip]
+             [isAttemptPage]="true"
+             [validationErrors]="validationErrors">
+  </app-input>
+  <p class="numeric-answer-hint">
+    <i>Only numbers may be entered in this field </i>
+  </p>
+</app-answer-wrapper>

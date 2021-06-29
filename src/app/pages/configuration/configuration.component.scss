@@ -1,0 +1,5 @@
+.save-btn{
+  /deep/ .icon-button{width: 4rem;}
+}
+:host{overflow-y: auto;}
+.content{margin: 15px 20px;}

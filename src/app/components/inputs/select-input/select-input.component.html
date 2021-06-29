@@ -1,0 +1,43 @@
+<div type="type">
+  <ng-select [items]="options"
+             #input
+             [searchable]="searchOn"
+             [multiple]="type ==='multi'"
+             [closeOnSelect]="type !=='multi'"
+             [bindValue]="valueField"
+             [groupBy]="groupBy"
+             [groupValue]="groupValue"
+             [selectableGroup]="type ==='multi'"
+             [bindLabel]="textField"
+             appendTo="body"
+             [ngClass]="{'with-error': (errorMessage && !focused)}"
+             attr.data-tooltip="{{(!notTooltip && !focused) ? errorMessage : ''}}"
+             attr.data-tooltip-position="{{tooltipPosition}}"
+             attr.data-tooltip-class="{{'error-tooltip'}}"
+             [clearable]="searchOn"
+             [placeholder]="placeholder"
+             [formControl]="control"
+             (focusin)="onFocusIn($event)"
+             (focusout)="onFocusOut($event)">
+    <ng-template ng-optgroup-tmp let-item="item">
+      <span style="vertical-align: middle;">{{item.groupName}}</span>
+    </ng-template>
+    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index" let-search="searchTerm">
+      <div class="option-wrapper" [class.not_activated]="item.not_activated" [ngClass]="{multiple: type==='multi'}">
+        <div class="checkbox" *ngIf="type==='multi'">
+          <mat-checkbox class="custom_mat-checkbox"
+                        id="item-{{index}}"
+                        [disableRipple]="true"
+                        [disabled]="true"
+                        [checked]="item$.selected"></mat-checkbox>
+        </div>
+        <span [ngOptionHighlight]="search" [class.bold]="item.top === true">{{item[textField]}}</span>
+      </div>
+    </ng-template>
+    <ng-template ng-optgroup-tmp let-item="item" let-index="index" *ngIf="groupBy">
+      {{item[groupBy]}}
+  </ng-template>
+  </ng-select>
+</div>
+<div *ngIf="notTooltip" class="error_message">{{(errorMessage && !focused) ? errorMessage : ''}}</div>
+

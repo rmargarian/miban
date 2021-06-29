@@ -1,0 +1,22 @@
+<div class="dialog">
+  <div class="form-header">
+    <div class="header-text" appMatDialogDraggableTitle>{{data.header}}</div>
+    <app-icon-button iconClass="close" color="transparent" (clicked)="closeDialog()"></app-icon-button>
+  </div>
+  <form>
+    <div class="form-content">
+      <div class="info">
+        <p>
+          <!--<i class="material-icons done_icon">done</i>
+          <i class="fas fa-exclamation done_icon"></i>-->
+        </p>
+        <div class="info_text">Please check your email for your report, including your Junk or Spam folder.</div>
+      </div>
+    </div>
+    <div class="form-footer">
+      <div class="a_container">
+        <a [href]="href" target="_blank" (click)="closeDialog()">Show My Report!</a>
+      </div>
+    </div>
+  </form>
+</div>

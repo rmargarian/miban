@@ -1,0 +1,31 @@
+@import "colors";
+
+$headerHeight: 37px;
+$tabHeight: 31px;
+$panelWidth: 82vw;
+$sbWidth: 300px;
+$headerItemsHeight: 27px;
+//Fonts
+$baseFont: Arial, verdana, sans-serif;
+$tooltipWidth: 20px;
+$userBRadius: 6px;
+
+%tooltip_style {
+  font-size: 13px !important;
+  white-space: nowrap !important;
+  color: black !important;
+  font-weight: normal !important;
+  background-color: #ebf5ff !important;
+  border: 1px solid #ddd;
+  -webkit-box-shadow: 2px 2px rgba(0,0,0,.2);
+  box-shadow: 2px 2px rgba(0, 0, 0, 0.2);
+  padding: 0 5px !important;
+  height: $tooltipWidth !important;
+  line-height: $tooltipWidth;
+  font-family: $baseFont;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+

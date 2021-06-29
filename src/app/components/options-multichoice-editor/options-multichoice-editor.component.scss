@@ -1,0 +1,144 @@
+@import "../../../assets/styles/theme";
+@import "../../../assets/styles/colors";
+
+app-config-block {
+  /deep/ .block {margin-top: 0px;}
+  .config-block-content {margin-left: 10px;}
+}
+
+.add_option {
+  /deep/ button.icon-button {
+    width: auto;
+    padding: 0px 5px;
+    margin-bottom: 10px;
+  }
+}
+
+.top_controls {
+  mat-checkbox {
+    margin-left: 10px;
+  }
+}
+
+.option_row {
+  display: flex;
+  font-size: 0.8em;
+  margin-bottom: 6px;
+  .inputs_style {
+    margin-right: 5px;
+    border-radius: 4px;
+    display: block;
+    width: 100%;
+    min-width: 0;
+    border: 1px solid rgb(204, 204, 204);
+    padding: 3px;
+  }
+
+  .with-error {border: 1px solid $warn !important;}
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  }
+  .option_index {
+    width: 8%;
+    cursor: grab;
+    padding-top: 4px;
+  }
+}
+
+.textarea_container {
+  flex: 1;
+  margin-right: 5px;
+
+  textarea {
+    width: 100%;
+  }
+}
+.option_editor_textarea {
+  border-radius: 4px;
+  padding: 3px;
+  resize: none;
+}
+
+.option_controls {
+  padding-bottom: 5px;
+  /*display: flex;
+  flex-direction: column;
+  justify-content: space-between;*/
+
+  .score {
+    width: 42px;
+    margin-right: 5px;
+  }
+}
+
+.one_column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  float: left;
+  height: 100%;
+}
+
+.option_index, input, textarea {margin-right: 5px;}
+
+.textarea_plus {
+  position: absolute;
+  margin-left: -10px;
+  margin-top: 11px;
+  font-weight: bold;
+}
+
+.color_select {
+  width: 42px;
+  float: left;
+  /deep/ .ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+    padding: 1px 4px !important;
+    font-size: 16px !important;
+  }
+
+  /deep/ .ng-arrow-wrapper {
+    width: 18px;
+    padding: 0 !important;
+  }
+  /deep/ .ng-value-container .ng-value {
+    padding-left: 1px;
+    width: 18px;
+  }
+
+  &.green {
+    /deep/ .ng-value-container .ng-value {
+      color: $faceGreen;
+    }
+  }
+  &.yellow {
+    /deep/ .ng-value-container .ng-value {
+      color: $faceYellow;
+    }
+  }
+  &.red {
+    /deep/ .ng-value-container .ng-value {
+      color: $faceRed;
+    }
+  }
+  &.none {
+    /deep/ .ng-value-container .ng-value {
+      color: $faceNone;
+    }
+  }
+}
+
+.fas {
+  font-weight: 900;
+  font-size: 17px;
+}
+
+input {
+  -moz-appearance: textfield;
+}
+textarea {
+  overflow-x: hidden;
+}

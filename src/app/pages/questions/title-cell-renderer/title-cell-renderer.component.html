@@ -1,0 +1,17 @@
+<span class="cell">
+  <div class="icons-container">
+    <mat-icon *ngIf="question.deleted" class="delete" [attr.data-tooltip]="'Delete permanently'" (click)="delete()">delete</mat-icon>
+    <mat-icon *ngIf="question.deleted" class="restore" [attr.data-tooltip]="'Restore question'" (click)="restore()">restore_page</mat-icon>
+  </div>
+
+  <span
+    *ngIf="!question.deleted"
+    [innerHtml]="type"
+    [class.quest_type_a]="quest_type_a"
+    [class.quest_type_p]="quest_type_p"
+    [class.quest_type_f]="quest_type_f"
+    [attr.data-tooltip]="tooltipData"
+    data-tooltip-position="right">
+  </span>
+  <span [innerHtml]="title" [attr.data-tooltip]="tooltipText" data-tooltip-position="bottom-start"></span>
+</span>

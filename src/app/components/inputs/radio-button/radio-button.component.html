@@ -1,0 +1,10 @@
+<mat-radio-button
+  [disableRipple]="true"
+  class="custom_mat-radio"
+  [value]="option[valueField]"
+  [checked]="isOnChangeFlow() ? option[valueField] : undefined"
+  [disabled]="disabled"
+  (change)="onChange()">
+  <span [innerHtml]="textField ? option[textField] : ''"></span>
+</mat-radio-button>
+

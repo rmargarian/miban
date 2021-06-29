@@ -1,0 +1,21 @@
+:host {
+
+  app-form-input {
+    max-width: 700px;
+  }
+  .send_bottom {
+    display: flex;
+    padding-left: 105px;
+
+    app-text-button { margin-right: 10px }
+    app-icon-button { height: 27px }
+  }
+
+  app-icon-button {
+    &.disabled {
+      /deep/ .mat-icon {
+        color: rgba(0, 0, 0, 0.26) !important;
+      }
+    }
+  }
+}

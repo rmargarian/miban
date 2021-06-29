@@ -1,0 +1,68 @@
+@import "~assets/styles/theme";
+@import "~assets/styles/colors";
+@import "~assets/styles/variables";
+
+:host {
+
+  /deep/ .custom_mat-datepicker {
+    mat-form-field {  margin-top: 2px; }
+   .mat-form-field-flex {
+     border: 1px solid #ccc;
+     border-radius: 5px;
+     display: flex;
+     align-items: center;
+     height: 27px;
+     .mat-form-field-infix {
+        border: none;
+        padding: 2px 0 0 0 !important;
+        height: 100% !important;
+       .mat-input-element{
+         font-size: 13px;
+         font-family: $baseFont;
+         height: 100%;
+         padding-left: 5px;
+        }
+     }
+   }
+   /deep/ .mat-datepicker-content .mat-calendar {
+     width: 252px !important;
+     height: 309px !important;
+   }
+
+   &.with-error .mat-form-field-flex {
+     border: 1px solid $warn !important;
+   }
+  }
+
+  /deep/ input[readonly] {
+    background-color: inherit !important;
+    color: inherit !important;
+  }
+
+  /deep/ input.readonly {
+    color: #797979 !important;
+  }
+
+  .ng-clear-wrapper {
+    cursor: pointer;
+    position: relative;
+    position: absolute;
+    right: 0.5px;
+    top: 2px;
+    color: #999;
+    width: 13px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    span {
+      font-size: 18px;
+      pointer-events: none
+    }
+
+    &:hover {
+      color: #dc3545;
+    }
+  }
+}

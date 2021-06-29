@@ -1,0 +1,22 @@
+<input
+  #input
+  autocomplete="new-password"
+  data-tooltip-position="top"
+  attr.data-tooltip="{{(!notTooltip && (showValidationTriggered || showValidation) && !focused) ? errorMessage : ''}}"
+  attr.data-tooltip-position="{{tooltipPosition}}"
+  attr.data-tooltip-class="{{'error-tooltip'}}"
+  attr.data-tooltip-prevent-overflow="{{tooltipPreventOverflow}}"
+  class="input"
+  [ngClass]="{'with-error': errorMessage && !focused && (showValidationTriggered || showValidation)}"
+  [type]="type"
+  [placeholder]="placeholder"
+  [formControl]="control"
+  [maxlength]="maxlength"
+  [min]="min"
+  [readonly]="readonly"
+  (focusin)="onFocusIn($event)"
+  (focusout)="onFocusOut($event)"
+  matInput>
+  <div *ngIf="notTooltip" class="error_message">
+    {{(showValidationTriggered || showValidation) && !focused ? errorMessage : ''}}
+  </div>

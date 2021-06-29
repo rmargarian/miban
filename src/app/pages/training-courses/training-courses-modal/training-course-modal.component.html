@@ -1,0 +1,20 @@
+<div class="dialog">
+  <div class="form-header">
+    <div class="header-text" appMatDialogDraggableTitle>{{header}}</div>
+    <app-icon-button iconClass="close" color="transparent" (clicked)="closeDialog()"></app-icon-button>
+  </div>
+  <div class="form-content" *ngIf="form">
+    <app-form-input
+      label="Course Name:"
+      labelWidth="125px"
+      [required]="true">
+      <app-input [control]="getControl('course_name')" [validationErrors]="showValidation ? getControl('course_name').errors : null"
+        [focus]="true" [tooltipPreventOverflow]="true" input-transclude-slot>
+      </app-input>
+    </app-form-input>
+  </div>
+  <div class="form-footer">
+    <app-text-button color="blue" type="submit" text="Save" (clicked)="save()"></app-text-button>
+    <app-text-button color="blue" type="submit" text="Close" (click)="closeDialog()"></app-text-button>
+  </div>
+</div>

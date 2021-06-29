@@ -1,0 +1,27 @@
+<div class="dialog">
+    <div class="form-header">
+      <div class="header-text">{{data.header}}</div>
+      <app-icon-button iconClass="close" color="transparent" (clicked)="onClose()"></app-icon-button>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="save()" *ngIf="form">
+      <div class="form-content">
+        <app-form-input label="Description:" labelWidth="120px" required="true">
+          <app-input [control]="getControl('email_desc')" [validationErrors]="getControl('email_desc').errors "
+          [focus]="true" input-transclude-slot></app-input>
+        </app-form-input>
+        <app-form-input label="Subject:" labelWidth="120px" required="true">
+          <app-input [control]="getControl('email_subject')" [validationErrors]="getControl('email_subject').errors"
+                     input-transclude-slot></app-input>
+        </app-form-input>
+        <app-form-input label="Message:" labelWidth="120px" class="flex-start" required="true">
+          <app-textarea [control]="getControl('tpl_content')" [validationErrors]="getControl('tpl_content').errors"
+            input-transclude-slot></app-textarea>
+        </app-form-input>
+      </div>
+      <div class="form-footer">
+        <app-text-button color="blue" [disabled]="form.invalid || validating" type="button" text="Save"
+                         (clicked)="save()"></app-text-button>
+        <app-text-button color="blue" text="Close" (click)="onClose()"></app-text-button>
+      </div>
+    </form>
+  </div>

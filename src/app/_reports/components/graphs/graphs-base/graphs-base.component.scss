@@ -1,0 +1,15 @@
+/deep/ .toolTip {
+  position: absolute;
+  transform: translate(55px, 75px);
+  background-color: #ebf5ff;
+  -webkit-box-shadow: 2px 2px rgba(0,0,0,.2);
+  box-shadow: 2px 2px rgba(0, 0, 0, 0.2);
+  color: black;
+  padding: 0.05rem .30rem;
+  border: 1px solid #ddd;
+  margin: 8px;
+  max-width: initial;
+  font-size: 12px;
+  max-height: 600px;
+  overflow: auto;
+}

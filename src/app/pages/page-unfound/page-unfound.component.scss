@@ -1,0 +1,18 @@
+:host {
+  .dashboard-card {
+    .title {
+      text-align: left;
+      margin: 36px;
+      font-size: 34px;
+      color: #157fcc;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+    .logo {
+      width: 300px;
+      height: 173px;
+      margin: 0 0 0 36px;
+      background: url(/assets/img/logo_300_100.png) no-repeat 0 0;
+    }
+  }
+}

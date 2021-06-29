@@ -1,0 +1,23 @@
+<div class="dialog">
+  <div class="form-header">
+    <div class="header-text" appMatDialogDraggableTitle>Extend the session</div>
+    <app-icon-button iconClass="close" color="transparent" (clicked)="closeDialog()"></app-icon-button>
+  </div>
+  <div class="form-content">
+    <div class="image"><i class="material-icons">warning</i></div>
+    <div class="message">There was a session timeout.<br>
+      Click "Extend" to extend the session, "Logout" - to exit the application</div>
+  </div>
+  <!--<form [formGroup]="form" (ngSubmit)="confirm()" *ngIf="form">
+      <div class="form-content">
+        <app-form-input label="Password:" labelWidth="120px" [required]="true">
+          <app-input [control]="getControl('password')" [validationErrors]="showValidation ? getControl('password').errors : null"
+            type="password" input-transclude-slot></app-input>
+        </app-form-input>
+      </div>
+    </form>-->
+    <div class="form-footer">
+      <app-text-button color="blue" type="button" text="Extend" (clicked)="confirm()"></app-text-button>
+      <app-text-button color="blue" type="button" text="Logout" (click)="closeDialog()"></app-text-button>
+    </div>
+</div>

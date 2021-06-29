@@ -1,0 +1,55 @@
+@import "~assets/styles/dialog";
+@import "~assets/styles/colors";
+@import "~assets/styles/user-page";
+
+:host {
+
+  /deep/ .label-block {
+    align-items: baseline !important;
+    padding-top: 7px !important;
+  }
+
+  .form-header {
+    height: 35px;
+  }
+  .form-footer {
+    text-align: center !important;
+  }
+
+  .mat-form-field { width: 100%; }
+
+  .captcha_container {
+    display: flex;
+    margin-top: 30px;
+    justify-content: flex-end;
+  }
+
+  .form-content { overflow-x: hidden !important}
+
+  /deep/ .ng-select .ng-clear-wrapper{width: 13px !important; top: 2px;}
+
+  /deep/.input {
+    height: 32px !important;
+  }
+
+  /deep/ .ng-select.ng-select-single .ng-select-container {
+    height: 32px !important;
+  }
+
+  /deep/ button.text-button {
+    height: 32px !important;
+    width: 100px !important;
+  }
+
+  /deep/ .ng-select .ng-arrow-wrapper {
+    width: 16px;
+    padding-right: 3px;
+  }
+
+  /deep/ .mat-icon-button .mat-icon, .mat-icon-button i {
+    margin-top: 7px;
+  }
+
+}
+
+

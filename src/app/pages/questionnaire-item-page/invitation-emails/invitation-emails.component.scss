@@ -1,0 +1,119 @@
+@import "~assets/styles/tabs";
+@import "~assets/styles/colors";
+
+:host {
+
+  ag-grid-angular {
+    height: 288px;
+    width: 100%;
+    max-width: 590px;
+    font-size: 11px;
+  }
+
+  /deep/ .ag-theme-balham .ag-cell,
+  /deep/ .ag-theme-balham .ag-header-cell,
+  /deep/ .ag-theme-balham .ag-header-group-cell {
+    line-height: 20px !important;
+    padding-left: 7px;
+  }
+  /deep/ .ag-theme-balham .ag-header-cell-resize::after,
+  /deep/ .ag-theme-balham .ag-header-cell::after,
+  /deep/ .ag-theme-balham .ag-header-group-cell::after {
+    margin-top: 2px;
+  }
+
+  .grid_wrapper {
+    display: flex;
+    height: 300px;
+
+    .selected {
+      min-width: 106px;
+      text-align: right;
+      padding-right: 12px;
+     }
+  }
+
+  app-form-input {
+    max-width: 700px;
+  }
+
+  .radio-filters {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 5px 5px 5px 105px;
+
+    app-radio-buttons-group {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .separetor {
+      color: $light_grey;
+      margin-right: 10px;
+      margin-left: 3px;
+    }
+
+    ::ng-deep .custom_mat-radio {
+      display: unset;
+      margin-right: 7px;
+      font-size: 13px;
+    }
+  }
+
+  .fieldset-filters {
+    max-width: 735px;
+    margin-top: 0;
+
+    &.not-show {
+      height: 1px;
+      padding: 6px 10px;
+
+      .grid-filters { display: none }
+    }
+
+    .grid-filters {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      app-single-column-grid { margin: 0 5px }
+    }
+  }
+
+  .instruction {
+    font-size: 11px;
+    color: $light_grey;
+    padding-left: 105px;
+  }
+
+  .box {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background: #0288d1;
+    border-radius: 6px;
+    color: white;
+    text-align: center;
+    padding: 4px;
+    transition: all 3s ease;
+    z-index: 1000000;
+    width: 300px;
+  }
+
+  app-icon-button {
+    &.disabled {
+      /deep/ .mat-icon {
+        color: rgba(0, 0, 0, 0.26) !important;
+      }
+    }
+  }
+
+  .export_btns_container {
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px 5px;
+  }
+
+}

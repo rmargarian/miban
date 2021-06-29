@@ -1,0 +1,143 @@
+<div class="form-content">
+  <form [formGroup]="form" (ngSubmit)="onSave()" *ngIf="form">
+    <div class="form-content">
+      <app-form-input label="Company Name:" labelWidth="120px" [required]="true">
+        <app-input [control]="getControl('company_name')"
+          [readonly]="true" input-transclude-slot></app-input>
+      </app-form-input>
+      <app-form-input label="First Name:" labelWidth="120px" [required]="true">
+        <app-input [control]="getControl('first_name')"
+          [validationErrors]="getControl('first_name').errors"
+          [notTooltip]="true"
+          [isValidationByFocusOut]="true"
+          [showValidationTriggered]="showValidation"
+          [focus]="true" input-transclude-slot></app-input>
+      </app-form-input>
+      <app-form-input label="Family Name:" labelWidth="120px" [required]="true">
+        <app-input [control]="getControl('last_name')"
+          [validationErrors]="getControl('last_name').errors"
+          [notTooltip]="true"
+          [isValidationByFocusOut]="true"
+          [showValidationTriggered]="showValidation"
+          input-transclude-slot></app-input>
+      </app-form-input>
+      <app-form-input label="Email:" labelWidth="120px" [required]="true">
+        <app-input type="text" [control]="getControl('email')"
+          [validationErrors]="getControl('email').errors"
+          [isValidationByFocusOut]="true"
+          [notTooltip]="true"
+          [showValidationTriggered]="showValidation" input-transclude-slot></app-input>
+      </app-form-input>
+      <app-form-input label="Password:" labelWidth="120px" [required]="true">
+        <app-input [control]="getControl('passwd')" input-transclude-slot type="password"
+          [notTooltip]="true"
+          [validationErrors]="showValidation ? getControl('passwd').errors : null">
+        </app-input>
+      </app-form-input>
+      <app-form-input *ngIf="!user.passwd" label="Confirm Password" labelWidth="120px" [required]="true">
+        <app-input [control]="getControl('confirm_passwd')" input-transclude-slot type="password"
+          [notTooltip]="true"
+          [validationErrors]="showValidation ? getControl('confirm_passwd').errors : null">
+        </app-input>
+      </app-form-input>
+      <app-form-input label="Career Category:" labelWidth="120px" *ngIf="key.show_career_category" [required]="key.mn_career_category">
+        <app-select-input [options]="careers" valueField='id'
+          [validationErrors]="showValidation ? getControl('career_category_id').errors : null"
+          [notTooltip]="true"
+          textField='name' [control]="getControl('career_category_id')"
+          [searchOn]="false" input-transclude-slot>
+        </app-select-input>
+      </app-form-input>
+      <app-form-input label="Job Title / Position:" labelWidth="120px" *ngIf="key.show_job_title" [required]="key.mn_job_title">
+        <app-input [control]="getControl('job_title')"
+          [validationErrors]="showValidation ? getControl('job_title').errors : null"
+          [notTooltip]="true"
+          [readonly]="!key.edit_job_title" input-transclude-slot></app-input>
+      </app-form-input>
+      <app-form-input label="Manager's Name:" labelWidth="120px" *ngIf="key.show_manager_name" [required]="key.mn_manager_name">
+        <app-input [control]="getControl('manager_name')"
+          [validationErrors]="showValidation ? getControl('manager_name').errors : null"
+          [notTooltip]="true"
+          [readonly]="!key.edit_manager_name" input-transclude-slot></app-input>
+      </app-form-input>
+      <app-form-input label="Department:" labelWidth="120px" *ngIf="key.show_dept" [required]="key.mn_dept">
+        <app-input [control]="getControl('department')"
+          [validationErrors]="showValidation ? getControl('department').errors : null"
+          [notTooltip]="true"
+          [readonly]="!key.edit_dept" input-transclude-slot></app-input>
+      </app-form-input>
+      <app-form-input label="Industry Sector:" labelWidth="120px" *ngIf="key.show_industry_sector" [required]="key.mn_industry_sector">
+        <app-input [control]="getControl('industry_sector')"
+          [validationErrors]="showValidation ? getControl('industry_sector').errors : null"
+          [notTooltip]="true"
+          [readonly]="!key.edit_industry_sector" input-transclude-slot></app-input>
+      </app-form-input>
+      <app-form-input label="Training Date:" labelWidth="120px" *ngIf="key.show_training_date" [required]="key.mn_training_date">
+        <app-date-picker [control]="getControl('training_date')" width="100%"
+          [validationErrors]="showValidation ? getControl('training_date').errors : null"
+          [notTooltip]="true"
+          [readonly]="true" input-transclude-slot></app-date-picker>
+      </app-form-input>
+      <app-form-input label="Training Course:" labelWidth="120px" *ngIf="key.show_training_cource" [required]="key.mn_training_cource">
+        <app-select-input [options]="trainings" valueField='id'
+          [validationErrors]="showValidation ? getControl('training_course_id').errors : null"
+          [notTooltip]="true"
+          textField='name' [control]="getControl('training_course_id')" [searchOn]="false" input-transclude-slot>
+        </app-select-input>
+      </app-form-input>
+      <app-form-input label="Country:" labelWidth="120px" *ngIf="key.show_country" [required]="key.mn_country">
+        <app-select-input [options]="countries" valueField='id'
+          [validationErrors]="showValidation ? getControl('country_id').errors : null"
+          [notTooltip]="true"
+          textField='name' [control]="getControl('country_id')" input-transclude-slot>
+        </app-select-input>
+      </app-form-input>
+      <app-form-input label="State:" *ngIf="countryId !== 3 && countryId !== 1 && key.show_state" labelWidth="120px" [required]="key.mn_state">
+        <app-input [control]="getControl('state_name')"
+          [validationErrors]="showValidation ? getControl('state_name').errors : null"
+          [notTooltip]="true"
+          [readonly]="!key.edit_state" input-transclude-slot></app-input>
+      </app-form-input>
+      <app-form-input label="State:" labelWidth="120px" *ngIf="key.show_state && countryId === 3 || countryId === 1" [required]="key.mn_state">
+        <app-select-input [options]="filteredStates" valueField='name'
+          [validationErrors]="showValidation ? getControl('state_name').errors : null"
+          [notTooltip]="true"
+          textField='name' [control]="getControl('state_name')" input-transclude-slot>
+        </app-select-input>
+      </app-form-input>
+      <app-form-input label="City:" labelWidth="120px" *ngIf="key.show_city" [required]="key.mn_city">
+        <app-input [control]="getControl('city')"
+          [validationErrors]="showValidation ? getControl('city').errors : null"
+          [notTooltip]="true"
+          [readonly]="!key.edit_city" input-transclude-slot></app-input>
+      </app-form-input>
+      <app-form-input label="Currency:" labelWidth="120px" [required]="isProfile ? true : false">
+        <app-select-input [control]="getControl('currency_id')" [options]="currencies" textField="currency"
+          [validationErrors]="showValidation ? getControl('currency_id').errors : null"
+          [notTooltip]="true"
+          valueField="id" input-transclude-slot>
+        </app-select-input>
+      </app-form-input>
+      <app-form-input label="Location:" labelWidth="120px" *ngIf="user.p_location">
+        <app-input [control]="getControl('p_location')"
+          [validationErrors]="showValidation ? getControl('p_location').errors : null"
+          [notTooltip]="true"
+          [readonly]="true" input-transclude-slot></app-input>
+      </app-form-input>
+      <app-form-input label="Date:" labelWidth="120px" *ngIf="user.p_date">
+        <app-date-picker [control]="getControl('p_date')" width="100%"
+          [validationErrors]="showValidation ? getControl('p_date').errors : null"
+          [notTooltip]="true"
+          [readonly]="true" input-transclude-slot></app-date-picker>
+      </app-form-input>
+    </div>
+    <div *ngIf="user.passwd" class="bottom-content">
+      <a href="javascript:void(0)" class="link" (click)="forgotPassword()">Password Reminder</a>
+      <div class="email-msg blue bold">{{passwdMsg}}</div>
+    </div>
+  </form>
+  <div class="btn-wrapper">
+    <app-text-button color="blue" type="button" text={{btnText}}
+      (clicked)="onSave()"></app-text-button>
+  </div>
+</div>

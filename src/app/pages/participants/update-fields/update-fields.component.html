@@ -1,0 +1,37 @@
+<div class="dialog">
+    <div class="form-header">
+      <div class="header-text" appMatDialogDraggableTitle>{{data.header}}</div>
+      <app-icon-button iconClass="close" color="transparent" (clicked)="closeDialog()"></app-icon-button>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="save()">
+      <div class="form-content">
+        <div class="info">Please fill the following fields to update {{data.users.length}} participants:</div>
+        <app-form-input label="Location:" labelWidth="120px">
+          <app-input [control]="getControl('p_location')" [focus]="true" input-transclude-slot></app-input>
+        </app-form-input>
+        <app-form-input label="Date:" labelWidth="120px">
+          <app-date-picker [control]="getControl('p_date')" width="100%" input-transclude-slot></app-date-picker>
+        </app-form-input>
+        <div class="one-row">
+          <app-form-input label="Date2:" labelWidth="120px">
+            <app-date-picker [control]="getControl('p_date2')" width="100%" input-transclude-slot></app-date-picker>
+          </app-form-input>
+          <mat-checkbox class="custom_mat-checkbox blue" [disableRipple]="true" [checked]="isClearDate2"
+            (change)="empty($event, 'date2')">
+            <span class="show_all">Clear</span>
+          </mat-checkbox>
+        </div>
+        <app-form-input label="Groups:" labelWidth="120px">
+          <app-input [control]="getControl('p_groups')" input-transclude-slot></app-input>
+        </app-form-input>
+        <app-form-input label="Saved:" labelWidth="120px">
+          <app-input [control]="getControl('p_saved')" input-transclude-slot></app-input>
+        </app-form-input>
+      </div>
+      <div class="form-footer">
+        <app-text-button color="blue" [disabled]="!form.valid" type="button" text="Save"
+                         (clicked)="save()"></app-text-button>
+        <app-text-button color="blue" type="submit" text="Close" (click)="closeDialog()"></app-text-button>
+      </div>
+    </form>
+  </div>

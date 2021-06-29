@@ -1,0 +1,4 @@
+<input matInput #input placeholder="Search" class="input" [formControl]="filterFormControl">
+<div *ngIf="!filterFormControl.value;then clearIcon else searchIcon">here is ignored</div>
+<ng-template #clearIcon><mat-icon class="search-icon">search</mat-icon></ng-template>
+<ng-template #searchIcon><mat-icon (click)="clearFilter()" class="search-icon cursor-pointer">clear</mat-icon></ng-template>

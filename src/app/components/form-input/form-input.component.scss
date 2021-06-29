@@ -1,0 +1,38 @@
+@import "../../../assets/styles/theme";
+
+.input-content {
+  display: flex;
+}
+
+.label-block {
+  margin-right: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 13px;
+  padding-right: 7px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.count {
+  color: grey;
+  position: absolute;
+  margin-top: 25px;
+  margin-left: -3px;
+}
+
+.star {
+  position: absolute;
+  right: 0;
+  color: $warn;
+}
+
+.input-block {
+  flex-grow: 1;
+  width: 13rem;
+}
+
+:host {
+  display: block;
+}

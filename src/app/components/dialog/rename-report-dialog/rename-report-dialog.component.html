@@ -1,0 +1,21 @@
+<div class="dialog">
+  <div class="form-header" >
+    <div class="header-text" appMatDialogDraggableTitle>{{data.title}}</div>
+    <app-icon-button iconClass="close" color="transparent" (clicked)="closeDialog()"></app-icon-button>
+  </div>
+  <div class="form-content">
+    <span class="text">Please enter new report name: </span>
+    <div class="input_div">
+      <app-input style="width: 100%"
+        class="input"
+        [focus]="true"
+        [control]="getControl('name')"
+        [validationErrors]="getControl('name').errors">
+      </app-input>
+    </div>
+  </div>
+  <div class="form-footer">
+    <app-text-button color="blue" type="button" text="Ok" [disabled]="!form.valid" (clicked)="confirm()"></app-text-button>
+    <app-text-button color="blue" type="submit" text="Cancel" (click)="closeDialog()"></app-text-button>
+  </div>
+</div>

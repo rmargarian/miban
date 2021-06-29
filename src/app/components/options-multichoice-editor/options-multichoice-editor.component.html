@@ -1,0 +1,88 @@
+<app-config-block [header]=header>
+  <div class="config-block-content" [ngClass]="{'pfa_disabled': disabled}">
+    <div class="top_controls">
+      <app-icon-button
+        class="add_option"
+        iconClass="add"
+        label="Add Option"
+        [disabled]="disabled"
+        (clicked)="onAddOption()">
+      </app-icon-button>
+      <mat-checkbox
+        *ngIf="questionType === questionTypes.MULTIPLE_CHOISE_SINGLE_OPTION"
+        [disableRipple]="true"
+        [formControl]="showFacesControl"
+        class="custom_mat-checkbox">
+        Faces
+      </mat-checkbox>
+    </div>
+    <div class="options"
+         dragula="VAMPIRES"
+         (dragulaModelChange)="onChangeOrderPosition($event)"
+         [dragulaModel]="options">
+      <div class="option_row"
+           content-transclude-slot
+           *ngFor="let option of options; let i = index;">
+        <div class="textarea_container">
+          <textarea
+            class="option_editor_textarea"
+            [placeholder]="optionsColumns[0].placeholder ? optionsColumns[0].placeholder : ''"
+            [rows]="rowsCount"
+            [disabled]="disabled"
+            [(ngModel)]="option.title"
+            [ngClass]="{'with-error': !!checkErrorTooltipMessage(option, optionsColumns[0])}"
+            attr.data-tooltip="{{checkErrorTooltipMessage(option, optionsColumns[0])}}"
+            attr.data-tooltip-class="{{'error-tooltip'}}"
+            attr.data-tooltip-position="{{'bottom-start'}}"
+            (keyup)="optionChanged()"
+            [required]="option[optionsColumns[0].required]">
+          </textarea>
+        </div>
+        <div class="option_controls">
+          <div class="one_column">
+            <div class="score">
+              <input
+                type="number"
+                [disabled]="disabled"
+                [(ngModel)]="option.score"
+                class="inputs_style"
+                (keyup)="optionChanged()"
+              >
+            </div>
+            <app-icon-button
+              class="remove"
+              iconClass="remove"
+              [disabled]="disabled"
+              (clicked)="onRemoveOption(option)">
+            </app-icon-button>
+          </div>
+          <ng-select
+            *ngIf="questionType === questionTypes.MULTIPLE_CHOISE_SINGLE_OPTION && showFaces"
+            [items]="iconsOptions"
+            bindLabel="type"
+            bindValue="type"
+            [searchable]="false" [clearable]="false"
+            [(ngModel)]="option.face_type"
+            [ngModelOptions]="{standalone: true}"
+            [ngClass]="{
+              'green': option.face_type === faceTypes.HAPPY,
+              'yellow': option.face_type === faceTypes.NEUTRAL,
+              'red': option.face_type === faceTypes.SAD,
+              'none': option.face_type === faceTypes.NONE
+            }"
+            class="color_select"
+            (change)="onFaceSelected()"
+            >
+            <ng-template ng-label-tmp let-item="item">
+              <i class="fas" [ngClass]="item.iconClass"></i>
+            </ng-template>
+            <ng-template ng-option-tmp let-item="item" let-index="index">
+              <i class="fas" [ngClass]="item.iconClass" [ngStyle]="{'color': item.color}"></i>
+            </ng-template>
+          </ng-select>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</app-config-block>

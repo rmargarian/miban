@@ -1,0 +1,12 @@
+@import "../../../../assets/styles/colors";
+
+app-form-input{
+  margin-bottom: 5px;
+  font-size: 0.8em;
+  input, ng-select, app-textarea{width: 100%;}
+  .checkbox{width: auto;}
+}
+
+.input {
+  &.textarea{ height: 165px; }
+}

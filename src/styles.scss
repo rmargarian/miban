@@ -1,0 +1,183 @@
+// import our custom theme
+@import '~@angular/material/theming';
+
+// always include only once per project
+@include mat-core();
+@import "assets/styles/theme";
+@import "assets/styles/colors";
+@import "assets/styles/table";
+@import "assets/styles/grid";
+@import "assets/styles/variables";
+
+// create theme (use mat-dark-theme for themes with dark backgrounds)
+$my-theme: mat-light-theme(
+    $my-theme-primary,
+    $my-theme-accent,
+    $my-theme-warn
+);
+
+// use our theme with angular-material-theme mixin
+@include angular-material-theme($my-theme);
+
+//import ng-select for multiselect checkbox
+@import "@ng-select/ng-select/themes/default.theme.css";
+
+body, html {
+  margin: 0;
+  height: 100%;
+  font-family: $baseFont;
+}
+
+body {
+  -webkit-overflow-scrolling: touch;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.toolbar-item {
+  margin-right: 7px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+*[form-content] {
+  margin-left: 5px;
+  font-size: 13px;
+}
+
+mat-dialog-container.mat-dialog-container {
+  padding: 0;
+}
+
+.select-panel {
+  font-size: 14px !important;
+
+  mat-option {
+    height: 35px !important;
+  }
+}
+
+/deep/ .mat-radio-ripple {display: none !important;}
+
+button.transparent .mat-button-focus-overlay {
+  background-color: transparent;
+}
+
+.pfa_disabled {
+  opacity: 0.5
+}
+
+.tooltip {
+  .tooltip-inner {
+    background-color: #ebf5ff;
+    -webkit-box-shadow: 2px 2px rgba(0, 0, 0, .2);
+    box-shadow: 2px 2px rgba(0, 0, 0, 0.2);
+    color: black;
+    padding: 0.05rem .30rem;
+    border: 1px solid #ddd;
+    margin: 8px 0;
+    max-width: initial;
+    overflow: auto;
+
+    &.no-wrap {
+      white-space: nowrap;
+    }
+
+    &.error-tooltip {
+      background-color: #f56359;
+      color: #fff;
+      box-shadow: 2px 2px rgba(173, 22, 22, 0.2);
+    }
+  }
+
+  .tooltip-arrow {
+    display: none;
+  }
+
+  &[aria-hidden=false] {
+    opacity: 1 !important;
+  }
+}
+
+.separator {
+  color: #fff;
+  margin-right: 7px;
+}
+
+.not-select {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* dragula  */
+.gu-mirror {
+  position: fixed !important;
+  margin: 0 !important;
+  z-index: 9999 !important;
+  opacity: 0.8;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: alpha(opacity=80);
+  pointer-events: none;
+}
+
+.gu-hide {
+  left: -9999px !important;
+}
+
+.gu-unselectable {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+
+.gu-transit {
+  opacity: 0.2;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+  filter: alpha(opacity=20);
+}
+
+mat-radio-group {
+  &.horizontal{ flex-direction:  row;}
+  &.default {flex-direction: column};
+  &.radio-group{display: flex;}
+
+  app-radio-button {
+    margin-bottom: 10px;
+  }
+}
+
+.mat-icon-button[disabled][disabled] img {
+  filter: opacity(26%);
+}
+
+
+app-text-button {
+  &.disabled {
+    button.text-button {
+      color: rgba(0, 0, 0, 0.26) !important;
+    }
+  }
+
+}
+
+.ag-unselectable {
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
+  user-select: text !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none !important;
+}

@@ -1,0 +1,45 @@
+@import "../../../../assets/styles/colors";
+
+%quest_type_style {
+  font-size: 1.25em;
+  font-weight: bold;
+}
+.cell{
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/deep/ .quest_type_p{
+  color: $blue;
+  @extend %quest_type_style;
+}
+
+/deep/ .quest_type_f{
+  color: $black;
+  @extend %quest_type_style;
+}
+
+/deep/ .quest_type_a{
+  color: $black;
+  @extend %quest_type_style;
+}
+
+:host {
+  .icons-container {
+    width: 50px;
+    float: left;
+    margin-left: -5px;
+
+    .delete {
+      color: #de1e1e;
+      cursor: pointer;
+    }
+    .restore {
+      color: $blue;
+      cursor: pointer;
+    }
+  }
+}
+
+
+

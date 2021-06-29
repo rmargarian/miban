@@ -1,0 +1,25 @@
+<div class="dialog" *ngIf="questionnaires.profiles && questionnaires.assessments && questionnaires.feedbacks">
+  <div class="form-header">
+    <div class="header-text" appMatDialogDraggableTitle>{{header}}</div>
+    <app-icon-button iconClass="close" color="transparent" (clicked)="closeDialog()"></app-icon-button>
+  </div>
+
+    <form class="form-content" [formGroup]="form">
+      <mat-radio-group formControlName="compliance_option" class="radio_group">
+        <app-config-block header="Feedbacks" *ngIf="questionnaires.feedbacks.length>0">
+          <app-radio-buttons-group class="radio_group" [items]="questionnaires.feedbacks"></app-radio-buttons-group>
+        </app-config-block>
+        <app-config-block header="Profiles" *ngIf="questionnaires.profiles.length>0">
+          <app-radio-buttons-group class="radio_group" [items]="questionnaires.profiles"></app-radio-buttons-group>
+        </app-config-block>
+        <app-config-block header="Assessments" *ngIf="questionnaires.assessments.length>0">
+          <app-radio-buttons-group class="radio_group" [items]="questionnaires.assessments"></app-radio-buttons-group>
+        </app-config-block>
+      </mat-radio-group>
+    </form>
+
+  <div class="form-footer">
+    <app-text-button color="blue" type="submit" text="Export" [disabled]="!form.controls['compliance_option'].value" (clicked)="export()"></app-text-button>
+    <app-text-button color="blue" type="submit" text="Close" (clicked)="closeDialog()"></app-text-button>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+const path = require('path');
+const CONFIG      = require('./app/config/config');
+const migrations_path = CONFIG.env === 'production' ? 'migrations' : 'migrations-not-prod';
+
+module.exports = {
+  'config': path.resolve('app', 'config/config-migration.js'),
+  'models-path': path.resolve('app', 'models'),
+  'migrations-path': path.resolve('app', migrations_path)
+}

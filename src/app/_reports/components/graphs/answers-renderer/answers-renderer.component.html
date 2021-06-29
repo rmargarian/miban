@@ -1,0 +1,39 @@
+<div [ngSwitch]="showType">
+  <app-text-answer
+    *ngSwitchCase="AnswerType.STRING"
+    [data]="answers"
+    [showHeader]="showHeader"
+    [usersInfoMap]="usersInfoMap"
+    [enableTooltip]="enableTooltip">
+  </app-text-answer>
+  <div *ngSwitchCase="AnswerType.GRAPH">
+    <div *ngFor="let answer of answers">
+      <h4>{{answer.title}}</h4>
+      <app-bar-chart
+        *ngIf="questionGraphType !== graphType.BAR_HORIZONTAL"
+        [parentRef]="parentRef"
+        [data]="answer.chart.data"
+        [axes]="answer.chart.axes"
+        [series]="answer.chart.series"
+        [maxDataValue]="answer.chart.maxDataValue"
+        [usersInfoMap]="usersInfoMap"
+        [enableTooltip]="enableTooltip"
+        [hideEmptyResponses]="hideEmptyResponses"
+        [color]="color">
+      </app-bar-chart>
+
+      <app-bar-chart-horizontal
+          *ngIf="questionGraphType === graphType.BAR_HORIZONTAL"
+          [parentRef]="parentRef"
+          [data]="answer.chart.data"
+          [usersInfoMap]="usersInfoMap"
+          [maxDataValue]="answer.chart.maxDataValue"
+          [series]="answer.chart.series"
+          [axes]="answer.chart.axes"
+          [enableTooltip]="enableTooltip"
+          [hideEmptyResponses]="hideEmptyResponses"
+          [color]="color">
+      </app-bar-chart-horizontal>
+    </div>
+  </div>
+</div>

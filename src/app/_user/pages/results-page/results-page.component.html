@@ -1,0 +1,94 @@
+<div class="page_container">
+  <div class="logo"></div>
+  <div class="report_container">
+    <h1>{{questionnaire.title}} Report</h1>
+    <div class="result">
+      <div class="score_res">Your overall score is {{score}}</div>
+
+      <br>Please examine the explanations beneath each question below to learn more. <br>
+
+      <br>If you scored: <br>
+      <div class="points"><img src="/assets/img/animals/lion.svg">&nbsp; <b>Lion 85%+</b>&nbsp;  You're a sales pro and are likely in great shape to achieve your price increase. To take your negotiation capability to the next level, graduate from our
+      <a href="https://www.negotiations.com/training/sales-negotiation/">Sales Negotiation Training</a>. <br></div>
+      <div class="points"><img src="/assets/img/animals/leopard.svg">&nbsp; <b>Leopard 70-84%</b>&nbsp;  You don't have much more to do to get better prepared. Study our explanations to the questions you didn’t score a green smile on to boost your probability of success. <br></div>
+      <div class="points"><img src="/assets/img/animals/cheetah.svg">&nbsp; <b>Cheetah 55-69%</b>&nbsp;  You'll do well to book time into your calendar to action the advice in our detailed post. <br></div>
+      <div class="points"><img src="/assets/img/animals/hyena.svg">&nbsp; <b>Hyena 40-54%</b>&nbsp;  You'll do well to action the advice in our detailed post, and if you have the luxury of a sales manager, then book some time together to get coaching as you work through our post's detailed advice. <br></div>
+      <div class="points"><img src="/assets/img/animals/wolf.svg">&nbsp; <b>Wolf &lt;40%</b>&nbsp;  You are likely not in a strong position to get your price increase. We recommend that you start by studying your competitive position. Once you've read through our advice, complete your SWOT analysis and meet with your sales manager if you have one. The 'High-Low Leverage' section may be valuable for you to gain leverage. <br></div>
+
+      <br>If you have 5 or more in your sales team, then <a href="https://www.negotiations.com/contact.html">get in
+        touch</a> to request a group assessment report for your team. <br>
+      To diagnose your team's overall negotiation needs, ask about our <a
+        href="https://www.negotiations.com/approach/negotiation-profiling.php">Team Negotiation Diagnostic</a>. <br>
+      <br>For practice and expert coaching in getting your price increases over the line, and improving your negotiation
+      capability, check out our <a href="https://www.negotiations.com/training/calendar.php">open enrollment training
+        calendar</a>. <br>
+        Want to figure out your team's in-house training needs? Then take our <a
+        href="https://www.negotiations.com/training/training-customizer/ ">customizer for a spin</a>. <br>
+      Our world-first <a href="https://www.negotiations.com/training/role-play/">online simulation</a> pinpoints
+      insights into your negotiation genius and opportunities for growth.
+    </div>
+    <div class="table_container">
+      <table>
+        <tbody>
+          <ng-container *ngFor="let row of table;let index = index">
+            <tr *ngIf="!row._id && !row._result" style="height: 20px; text-align: left;">
+              <!--First cell-->
+              <td *ngIf="row.hasOwnProperty('score') && !with_faces"
+                class="score" style="width:80px; text-align: center;">{{row.score === '0/0' ? '' : row.score}}</td>
+              <td *ngIf="!row.hasOwnProperty('score') && !with_faces" class="score" style="width:80px"></td>
+
+              <!--Second cell-->
+              <td *ngIf="row.hasOwnProperty('option_score') && row.hasOwnProperty('checked') && row.show_faces && with_faces"
+                [class]="'option_score checked ' + getFaceColorClass(row.option_face)"
+                style="width:35px; font-weight: 900;">
+                <i [class]="'fas ' + getFaceIcon(row.option_face)"></i>
+              </td>
+              <td *ngIf="row.hasOwnProperty('option_score') && row.hasOwnProperty('checked') && (!row.show_faces || !with_faces)"
+                class="option_score checked" style="width:35px; color: #000080; font-weight: bold;">
+                {{row.option_score}}
+              </td>
+
+              <td *ngIf="row.hasOwnProperty('option_score') && !row.hasOwnProperty('checked') && row.show_faces && with_faces"
+                [class]="'option_score ' + getDefaultFaceColorClass()" style="width:35px; font-weight: 900;">
+                <i [class]="'fas ' + getFaceIcon(row.option_face)"></i>
+              </td>
+              <td *ngIf="row.hasOwnProperty('option_score') && !row.hasOwnProperty('checked') && (!row.show_faces || !with_faces)"
+                class="option_score" style="width:35px">
+                {{row.option_score}}
+              </td>
+
+              <!--Third cell || colspan-->
+              <td
+                *ngIf="row.hasOwnProperty('title') && row.hasOwnProperty('checked') && row.hasOwnProperty('option_score')"
+                class="title_checked_option_score" style="width:750px; font-weight: bold; color: #000080;">
+                {{row.title}}
+              </td>
+              <td
+                *ngIf="row.hasOwnProperty('title') && row.hasOwnProperty('checked') && !row.hasOwnProperty('option_score')"
+                class="title_checked" colspan="2" style="width:750px; color: #000080;">
+                {{row.title}}
+              </td>
+              <td *ngIf="row.hasOwnProperty('title') && row.hasOwnProperty('bold')" colspan="2" class="bold"
+                style="font-weight: bold;" [innerHTML]="row.qNumber + '. ' + row.title">
+              </td>
+              <td *ngIf="row.hasOwnProperty('title') && row.hasOwnProperty('group')" colspan="2" class="group"
+                style="font-weight: bold; color: #fff; background-color: #0288d1">
+                {{row.title}}
+              </td>
+              <td *ngIf="row.hasOwnProperty('title') && row.hasOwnProperty('explanation')" colspan="2">
+                <div class="bold" style="font-weight: bold;"><br>Explanation:</div>
+                <div class="explanation" style="font-style: italic;">{{row.title}}</div>
+              </td>
+              <td
+                *ngIf="row.hasOwnProperty('title') && !row.hasOwnProperty('checked') && row.hasOwnProperty('option_score')"
+                class="title_option_score" style="width:750px">
+                {{row.title}}
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<ngx-loading [show]="loading"></ngx-loading>

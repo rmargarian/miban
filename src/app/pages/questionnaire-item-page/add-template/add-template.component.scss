@@ -1,0 +1,14 @@
+@import "~assets/styles/dialog";
+
+:host {
+
+  /deep/ .input {
+    &.textarea{ min-height: 180px !important; }
+  }
+
+  app-form-input.flex-start {
+    /deep/ .input-content{
+      align-items: flex-start;
+    }
+  }
+}

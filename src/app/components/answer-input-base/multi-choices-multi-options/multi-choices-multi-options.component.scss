@@ -1,0 +1,10 @@
+@import '../answer-input-base.component.scss';
+
+.checkboxes-group-wrapper{
+  display: flex;
+  margin-bottom: 10px;
+}
+.horizontaly{ flex-direction:  row;}
+.default {flex-direction: column};
+
+

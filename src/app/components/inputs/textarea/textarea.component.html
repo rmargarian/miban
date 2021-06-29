@@ -1,0 +1,15 @@
+<label *ngIf="labelText" class="label"> {{stripHtml(labelText)}}: </label>
+
+<div *ngIf="notTooltip && !focused" class="error_message">{{errorMessage || ''}}</div>
+<textarea attr.data-tooltip="{{!notTooltip && !focused ? errorMessage : ''}}"
+          #input
+          attr.data-tooltip-position="{{tooltipPosition}}"
+          attr.data-tooltip-class="{{'error-tooltip'}}"
+          class="input textarea"
+          #textarea
+          [rows]="rowsCount"
+          [ngClass]="{'with-error': errorMessage && !focused}"
+          [formControl]="control"
+          (focusin)="onFocusIn($event)"
+          (focusout)="onFocusOut($event)">
+</textarea>

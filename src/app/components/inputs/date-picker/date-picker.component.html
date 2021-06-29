@@ -1,0 +1,16 @@
+<mat-form-field class="custom_mat-datepicker"
+  [style.width]="width"
+  [ngClass]="{'with-error': errorMessage}" >
+  <input matInput
+    [matDatepicker]="date_picker"
+    [formControl]="control"
+    [class.readonly]="readonly"
+    (dateChange)="dateChanged($event)"
+    readonly>
+  <span *ngIf="control.value && !readonly" class="ng-clear-wrapper" title="Clear date" (click)="clearDate()">
+    <span>×</span>
+  </span>
+  <mat-datepicker-toggle matSuffix [for]="date_picker"></mat-datepicker-toggle>
+  <mat-datepicker #date_picker></mat-datepicker>
+</mat-form-field>
+<div *ngIf="notTooltip" class="error_message">{{errorMessage ? errorMessage : ''}}</div>

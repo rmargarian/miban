@@ -1,0 +1,25 @@
+<div class="dialog">
+  <div class="form-header">
+    <div class="header-text">{{data.header}}</div>
+    <app-icon-button iconClass="close" color="transparent" (clicked)="closeDialog()"></app-icon-button>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="save()" class="mat-tab-group">
+    <div class="form-content">
+      <app-form-input label="Title:" labelWidth="120px" required="true">
+        <app-input [control]="getControl('title')" [validationErrors]="getControl('title').errors"
+        [focus]="true" input-transclude-slot></app-input>
+      </app-form-input>
+      <app-form-input label="Description:" labelWidth="120px">
+        <app-textarea [control]="getControl('description')" input-transclude-slot></app-textarea>
+      </app-form-input>
+      <div class="group_active">
+          <mat-checkbox [formControl]="form.controls['is_active']" class="custom_mat-checkbox blue" [checked]="data.group.is_active"
+            [disableRipple]="true" content-transclude-slot>Active group</mat-checkbox>
+          </div>
+    </div>
+    <div class="form-footer">
+      <app-text-button color="blue" [disabled]="!form.valid" type="button" text="Save" (clicked)="save()"></app-text-button>
+      <app-text-button color="blue" type="submit" text="Close" (click)="closeDialog()"></app-text-button>
+    </div>
+  </form>
+</div>

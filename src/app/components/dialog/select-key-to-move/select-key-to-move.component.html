@@ -1,0 +1,25 @@
+<div class="dialog" >
+  <div class="form-header">
+    <div class="header-text" appMatDialogDraggableTitle>{{header}}</div>
+    <app-icon-button iconClass="close" color="transparent" (clicked)="closeDialog()"></app-icon-button>
+  </div>
+  <div class="form-content">
+
+    <app-form-input label="Choose key: "
+                    labelWidth="120px">
+      <app-select-input [options]="keys"
+                        [focus]="true"
+                        [control]="getControl('selectedCompany')"
+                        textField="title"
+                        valueField="id"
+                        placeholder="Key"
+                        input-transclude-slot>
+      </app-select-input>
+    </app-form-input>
+
+  </div>
+  <div class="form-footer">
+    <app-text-button color="blue" type="submit" text="Move" [disabled]="!form.controls['selectedCompany'].value" (clicked)="move()"></app-text-button>
+    <app-text-button color="blue" type="submit" text="Close" (click)="closeDialog()"></app-text-button>
+  </div>
+</div>

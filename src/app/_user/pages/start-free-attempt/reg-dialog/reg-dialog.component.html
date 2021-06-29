@@ -1,0 +1,45 @@
+<div class="dialog">
+  <div class="form-header">
+    <div class="header-text" appMatDialogDraggableTitle>{{data.header}}</div>
+    <app-icon-button iconClass="close" color="transparent" (clicked)="closeDialog()"></app-icon-button>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="save()" *ngIf="form">
+    <div class="form-content">
+      <app-form-input label="First Name:" labelWidth="90px" required="true">
+        <app-input [control]="getControl('first_name')"
+          [validationErrors]="getControl('first_name').errors"
+          [focus]="true"
+          [isValidationByFocusOut]="true"
+          [showValidationTriggered]="showValidation"
+          [notTooltip]="true" input-transclude-slot></app-input>
+      </app-form-input>
+      <app-form-input label="Email:" labelWidth="90px" required="true">
+        <app-input type="text" [control]="getControl('email')"
+          [validationErrors]="getControl('email').errors"
+          [notTooltip]="true"
+          [isValidationByFocusOut]="true"
+          [showValidationTriggered]="showValidation" input-transclude-slot></app-input>
+      </app-form-input>
+      <app-form-input label="Job Title:" labelWidth="90px" [required]="true">
+        <app-input [control]="getControl('job_title')" [validationErrors]="showValidation ? getControl('job_title').errors : null"
+          [notTooltip]="true" input-transclude-slot></app-input>
+      </app-form-input>
+      <app-form-input label="Organization:" labelWidth="90px" [required]="true">
+        <app-input [control]="getControl('organization')" [validationErrors]="showValidation ? getControl('organization').errors : null"
+          [notTooltip]="true" input-transclude-slot></app-input>
+      </app-form-input>
+      <app-form-input label="Phone:" labelWidth="90px">
+        <app-phone-input
+            [countries]="countries"
+            [control]="getControl('phone')"
+            [validationErrors]="getControl('phone').errors"
+            [countriesControl]="countriesControl"
+            input-transclude-slot></app-phone-input>
+      </app-form-input>
+    </div>
+    <div class="form-footer">
+      <app-text-button color="blue" type="button" text="Submit"
+                       (clicked)="save()"></app-text-button>
+    </div>
+  </form>
+</div>

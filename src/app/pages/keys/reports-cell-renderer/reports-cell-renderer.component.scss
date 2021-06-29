@@ -1,0 +1,10 @@
+@import "../../../../assets/styles/colors";
+
+:host {
+  .reports_counter {
+    position: relative;
+    color: $blue;
+    cursor: pointer;
+  }
+}
+

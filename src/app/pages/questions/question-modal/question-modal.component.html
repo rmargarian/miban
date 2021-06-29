@@ -1,0 +1,426 @@
+<div class="dialog">
+  <div class="form-header">
+    <div class="header-text" appMatDialogDraggableTitle>{{data.header}}</div>
+    <app-icon-button iconClass="close" color="transparent" (clicked)="onClose()"></app-icon-button>
+  </div>
+  <form [formGroup]="form" (ngSubmit)='save()'>
+    <div class="form-content">
+      <div class="left-side">
+        <app-form-input
+          label="Question:"
+          class="question_textarea"
+          labelWidth="120px" [required]="true">
+          <app-textarea
+            [focus]="true"
+            [control]="getControl('title')"
+            [validationErrors]="showValidation ? getControl('title').errors : null"
+            input-transclude-slot>
+          </app-textarea>
+        </app-form-input>
+        <div class="used_in" *ngIf="usedInData">
+          <div class="label">USED IN: </div>
+          <div class="data" [innerHTML]=usedInData></div>
+        </div>
+
+        <app-form-input
+          label="Help:"
+          labelWidth="120px">
+          <app-textarea
+            class="one-row"
+            [control]="getControl('help')"
+            [validationErrors]="showValidation ? getControl('help').errors : null"
+            input-transclude-slot>
+          </app-textarea>
+        </app-form-input>
+
+        <app-form-input
+          label="More Info:"
+          labelWidth="120px">
+          <app-textarea
+            class="one-row"
+            [control]="getControl('more_info')"
+            [validationErrors]="showValidation ?  getControl('more_info') : null"
+            input-transclude-slot>
+          </app-textarea>
+        </app-form-input>
+
+        <app-form-input
+          *ngIf="data.modalType !== 'edit'"
+          label="Belongs To:"
+          [required]="true"
+          labelWidth="120px">
+          <app-select-input
+            [control]="getControl('quest_type')"
+            [validationErrors]="showValidation ? getControl('quest_type').errors : null"
+            [options]='data.quest_type'
+            input-transclude-slot
+            textField="text" valueField="id">
+          </app-select-input>
+        </app-form-input>
+
+        <app-form-input
+          label="Type:"
+          [required]="true"
+          labelWidth="120px">
+          <app-select-input
+            [control]="getControl('type')"
+            [validationErrors]="showValidation ? getControl('type').errors : null"
+            [options]="data.type"
+            input-transclude-slot
+            [searchOn]="false"
+            textField="text" valueField="id">
+          </app-select-input>
+        </app-form-input>
+
+        <app-form-input
+          *ngIf="getControl('type').value === QuestionType.SLIDER"
+          label="Slider Mode:"
+          [required]="true"
+          labelWidth="120px">
+          <app-select-input
+            [control]="additionalForm.controls['slider_mode']"
+            [validationErrors]="showValidation ? additionalForm.controls['slider_mode'].errors : null"
+            [options]="data.sliderModes"
+            input-transclude-slot
+            textField="text" valueField="id">
+          </app-select-input>
+        </app-form-input>
+
+        <app-form-input
+          labelWidth="120px"
+          label="Range Interval"
+          *ngIf="getControl('type').value === QuestionType.SLIDER && additionalForm.controls['slider_mode'].value === 2"
+          [required]="true">
+          <app-input
+            input-transclude-slot
+            type="number"
+            [control]="additionalForm.controls['range_interval']"
+            [validationErrors]="showValidation ? additionalForm.controls['range_interval'].errors : null"></app-input>
+        </app-form-input>
+
+        <app-form-input
+          *ngIf="getControl('type').value === QuestionType.SLIDER"
+          label=" "
+          labelWidth="120px"
+          class="block_input_block font-size-checkbox">
+          <div style="display: flex" input-transclude-slot>
+            <mat-checkbox
+              [formControl]="form.controls['show_labels']"
+              class="custom_mat-checkbox"
+              [disableRipple]="true">Display labels
+            </mat-checkbox>
+          </div>
+        </app-form-input>
+
+        <app-form-input
+          *ngIf="getControl('type').value === QuestionType.SLIDER"
+          label=" "
+          labelWidth="120px"
+          class="block_input_block font-size-checkbox">
+          <div style="display: flex" input-transclude-slot>
+            <mat-checkbox
+              [formControl]="form.controls['show_tooltips']"
+              class="custom_mat-checkbox"
+              [disableRipple]="true">Display values as tooltips
+            </mat-checkbox>
+          </div>
+        </app-form-input>
+
+        <app-form-input
+          *ngIf="getControl('type').value === QuestionType.SLIDER && additionalForm.controls['slider_mode'].value == '2'"
+          label=" "
+          labelWidth="120px"
+          class="block_input_block font-size-checkbox">
+          <div style="display: flex" input-transclude-slot>
+            <mat-checkbox
+              [formControl]="additionalForm.controls['range_percentages']"
+              class="custom_mat-checkbox"
+              [disableRipple]="true">Display values as percentages
+            </mat-checkbox>
+          </div>
+        </app-form-input>
+
+        <app-form-input
+          label=" "
+          labelWidth="120px"
+          class="range_block"
+          *ngIf="getControl('type').value === QuestionType.SLIDER && additionalForm.controls['slider_mode'].value == '2'">
+          <app-config-block header="Range" input-transclude-slot>
+            <div class="range-from">
+              <span class="range_input_label">From:</span>
+              <app-input
+                type="number"
+                class="range_input_number"
+                required="true"
+                [placeholder]="'Value'"
+                [control]="additionalForm.controls['range_from_value']"
+                [validationErrors]="showValidation ? additionalForm.controls['range_from_value'].errors : null">
+              </app-input>
+              <app-input
+                type="text"
+                [placeholder]="'Label'"
+                [control]="additionalForm.controls['range_from_tag']">
+              </app-input>
+            </div>
+            <div class="range-to">
+              <span class="range_input_label">To:</span>
+              <app-input
+                type="number"
+                class="range_input_number"
+                [placeholder]="'Value'"
+                required="true"
+                [control]="additionalForm.controls['range_to_value']"
+                [validationErrors]="showValidation ? additionalForm.controls['range_to_value'].errors : null">
+              </app-input>
+              <app-input
+                type="text"
+                [placeholder]="'Label'"
+                [control]="additionalForm.controls['range_to_tag']">
+              </app-input>
+            </div>
+          </app-config-block>
+        </app-form-input>
+
+        <app-form-input
+          label=" "
+          labelWidth="120px"
+          class="range_block"
+          *ngIf="getControl('type').value === QuestionType.SLIDER && additionalForm.controls['slider_mode'].value == '1'">
+          <app-answer-options-editor
+            orderFieldName="position"
+            input-transclude-slot
+            header="Custom Labels"
+            [options]="sliderTags"
+            [rowsCount]="1"
+            [optionsColumns]="sliderColumns"
+            (addOption)="addSliderLabel($event)"
+            (removeOption)="removeSliderLabel($event)"
+            (changeOption)="onChangeOption()"
+            (changeOrderPosition)="changeSliderOrderPosition($event)"
+            (validationEmitter)="sliderValidationEmitter($event)">
+          </app-answer-options-editor>
+        </app-form-input>
+
+
+        <app-form-input
+          *ngIf="getControl('type').value !== QuestionType.TEXT"
+          label=" "
+          labelWidth="120px"
+          class="block_input_block font-size-checkbox">
+          <div input-transclude-slot style="display: flex">
+            <mat-checkbox
+              [formControl]="form.controls['is_commented']"
+              class="custom_mat-checkbox"
+              [disableRipple]="true">User can comment question
+            </mat-checkbox>
+          </div>
+        </app-form-input>
+
+        <app-form-input
+          label="Comment rows:"
+          labelWidth="120px">
+          <app-input
+            [control]="getControl('comment_row')"
+            [validationErrors]="showValidation ? getControl('comment_row').errors : null"
+            type="number"
+            input-transclude-slot>
+          </app-input>
+        </app-form-input>
+
+        <app-form-input
+          label="Comment label:"
+          labelWidth="120px"
+          class="block_input_block">
+          <app-input
+            [control]="getControl('comment_label')"
+            [validationErrors]="showValidation ? getControl('comment_label').errors : null"
+            input-transclude-slot>
+          </app-input>
+          <div class="checkbox_onerow" content-transclude-slot>
+            <mat-checkbox
+              style="margin-left: 5px"
+              [disableRipple]="true"
+              [formControl]="form.controls['is_comment_label']"
+              class="custom_mat-checkbox">
+            </mat-checkbox>
+          </div>
+        </app-form-input>
+
+        <app-form-input
+          *ngIf="getControl('type').value === QuestionType.ARRAY"
+          class="block_input_block"
+          label="Label Set:"
+          labelWidth="120px"
+          [required]="true">
+          <app-select-input
+            class="full_row"
+            [control]="additionalForm.controls['label_set_id']"
+            [validationErrors]="showValidation ? additionalForm.controls['label_set_id'].errors : null"
+            [options]="data.labelSet"
+            input-transclude-slot
+            textField="title" valueField="id">
+          </app-select-input>
+          <div class="checkbox_onerow" content-transclude-slot>
+            <app-icon-button
+              class="label_set_btns"
+              iconClass="add" (clicked)="addLabelSet()">
+            </app-icon-button>
+            <app-icon-button
+              class="label_set_btns"
+              [disabled]="!additionalForm.controls['label_set_id'].value"
+              iconClass="edit" (clicked)="editLabelSet(additionalForm.controls['label_set_id'].value)">
+            </app-icon-button>
+            <app-icon-button
+              class="label_set_btns"
+              iconClass="remove" (clicked)="deleteLabelSet(additionalForm.controls['label_set_id'].value)">
+            </app-icon-button>
+          </div>
+        </app-form-input>
+
+        <app-form-input
+          label=" "
+          labelWidth="120px" class="block_input_block">
+          <div class="question_options" input-transclude-slot>
+            <mat-checkbox
+              [disableRipple]="true"
+              [formControl]="form.controls['is_active']"
+              class="custom_mat-checkbox">
+              Active
+            </mat-checkbox>
+            <mat-checkbox
+              [disableRipple]="true"
+              [formControl]="form.controls['is_bonus']"
+              class="custom_mat-checkbox">
+              Bonus
+            </mat-checkbox>
+            <mat-checkbox
+              [disableRipple]="true"
+              [formControl]="form.controls['is_mandatory']"
+              class="custom_mat-checkbox">
+              Mandatory
+            </mat-checkbox>
+            <mat-checkbox
+              *ngIf="getControl('type').value === QuestionType.TEXT"
+              [disableRipple]="true"
+              [formControl]="form.controls['is_cloud']"
+              class="custom_mat-checkbox">
+              Cloud
+            </mat-checkbox>
+            <mat-checkbox
+              *ngIf="getControl('type').value === QuestionType.MULTIPLE_CHOISE_MULTI_OPTIONS ||
+                     getControl('type').value === QuestionType.MULTIPLE_CHOISE_SINGLE_OPTION"
+              [disableRipple]="true"
+              [formControl]="form.controls['is_vertical_alig']"
+              class="custom_mat-checkbox">
+              Align items horizontally
+            </mat-checkbox>
+            <mat-checkbox
+              *ngIf="getControl('type').value === QuestionType.MULTIPLE_CHOISE_MULTI_OPTIONS ||
+                     getControl('type').value === QuestionType.MULTIPLE_CHOISE_SINGLE_OPTION ||
+                     getControl('type').value === QuestionType.ARRAY"
+              [disableRipple]="true"
+              [formControl]="form.controls['is_sort_hide']"
+              class="custom_mat-checkbox">
+              Sort & Hide < 10%
+            </mat-checkbox>
+          </div>
+        </app-form-input>
+
+        <div
+          *ngIf="getControl('type').value === QuestionType.MULTIPLE_CHOISE_MULTI_OPTIONS"
+          style="margin-bottom: 5px;">
+          <app-form-input
+            label="Min. options: "
+            labelWidth="120px">
+            <app-input
+              type="number"
+              [control]="additionalForm.controls['min_selected_options']"
+              [validationErrors]="showValidation ? additionalForm.controls['min_selected_options'].errors : null"
+              input-transclude-slot>
+            </app-input>
+          </app-form-input>
+
+          <app-form-input
+            label="Max. options: "
+            labelWidth="120px">
+            <app-input
+              type="number"
+              [control]="additionalForm.controls['max_selected_options']"
+              [validationErrors]="showValidation ? additionalForm.controls['max_selected_options'].errors : null"
+              input-transclude-slot>
+            </app-input>
+          </app-form-input>
+        </div>
+
+        <app-form-input
+          *ngIf="getControl('type').value !== QuestionType.TEXT"
+          label="Graph Type:"
+          [required]="true"
+          labelWidth="120px">
+          <app-select-input
+            [control]="getControl('question_graph_type')"
+            [validationErrors]="showValidation ? getControl('question_graph_type').errors : null"
+            [options]="data.graph_type"
+            input-transclude-slot
+            [searchOn]="false"
+            textField="text" valueField="id">
+          </app-select-input>
+        </app-form-input>
+
+        <app-form-input
+          label="Explanation:"
+          labelWidth="120px">
+          <app-textarea
+            [control]="getControl('explanation')"
+            [validationErrors]="showValidation ? getControl('explanation').errors : null"
+            input-transclude-slot>
+          </app-textarea>
+        </app-form-input>
+      </div>
+
+      <div class="right-side">
+        <app-answer-options-editor
+          *ngIf="!disabledConfigBlock &&
+                  getControl('type').value !== QuestionType.MULTIPLE_CHOISE_SINGLE_OPTION &&
+                  getControl('type').value !== QuestionType.MULTIPLE_CHOISE_MULTI_OPTIONS"
+          header="Answers"
+          [optionsColumns]="questionAnswerColumns"
+          [options]="question_answer_options"
+          [showValidation]="showValidation"
+          (addOption)="addOption($event)"
+          (removeOption)="removeOption($event)"
+          (changeOption)="onChangeOption()"
+          (changeOrderPosition)="changeOrderPosition($event)"
+          (validationEmitter)="validationEmitter($event)">
+        </app-answer-options-editor>
+
+        <app-options-multichoice-editor
+          *ngIf="!disabledConfigBlock &&
+                  (getControl('type').value === QuestionType.MULTIPLE_CHOISE_SINGLE_OPTION ||
+                  getControl('type').value === QuestionType.MULTIPLE_CHOISE_MULTI_OPTIONS)"
+          header="Answers"
+          [showFacesControl]="form.controls['is_faces']"
+          [questionType]="getControl('type').value"
+          [optionsColumns]="questionAnswerColumns"
+          [options]="question_answer_options"
+          [showValidation]="showValidation"
+          (addOption)="addOption($event)"
+          (removeOption)="removeOption($event)"
+          (changeOption)="onChangeOption()"
+          (changeOrderPosition)="changeOrderPosition($event)"
+          (validationEmitter)="validationEmitter($event)"
+        >
+        </app-options-multichoice-editor>
+
+        <span *ngIf="!minValidator" class="minmax_message">Options count is less then allowed</span>
+      </div>
+    </div>
+  </form>
+  <div class="form-footer">
+    <app-text-button color="blue" type="button" text="Save" (clicked)="save()">
+    </app-text-button>
+    <app-text-button color="blue" type="button" text="Preview" (click)="openPreview()">
+    </app-text-button>
+    <app-text-button color="blue" type="submit" text="Close" (click)="onClose()"></app-text-button>
+  </div>
+</div>

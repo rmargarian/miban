@@ -1,0 +1,12 @@
+<div class="dialog">
+  <div class="form-header">
+    <div class="header-text" appMatDialogDraggableTitle>{{title}}</div>
+    <app-icon-button iconClass="close" color="transparent" (clicked)="closeDialog()"></app-icon-button>
+  </div>
+  <div class="form-content">
+    <div class="message">{{text}}</div>
+  </div>
+  <div class="form-footer" *ngIf="noTimer">
+    <app-text-button color="blue" type="button" text="Ok" (click)="closeDialog()"></app-text-button>
+  </div>
+</div>

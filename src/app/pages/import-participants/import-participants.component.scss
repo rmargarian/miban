@@ -1,0 +1,83 @@
+@import "~assets/styles/theme";
+@import "~assets/styles/colors";
+@import "~assets/styles/variables";
+
+:host {
+  app-admin-toolbar {
+    div {
+      color: #fff;
+      font-size: 13px;
+      height: 27px;
+      line-height: 27px;
+      font-weight: 600;
+    }
+  }
+
+  .import-wrapper {
+    min-width: 100%;
+    height: calc(100vh - 37px);
+    overflow-y: auto;
+    display: block;
+    font-family: $baseFont;
+    font-size: 13px;
+    padding: 15px 15px 0 15px;
+    color: #000;
+
+    .content {
+      .header {
+        font-size: 16px;
+        font-weight: 600;
+      }
+
+      .text,
+      .header,
+      .headers {
+        margin-bottom: 10px;
+      }
+
+      .headers {
+        color: #fff;
+        font-weight: 600;
+
+        span {
+          background-color: $userBlue;
+          padding: 2px;
+        }
+      }
+
+      .form-wrapper {
+        .input-wrapper {
+          display: flex;
+          align-items: center;
+          margin-bottom: 5px;
+
+          .label {
+            float: left;
+            width: 40px;
+          }
+
+          app-select-input,
+          app-file-input {
+            width: 350px
+          }
+        }
+      }
+    }
+  }
+
+  .error_message {
+    font-size: 12px;
+    color: #f44336;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+
+  .star {
+    color: #f44336;
+  }
+
+  .right-5 { margin-right: 5px }
+  .top-7 { margin-top: 7px }
+  .top-10 { margin-top: 10px }
+  .block_margin { margin: 15px 0 }
+}

@@ -1,0 +1,37 @@
+<div class="dialog">
+  <div class="form-header">
+    <div class="header-text">{{header}}</div>
+    <app-icon-button iconClass="close" color="transparent" (clicked)="closeDialog()"></app-icon-button>
+  </div>
+  <div class="form-content">
+
+    <app-config-block header="Label Set">
+      <app-form-input label="Title: " labelWidth="50px" [required]="true">
+        <app-input
+          [control]="getControl('title')"
+          [validationErrors]="getControl('title').errors"
+          input-transclude-slot>
+        </app-input>
+      </app-form-input>
+    </app-config-block>
+
+
+    <app-answer-options-editor
+      header="Label Set Options"
+      [options]="labelsInfo"
+      [optionsColumns]="optionColumns"
+      (addOption)="addOption($event)"
+      (removeOption)="removeOption($event)"
+      (changeOrderPosition)="changePosition($event)"
+      (validationEmitter)="changeValidation($event)">
+    </app-answer-options-editor>
+
+  </div>
+
+  <div class="form-footer">
+    <app-text-button color="blue" [disabled]="!form.valid || !labelSetValidator" type="button" text="Save"
+                     (clicked)="save()"></app-text-button>
+    <app-text-button color="blue" type="submit" text="Close" (click)="closeDialog()"></app-text-button>
+  </div>
+</div>
+

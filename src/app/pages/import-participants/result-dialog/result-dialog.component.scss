@@ -1,0 +1,19 @@
+@import "~assets/styles/dialog";
+
+:host {
+  .form-content {
+    .info {
+      font-size: 13px;
+      margin: 5px 0;
+    }
+  }
+  .dialog .form-footer {
+    text-align: center;
+  }
+  .logs_container {
+    border: 1px solid #bdc3c7;
+    padding: 3px;
+    font-size: 10px;
+    line-height: 1.4;
+  }
+}

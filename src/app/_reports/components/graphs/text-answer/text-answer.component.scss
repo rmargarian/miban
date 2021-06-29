@@ -1,0 +1,30 @@
+@import "~assets/styles/variables";
+
+/deep/ {
+  .toolTip {
+    position: absolute;
+    transform: translate(55px, 75px);
+    background-color: #ebf5ff;
+    -webkit-box-shadow: 2px 2px rgba(0, 0, 0, .2);
+    box-shadow: 2px 2px rgba(0, 0, 0, 0.2);
+    color: black;
+    padding: 0.05rem .30rem;
+    border: 1px solid #ddd;
+    margin: 8px;
+    max-width: initial;
+    display: none;
+  }
+  .span_answer {
+    font-size: 13px;
+    font-family: $baseFont;
+  }
+  li {line-height: 13px;}
+}
+
+h4 {
+  font-family: $baseFont;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+

@@ -1,0 +1,18 @@
+<app-admin-toolbar>
+  <app-icon-button class="toolbar-item" tooltip="Create new" iconClass="add" (click)="addAdmin()"></app-icon-button>
+  <app-icon-button class="toolbar-item" tooltip="Delete selected" iconClass="remove" [disabled]="!canDeleteAdmin" (clicked)="removeAdmin()"></app-icon-button>
+  <app-icon-button class="toolbar-item" tooltip="Reload" iconClass="refresh" (click)="refresh()"></app-icon-button>
+  <div class="separator">|</div>
+  <app-search-input [focus]="true"  [filterFormControl]="filterFormControl" id="search-input" #search (changes)='filter($event)' [debounceTime]="700"></app-search-input>
+</app-admin-toolbar>
+
+<ag-grid-angular style="height: 100%;"
+    #agGrid
+    class="ag-theme-balham"
+    [rowData]="displayedData"
+    [columnDefs]="columnDefs"
+    rowSelection="single"
+    suppressDragLeaveHidesColumns="true"
+    [gridOptions]="gridOptions"
+    (gridReady)="onGridReady($event)">
+  </ag-grid-angular>

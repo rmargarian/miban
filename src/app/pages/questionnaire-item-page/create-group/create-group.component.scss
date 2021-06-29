@@ -1,0 +1,14 @@
+@import "~assets/styles/dialog";
+
+:host {
+
+  .group_active {
+
+    padding: 5px 0;
+
+    /deep/ .mat-checkbox-layout {
+      margin-left: 125px;
+    }
+  }
+
+}

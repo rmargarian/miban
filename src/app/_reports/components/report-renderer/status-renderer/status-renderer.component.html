@@ -1,0 +1,13 @@
+<span *ngIf="time !== undefined" ref="eCellWrapper" class="ag-cell-wrapper cell_content">
+  <span ref="eCellValue" class="ag-cell-value status_text"
+      >{{time}}
+  </span>
+  <span *ngIf="status" class="image">
+    <fa-icon icon={{icon}} [attr.data-tooltip]="status" class="abs"></fa-icon>
+  </span>
+</span>
+<span *ngIf="time === undefined" ref="eCellWrapper" class="ag-cell-wrapper cell_content">
+  <span *ngIf="status" class="image">
+    <fa-icon icon={{icon}} [attr.data-tooltip]="status"></fa-icon>
+  </span>
+</span>

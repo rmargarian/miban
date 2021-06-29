@@ -1,0 +1,20 @@
+@import "../../../../assets/styles/dialog";
+@import "../../../../assets/styles/colors";
+
+:host {
+
+  .dialog .message{
+    min-width: 300px;
+  }
+
+  .dialog .form-content {
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+  }
+}
+.full_width {
+  width: 100%;
+}

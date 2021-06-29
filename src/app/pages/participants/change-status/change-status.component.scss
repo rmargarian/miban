@@ -1,0 +1,24 @@
+@import "../../../../assets/styles/dialog";
+
+:host {
+
+  .header-text { font-size: 13px }
+
+  .group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 5px;
+
+    span { font-size: 14px }
+    app-form-input {
+      margin: 0 0 0 10px;
+      width: 145px;
+    }
+  }
+
+  .form-content { overflow: hidden !important}
+  .form-footer { margin: 0 !important}
+  .ng-placeholder { display: block }
+}

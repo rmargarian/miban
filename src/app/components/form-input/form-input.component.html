@@ -1,0 +1,13 @@
+<div class="input-content">
+  <div [ngStyle]="{width: labelWidth}" *ngIf="label" class="label-block">
+    {{label}}
+    <span *ngIf="required" class="star">*</span>
+    <span class="count" *ngIf="count >= 0">{{count}} selected</span>
+  </div>
+  <div class="input-block">
+    <ng-content select="[input-transclude-slot]"></ng-content>
+  </div>
+  <div>
+    <ng-content select="[content-transclude-slot]"></ng-content>
+  </div>
+</div>

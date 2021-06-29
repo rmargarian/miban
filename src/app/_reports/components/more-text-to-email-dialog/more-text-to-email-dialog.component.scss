@@ -1,0 +1,13 @@
+@import "../../../../assets/styles/dialog";
+@import "../../../../assets/styles/colors";
+
+%report_style{
+  display: flex;
+  flex-direction: column;
+  align-items:flex-start;
+}
+
+:host {
+  .dialog .form-content {padding: 10px 10px 0px;}
+  .dialog .form-footer {text-align: center;}
+}

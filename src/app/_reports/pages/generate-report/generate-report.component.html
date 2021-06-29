@@ -1,0 +1,514 @@
+<form [formGroup]="form" *ngIf="form">
+  <app-form-input
+    label="Questionnaires:"
+    labelWidth="120px"
+    [required]="true">
+    <app-select-input
+      [focus]="true"
+      [options]="allQuestionnaires"
+      [valueField]="'id'"
+      [textField]="'title'"
+      groupBy="type"
+      [groupValue]="groupValueFn"
+      [control]="form.controls['questionnaire']"
+      placeholder="Please select or type"
+      [searchOn]="true"
+      input-transclude-slot>
+    </app-select-input>
+  </app-form-input>
+
+  <app-form-input
+    labelWidth="120px"
+    label="Key:"
+    [required]="true">
+    <app-select-input
+      class="m_select"
+      [control]="form.controls['keys']"
+      [options]="keys"
+      input-transclude-slot
+      type="multi"
+      textField="title" valueField="id">
+    </app-select-input>
+
+    <div content-transclude-slot class="withAdditional">
+      <mat-checkbox
+        class="custom_mat-checkbox"
+        [disableRipple]="true"
+        [formControl]="form.controls['show_all_keys']"
+        input-transclude-slot>
+        Show all
+      </mat-checkbox>
+    </div>
+  </app-form-input>
+
+  <app-form-input
+    labelWidth="120px"
+    label=" "
+    class="withAdditional">
+    <div class="filters-row" input-transclude-slot>
+      <div input-transclude-slot class="filter-wrapper">
+        <app-single-column-grid
+          input-transclude-slot
+          [rowMultiSelect]="true"
+          [disableGridSort]="true"
+          [type]='gridFilters.COUNTRY'
+          [headerTitle]="'Countries'"
+          [data]="allFilters.country"
+          [selectedRows]="appliedFilters.country"
+          (filterChanged)="onFilterChanged($event)">
+        </app-single-column-grid>
+        <app-text-button
+          class="select-all-btn"
+          content-transclude-slot
+          [disabled]="allFilters.country.length === 0"
+          color="blue" type="button"
+          [text]="isSelectedAll(getUnique(appliedFilters.country), getUnique(allFilters.country)) ?  'Unselect all' : 'Select all'"
+          [id]="gridFilters.COUNTRY"
+          (clicked)="selectAll(gridFilters.COUNTRY)">
+        </app-text-button>
+      </div>
+
+      <div input-transclude-slot class="filter-wrapper">
+        <app-single-column-grid
+          input-transclude-slot
+          [rowMultiSelect]="true"
+          [type]='gridFilters.STATE_NAME'
+          [headerTitle]="'States'"
+          [data]="allFilters.state_name"
+          [selectedRows]="appliedFilters.state_name"
+          (filterChanged)="onFilterChanged($event)">
+        </app-single-column-grid>
+        <app-text-button
+          class="select-all-btn"
+          content-transclude-slot
+          [disabled]="allFilters.state_name.length === 0"
+          color="blue" type="button"
+          [text]="isSelectedAll(getUnique(appliedFilters.state_name), getUnique(allFilters.state_name)) ?  'Unselect all' : 'Select all'"
+          (clicked)="selectAll(gridFilters.STATE_NAME)">
+        </app-text-button>
+      </div>
+    </div>
+  </app-form-input>
+
+  <app-form-input
+    labelWidth="120px"
+    label=" "
+    class="withAdditional">
+    <div class="filters-row" input-transclude-slot>
+      <div class="filter-wrapper" input-transclude-slot>
+        <app-single-column-grid
+          input-transclude-slot
+          [disableGridSort]="true"
+          [rowMultiSelect]="true"
+          [headerTitle]="'Cities'"
+          [type]='gridFilters.CITY'
+          [data]="allFilters.city"
+          [selectedRows]="appliedFilters.city"
+          (filterChanged)="onFilterChanged($event)">
+        </app-single-column-grid>
+
+        <app-text-button
+          class="select-all-btn"
+          content-transclude-slot
+          [disabled]="allFilters.city.length === 0"
+          color="blue" type="button"
+          [text]="isSelectedAll(getUnique(appliedFilters.city), getUnique(allFilters.city)) ?  'Unselect all' : 'Select all'"
+          (clicked)="selectAll(gridFilters.CITY)">
+        </app-text-button>
+      </div>
+
+      <div class="filter-wrapper" input-transclude-slot>
+        <app-single-column-grid
+          input-transclude-slot
+          [rowMultiSelect]="true"
+          [type]='gridFilters.CAREER'
+          [headerTitle]="'Careers'"
+          [data]="allFilters.career"
+          [selectedRows]="appliedFilters.career"
+          (filterChanged)="onFilterChanged($event)">
+        </app-single-column-grid>
+
+        <app-text-button
+          class="select-all-btn"
+          content-transclude-slot
+          [disabled]="allFilters.career.length === 0"
+          color="blue" type="button"
+          [text]="isSelectedAll(getUnique(appliedFilters.career), getUnique(allFilters.career)) ?  'Unselect all' : 'Select all'"
+          (clicked)="selectAll(gridFilters.CAREER)">
+        </app-text-button>
+      </div>
+    </div>
+  </app-form-input>
+
+  <app-form-input
+    labelWidth="120px"
+    label=" " class="withAdditional">
+    <div class="filters-row" input-transclude-slot>
+      <div class="filter-wrapper" input-transclude-slot>
+        <app-single-column-grid
+          input-transclude-slot
+          [disableGridSort]="true"
+          [rowMultiSelect]="true"
+          [type]='gridFilters.DEPARTMENT'
+          [headerTitle]="'Departments'"
+          [data]="allFilters.department"
+          [selectedRows]="appliedFilters.department"
+          (filterChanged)="onFilterChanged($event)">
+        </app-single-column-grid>
+
+        <app-text-button
+          class="select-all-btn"
+          content-transclude-slot
+          [disabled]="allFilters.department.length === 0"
+          color="blue" type="button"
+          [text]="isSelectedAll(getUnique(appliedFilters.department), getUnique(allFilters.department)) ?  'Unselect all' : 'Select all'"
+          (clicked)="selectAll(gridFilters.DEPARTMENT)">
+        </app-text-button>
+      </div>
+
+      <div class="filter-wrapper" input-transclude-slot>
+        <app-single-column-grid
+          input-transclude-slot
+          [disableGridSort]="true"
+          [rowMultiSelect]="true"
+          [type]='gridFilters.JOB_TITLE'
+          [headerTitle]="'Job Titles'"
+          [data]="allFilters.job_title"
+          [selectedRows]="appliedFilters.job_title"
+          (filterChanged)="onFilterChanged($event)">
+        </app-single-column-grid>
+
+        <app-text-button
+          class="select-all-btn"
+          content-transclude-slot
+          [disabled]="allFilters.job_title.length === 0"
+          color="blue" type="button"
+          [text]="isSelectedAll(getUnique(appliedFilters.job_title), getUnique(allFilters.job_title)) ?  'Unselect all' : 'Select all'"
+          (clicked)="selectAll(gridFilters.JOB_TITLE)">
+        </app-text-button>
+      </div>
+
+    </div>
+  </app-form-input>
+
+  <app-form-input
+    labelWidth="120px"
+    label=" " class="withAdditional">
+    <div class="filters-row" input-transclude-slot>
+      <div class="filter-wrapper" input-transclude-slot>
+        <app-single-column-grid
+          class="large"
+          input-transclude-slot
+          [rowMultiSelect]="true"
+          [type]="gridFilters.P_LOCATION"
+          [headerTitle]="'Locations'"
+          [data]="allFilters.p_location"
+          [selectedRows]="appliedFilters.p_location"
+          (filterChanged)="onFilterChanged($event)">
+        </app-single-column-grid>
+
+        <app-text-button
+          class="select-all-btn"
+          [disabled]="allFilters.p_location.length === 0"
+          content-transclude-slot
+          color="blue" type="button"
+          [text]="isSelectedAll(getUnique(appliedFilters.p_location), getUnique(allFilters.p_location)) ?  'Unselect all' : 'Select all'"
+          (clicked)="selectAll(gridFilters.P_LOCATION)">
+        </app-text-button>
+      </div>
+      <div class="filter-wrapper" input-transclude-slot>
+        <app-single-column-grid
+          class="large"
+          input-transclude-slot
+          [rowMultiSelect]="true"
+          [type]="gridFilters.P_DATE"
+          [headerTitle]="'Dates'"
+          [data]="allFilters.p_date"
+          [selectedRows]="appliedFilters.p_date"
+          (filterChanged)="onFilterChanged($event)">
+        </app-single-column-grid>
+
+        <app-text-button
+          class="select-all-btn"
+          content-transclude-slot
+          [disabled]="allFilters.p_date.length === 0"
+          color="blue" type="button"
+          [text]="isSelectedAll(getUnique(appliedFilters.p_date), getUnique(allFilters.p_date)) ?  'Unselect all' : 'Select all'"
+          (clicked)="selectAll(gridFilters.P_DATE)">
+        </app-text-button>
+      </div>
+    </div>
+  </app-form-input>
+
+  <app-form-input
+    label=" "
+    labelWidth="120px"
+    class="withAdditional">
+    <div class="filters-row" input-transclude-slot>
+      <div class="filter-wrapper" input-transclude-slot>
+        <app-single-column-grid
+          class="large"
+          input-transclude-slot
+          [rowMultiSelect]="true"
+          [type]="gridFilters.P_GROUPS"
+          [headerTitle]="'Groups'"
+          [data]="allFilters.p_groups"
+          [selectedRows]="appliedFilters.p_groups"
+          (filterChanged)="onFilterChanged($event)">
+        </app-single-column-grid>
+
+        <app-text-button
+          class="select-all-btn"
+          content-transclude-slot
+          [disabled]="allFilters.p_groups.length === 0"
+          color="blue" type="button"
+          [text]="isSelectedAll(getUnique(appliedFilters.p_groups), getUnique(allFilters.p_groups)) ? 'Unselect all' : 'Select all'"
+          (clicked)="selectAll(gridFilters.P_GROUPS)">
+        </app-text-button>
+      </div>
+
+      <div class="filter-wrapper" input-transclude-slot>
+        <app-single-column-grid
+          class="large"
+          input-transclude-slot
+          [rowMultiSelect]="true"
+          [type]="gridFilters.P_SAVED"
+          [headerTitle]="'Saved'"
+          [data]="allFilters.p_saved"
+          [selectedRows]="appliedFilters.p_saved"
+          (filterChanged)="onFilterChanged($event)">
+        </app-single-column-grid>
+
+        <app-text-button
+          class="select-all-btn"
+          content-transclude-slot
+          [disabled]="allFilters.p_saved.length === 0"
+          color="blue" type="button"
+          [text]="isSelectedAll(getUnique(appliedFilters.p_saved), getUnique(allFilters.p_saved)) ? 'Unselect all' : 'Select all'"
+          (clicked)="selectAll(gridFilters.P_SAVED)">
+        </app-text-button>
+      </div>
+
+    </div>
+  </app-form-input>
+
+  <app-form-input
+    labelWidth="120px"
+    label="Participants:"
+    [count]="getSelectedParticipantsCount()">
+    <ag-grid-angular
+      input-transclude-slot
+      style="height: 300px; width: 95%"
+      class="ag-theme-balham participants_grid"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      rowSelection="multiple"
+      [rowMultiSelectWithClick]="!selectionTick"
+      rowDeselection="true"
+      (gridReady)="onGridReady($event)"
+      (rowDataChanged)="selectParticipants()"
+      [frameworkComponents]="frameworkComponents"
+      [gridOptions]="gridOptions">
+    </ag-grid-angular>
+  </app-form-input>
+
+  <div class="raw-btns">
+    <div class="color_select_wrapper">
+      <ng-select
+          [items]="colours"
+          bindLabel="value"
+          bindValue="value"
+          [searchable]="false" [clearable]="false"
+          [(ngModel)]="colour"
+          [ngModelOptions]="{standalone: true}"
+          class="color_select"
+          >
+          <ng-template ng-label-tmp let-item="item">
+            <div [ngStyle]="{'background': colour}"></div>
+          </ng-template>
+          <ng-template ng-option-tmp let-item="item" let-index="index">
+            <div class="colour-option" [ngStyle]="{'background': item.value}"></div>
+          </ng-template>
+      </ng-select>
+      <span class="tip">Bar Graph colour</span>
+    </div>
+      <app-icon-button
+        color="blue"
+        tooltip="Reload Grid"
+        iconClass="refresh"
+        (clicked)="reload()">
+      </app-icon-button>
+      <app-icon-button
+        color="blue"
+        [disabled]="rowData.length <= 0"
+        [tooltip]="rowsCount !== rowData.length ? 'Select all' : 'Unselect all'"
+        iconClass="assignment"
+        (clicked)="selectAllParticipants()">
+      </app-icon-button>
+
+      <app-icon-button
+        color="blue"
+        tooltip="Switch to multi selection"
+        [disabled]="rowData.length <= 0"
+        iconClass="done_all"
+        [pressed]="!selectionTick"
+        (clicked)="switchParticipantsGridSelectionMode()">
+      </app-icon-button>
+
+      <app-icon-button
+        color="blue"
+        tooltip="Show only completed"
+        [disabled]="fullList.length <= 0"
+        faIconClass="fas fa-flag"
+        [pressed]="showCompletedOnly"
+        (clicked)="switchSelectCompletedOnly()">
+      </app-icon-button>
+  </div>
+
+  <app-form-input
+    label=" "
+    labelWidth="120px">
+    <div input-transclude-slot class="buttons-row-style">
+      <app-text-button
+        tooltip="Generate report"
+        color="blue"
+        type="button"
+        [disabled]="!form.controls['keys'].value"
+        text="Submit"
+        [disabled]="getSelectedParticipantsCount() === 0"
+        (clicked)="submit()" style="margin-right: 10px">
+      </app-text-button>
+      <app-icon-button
+        color="blue"
+        tooltip="Export detailed responses"
+        [disabled]="rowsCount <= 0"
+        (clicked)="exportDetailedResponses()"
+        iconClass="cloud_download">
+      </app-icon-button>
+      <app-icon-button
+        tooltip="Best negotiators"
+        color="blue"
+        [disabled]="rowsCount <= 0"
+        iconClass="people" (clicked)="exportBestNegotiators()">
+      </app-icon-button>
+      <app-icon-button
+        tooltip="Download pdf"
+        color="blue"
+        [disabled]="rowsCount <= 0"
+        imgSrc="https://img.icons8.com/material-outlined/24/000000/pdf.png"
+        iconClass="" (clicked)="downloadPDF()">
+      </app-icon-button>
+
+      <div class="html-input-style buttons-row-style"
+        input-transclude-slot>
+        <span>Email:</span>
+        <app-input class="html-input" [control]="form.controls['emails']"></app-input>
+        <span class="separate">Separate with comma or semicolon</span>
+      </div>
+
+      <app-icon-button
+        tooltip="Add text to email"
+        color="blue"
+        iconClass="email"
+        (clicked)="openMoreTextToEmailSendDialog()">
+      </app-icon-button>
+      <app-text-button
+        tooltip="Send report on emails"
+        [disabled]="!generatedReport || !form.controls['emails'].value"
+        color="blue"
+        type="button"
+        text="Send" (clicked)="sendReportByEmail()">
+      </app-text-button>
+    </div>
+  </app-form-input>
+
+  <app-form-input
+    label=" "
+    labelWidth="120px">
+    <div
+      input-transclude-slot
+      class="buttons-row-style html-input-style">
+      <span>HTML Report: </span>
+      <app-input
+        type="text"
+        class="html-input"
+        [control]="form.controls['report_name']">
+      </app-input>
+      <app-text-button
+        tooltip="Save report in selected keys"
+        style="margin-right: 10px"
+        color="blue"
+        [disabled]="!form.controls['report_name'].value || getSelectedParticipantsCount() === 0"
+        text="Create"
+        type="button"
+        (clicked)="createReport()">
+      </app-text-button>
+      <mat-checkbox
+        class="custom_mat-checkbox"
+        [formControl]="form.controls['names']">
+        Names
+      </mat-checkbox>
+      <mat-checkbox
+        class="custom_mat-checkbox cloud"
+        [formControl]="form.controls['cloud']">
+        Cloud
+      </mat-checkbox>
+      <mat-checkbox
+        class="custom_mat-checkbox cloud"
+        [formControl]="form.controls['hide_empty']">
+        Sort & Hide < 10%
+      </mat-checkbox>
+    </div>
+  </app-form-input>
+</form>
+
+<div class="report-wrapper" *ngIf="generatedReport">
+  <div class="report_header">
+    <h2 class="name_questionare">{{nameOfQuestionnaire}}</h2>
+    <div *ngFor="let company of companies">
+      <h3 class="company_name">{{company.title}} ({{company.companyKey}})</h3>
+    </div>
+    <h2 class="name_questionare">{{reportName}}</h2>
+  </div>
+
+  <div id="smallGridTemplate"
+       style="width: 78%; margin: auto;">
+    <table style="width: 80%; border-collapse: collapse; border: 1px solid black">
+      <tr style="background-color: rgba(117,117,127,0.2); font-weight: bold" *ngIf="splitedHeader">
+        <td style="width: 80%; border: 1px solid black; padding: 5px">{{splitedHeader[0]}}</td>
+        <td style='width: 20%; border: 1px solid black; padding: 5px'>{{splitedHeader[1]}}</td>
+      </tr>
+      <tr *ngFor="let userInfo of gridUsers">
+        <td style="border: 1px solid black; padding: 3px">{{userInfo[0]}}</td>
+        <td style="border: 1px solid black; padding: 3px 5px">{{userInfo[1]}}</td>
+      </tr>
+    </table>
+  </div>
+
+  <div id="largeGridTemplate"
+       style="width: 78%; margin: auto;">
+    <table style="width: 90%; border-collapse: collapse; border: 1px solid black">
+      <tr style="background-color: rgba(117,117,127,0.2); font-weight: bold" *ngIf="splitedHeader">
+        <td style="width: 70%; border: 1px solid black; padding: 5px">{{splitedHeader[0]}}</td>
+        <td style="width: 15%; border: 1px solid black; padding: 5px">{{splitedHeader[1]}}</td>
+        <td style="width: 15%; border: 1px solid black; padding: 5px">{{splitedHeader[2]}}</td>
+      </tr>
+      <tr *ngFor="let userInfo of gridUsers" class="users">
+        <td style="border: 1px solid black; padding: 3px">{{userInfo[0]}}</td>
+        <td style="border: 1px solid black; padding: 3px">{{userInfo[1]}}</td>
+        <td style="border: 1px solid black; padding: 3px">{{userInfo[2]}}</td>
+      </tr>
+    </table>
+  </div>
+
+  <app-report-renderer
+    #reportRenderer
+    [report]="generatedReport"
+    [isForEmail]="isForEmail"
+    [enableTooltip]="true" [parentRef]="this">
+  </app-report-renderer>
+</div>
+
+<div style="height: 20px"></div>
+
+<ngx-loading [show]="loading" [config]="{fullScreenBackdrop: true }"></ngx-loading>

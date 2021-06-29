@@ -1,0 +1,13 @@
+/deep/ .mat-form-field-underline{height: 0px !important;}
+/deep/ .mat-form-field-wrapper {padding-bottom: 0px !important;}
+/deep/ .mat-form-field-appearance-legacy.mat-form-field-invalid:not(.mat-focused) .mat-form-field-ripple {
+  height: 0px !important;
+}
+
+:host {
+  height: 100%;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+}
+

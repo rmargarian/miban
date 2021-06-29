@@ -1,0 +1,150 @@
+<app-admin-toolbar>
+  <div *ngIf="(tabIndex$ | async) !== tabs.QUESTIONS && (tabIndex$ | async) !== tabs.INCOMPLETE">
+    <app-icon-button tooltip="Create new" class="toolbar-item" iconClass="add" (click)="add()"></app-icon-button>
+    <app-icon-button tooltip="Delete selected" class="toolbar-item" iconClass="remove" (click)="delete()"></app-icon-button>
+    <app-icon-button tooltip="Clone selected" class="toolbar-item" iconClass="library_add" (click)="clone()"></app-icon-button>
+    <app-icon-button tooltip="Save" [disabled]="form.invalid" class="toolbar-item" iconClass="save" (click)="save()"></app-icon-button>
+  </div>
+  <div *ngIf="(tabIndex$ | async) === tabs.QUESTIONS" class="questions_btns">
+    <app-icon-button tooltip={{tooltipAdd}}
+      class="toolbar-item" iconClass="add" (click)="createG_Q()"></app-icon-button>
+    <app-icon-button tooltip={{tooltipDelete}} [disabled]="!selectedQGroupsCount && !selectedQItemsCount"
+      class="toolbar-item" iconClass="remove" (click)="deleteG_Q()"></app-icon-button>
+    <app-icon-button tooltip={{tooltipEdit}} [disabled]="selectedQGroupsCount !== 1 && selectedQItemsCount !== 1"
+      class="toolbar-item" iconClass="edit" (click)="editG_Q()"></app-icon-button>
+    <app-icon-button tooltip="Reload" class="toolbar-item" iconClass="refresh" (clicked)="refresh()"></app-icon-button>
+    <div class="separator">|</div>
+
+    <app-icon-button *ngIf="selectedQItemsCount" tooltip="Copy Question" [disabled]="selectedQItemsCount !== 1"
+      class="toolbar-item" iconClass="file_copy" [matMenuTriggerFor]="menuCopy.parentMenu"></app-icon-button>
+    <app-menu-item #menuCopy [items]="typedQuestionnaires"
+      (chosen)="copyToSelected($event)"></app-menu-item>
+    <app-icon-button *ngIf="selectedQItemsCount" tooltip="Move Question" [disabled]="selectedQItemsCount < 1"
+      class="toolbar-item" iconClass="arrow_forward" [matMenuTriggerFor]="menuMove.parentMenu"></app-icon-button>
+    <app-menu-item #menuMove [items]="typedQuestionnaires"
+      (chosen)="moveToSelected($event)"></app-menu-item>
+
+    <div class="separator" *ngIf="selectedQItemsCount">|</div>
+    <app-search-input id="search-input" #search (keyup)="onQuickFilterChanged($event)" (clear)='onClear()'
+      [filterFormControl]="filterFormControl" [focus]="true" [debounceTime]="700"></app-search-input>
+  </div>
+  <div *ngIf="(tabIndex$ | async) === tabs.INCOMPLETE" class="questions_btns">
+    <app-icon-button [disabled]="!incomleteIds.length" tooltip="Delete selected" class="toolbar-item" iconClass="remove" (click)="removeIncompleteAttempts()"></app-icon-button>
+    <app-icon-button tooltip="Reload" class="toolbar-item" iconClass="refresh" (click)="refreshIncomplete()"></app-icon-button>
+
+    <div class="separator">|</div>
+    <div class="users_count">Selected:&nbsp;{{incomleteIds.length}}</div>
+  </div>
+</app-admin-toolbar>
+<form [formGroup]="form" flex *ngIf="form">
+  <mat-tab-group #tabGroup [selectedIndex]="(tabIndex$ | async)">
+    <mat-tab label='Setup'>
+      <fieldset *ngIf="((tabIndex$ | async) === tabs.SETUP)">
+        <legend>{{qName}} Editor</legend>
+        <div class="form-content">
+          <app-form-input label="Title:" labelWidth="100px" required="true">
+            <app-input [control]="getControl('title')" [validationErrors]="getControl('title').errors "
+              [focus]="true" input-transclude-slot></app-input>
+          </app-form-input>
+          <app-form-input label="Acronym:" labelWidth="100px">
+            <app-input [control]="getControl('abbreviation')" [validationErrors]="getControl('abbreviation').errors "
+              input-transclude-slot (onkeypress)="return (this.value.length < this.maxLength)" [maxlength]="4"></app-input>
+          </app-form-input>
+          <app-form-input label="Description:" labelWidth="100px" class="flex-start">
+            <app-textarea [control]="getControl('description')" input-transclude-slot></app-textarea>
+          </app-form-input>
+          <app-form-input label="Welcome:" labelWidth="100px" class="flex-start">
+            <app-textarea [control]="getControl('welcome')" input-transclude-slot></app-textarea>
+          </app-form-input>
+        </div>
+      </fieldset>
+    </mat-tab>
+    <mat-tab label='Questions'>
+      <app-questions-tab #questionsTab [item]="item" (reload)="refresh()"></app-questions-tab>
+    </mat-tab>
+    <mat-tab label='Auto emails'>
+      <fieldset>
+        <legend>Confirmation Email</legend>
+        <div class="form-content emails-content">
+          <app-form-input label="Subject:" labelWidth="100px">
+            <app-input [control]="getControl('conf_email_subject')" input-transclude-slot></app-input>
+          </app-form-input>
+          <app-form-input label="Message:" labelWidth="100px" class="flex-start">
+            <app-textarea [control]="getControl('conf_email_template')" input-transclude-slot></app-textarea>
+          </app-form-input>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Incomplete Profile Email</legend>
+        <div class="form-content emails-content">
+          <app-form-input label="Subject:" labelWidth="100px">
+            <app-input [control]="getControl('pubreg_email_subject')" input-transclude-slot></app-input>
+          </app-form-input>
+          <app-form-input label="Message:" labelWidth="100px" class="flex-start">
+            <app-textarea [control]="getControl('pubreg_email_template')" input-transclude-slot></app-textarea>
+          </app-form-input>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Sponsor & Admin Completion Notification Email</legend>
+        <div class="form-content emails-content">
+          <app-form-input label="Subject:" labelWidth="100px">
+            <app-input [control]="getControl('sponsor_email_subject')" input-transclude-slot></app-input>
+          </app-form-input>
+          <app-form-input label="Message:" labelWidth="100px" class="flex-start">
+            <app-textarea [control]="getControl('sponsor_email_template')" input-transclude-slot></app-textarea>
+          </app-form-input>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Copy from</legend>
+        <div class="input_content">
+        <app-form-input label="PFA:" labelWidth="100px" class="input_select">
+          <app-select-input  [options]="allQuestionnaires" valueField='id' groupBy="typeStr" [groupValue]="groupValueFn"
+            placeholder="Please select or type" [control]="qControl" textField='title' [searchOn]="true"  input-transclude-slot>
+          </app-select-input>
+        </app-form-input>
+        <app-text-button [disabled]="!selsectedQid" color="blue" text="Overwrite" (click)="onOverwrite()"></app-text-button>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Template parameters</legend>
+        <div class="template_content">
+          {{templateInfo}}
+        </div>
+      </fieldset>
+    </mat-tab>
+    <mat-tab label='Invitation emails'>
+      <app-invitation-emails *ngIf="(tabIndex$ | async) === tabs.INVIT_EMAILS"
+        #invEmails
+        [item]="item"
+        [allQuestionnaires]="allQuestionnaires"
+        [isRes]="false"></app-invitation-emails>
+    </mat-tab>
+    <mat-tab label='Result emails' *ngIf="item.type === types.ASSESSMENT">
+      <app-invitation-emails *ngIf="(tabIndex$ | async) === tabs.RESULT_EMAILS"
+        #resEmails
+        [item]="item"
+        [allQuestionnaires]="allQuestionnaires"
+        [isRes]="true"></app-invitation-emails>
+    </mat-tab>
+    <mat-tab label='Configuration'>
+      <fieldset>
+        <legend>Maximum Time Allowed</legend>
+        <div class="form-content" *ngIf="((tabIndex$ | async) === tabs.CONFIG) || (item.type !== types.ASSESSMENT && (tabIndex$ | async) === tabs.RESULT_EMAILS)">
+          <app-form-input label="Timeout (mins):" labelWidth="100px" required="true">
+            <app-input [control]="getControl('incomplete_timeout')" [validationErrors]="getControl('incomplete_timeout').errors"
+            [focus]="true" [type]="'number'" [min]="1" (keydown)="numericKeyDown($event)" input-transclude-slot></app-input>
+          </app-form-input>
+        </div>
+      </fieldset>
+    </mat-tab>
+    <mat-tab label='Incomplete' *ngIf="item && item.id === 124">
+      <app-incomplete-attempts *ngIf="(tabIndex$ | async) === tabs.INCOMPLETE"
+        [selectedIds]="incomleteIds"
+        [questionnaire]="item">
+      </app-incomplete-attempts>
+    </mat-tab>
+  </mat-tab-group>
+</form>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '1px' }"></ngx-loading>

@@ -1,0 +1,10 @@
+<mat-menu #parentMenu="matMenu" [overlapTrigger]="false">
+  <ng-container *ngFor="let item of items">
+    <button *ngIf="!item.children || item.children.length === 0" mat-menu-item>{{ item.title }}</button>
+    <button *ngIf="item.children && item.children.length > 0"
+      mat-menu-item [matMenuTriggerFor]="submenu">{{ item.title }}</button>
+    <mat-menu #submenu="matMenu">
+       <button *ngFor="let subItem of item.children" mat-menu-item (click)="itemChosen(subItem)">{{ subItem.title }}</button>
+    </mat-menu>
+  </ng-container>
+</mat-menu>

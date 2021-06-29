@@ -1,0 +1,117 @@
+<div class="title">Title</div>
+<div class="questions_container">
+  <div class="container-fluid">
+  <ul class="list parent_list">
+    <span class="question_container">
+      <li (dblclick)="triggerUnassigned($event)"
+          (click)="selectUnassigned()"
+          [class.opened]="unassignedOpened"
+          [class.drag_over]="unassignedAllowDrop">
+        <div class="selectable"
+          [class.selected]="unassignedSelected"
+          (drop)="dropOnUnassigned($event)"
+          (dragover)="allowDropOnUnassigned($event, null)"
+          (dragleave)="dragLeave(null)">
+          <span *ngIf="unassignedQuestions.length" class="expander" (click)="triggerUnassigned($event)">
+            <i class="fas fa-chevron-right"></i>
+          </span>
+          <span class="image" [class.shift]="!unassignedQuestions.length">
+            <i class="material-icons">folder</i>
+          </span>
+          <span class="item_name not-select">UNASSIGNED</span>
+        </div>
+      </li>
+      <li class="li_child_list" [class.opened]="unassignedOpened">
+        <ul class="list child_list" [class.visibility0]="!unassignedOpened">
+          <li *ngFor="let item of unassignedQuestions; let i = index;" class="selectable"
+            [id]="item.id"
+            (click)="selectUnassignedItem(item)"
+            (dblclick)="editQuestion(item)"
+            [class.selected]="item.selected"
+            [class.height0]="item.hidden"
+            [class.drag_over]="item.alowDrop"
+            [class.not_active]="!item.is_active"
+            attr.data-tooltip="{{!item.is_active ? 'Not Active' : ''}}"
+            attr.data-tooltip-position="{{'bottom-start'}}"
+            draggable="true"
+            (dragstart)="onDragStart($event)"
+            (dragend)="onDragEnd($event)"
+            (mousedown)="onUnassignedItemMouseDown(item)"
+            (drop)="dropOnUnassigned($event)"
+            (dragover)="allowDropOnUnassigned($event, item)"
+            (dragleave)="dragLeave(item)">
+            <span class="image">
+              <i class="material-icons">description</i>
+            </span>
+            <span class="item_name not-select"
+              [innerHTML]="item.title">
+            </span>
+          </li>
+        </ul>
+      </li>
+    </span>
+
+    <span *ngFor="let group of groups; let i = index;" class="question_container">
+      <li (dblclick)="triggerFolder($event, group)"
+          (click)="selectGroup(group)"
+          [class.opened]="group.opened"
+          [class.drag_over]="group.alowDrop">
+        <div class="selectable"
+          [class.selected]="group.selected"
+          [id]="group.id"
+          draggable="true"
+          (dragstart)="onDragStart($event)"
+          (dragend)="onDragEnd($event)"
+          (mousedown)="onGroupMouseDown(group)"
+          (drop)="dropOnGroup($event, group)"
+          (dragover)="allowDrop($event, group)"
+          (dragleave)="dragLeave(group)">
+          <span *ngIf="group.group_questions_map.length" class="expander"
+            (click)="$event.stopPropagation()"
+            (mousedown)="triggerFolder($event, group)">
+            <i class="fas fa-chevron-right"></i>
+          </span>
+          <span class="image" [class.shift]="!group.group_questions_map.length">
+            <i class="material-icons">folder</i>
+          </span>
+          <span class="item_name not-select">{{group.title}}</span>
+        </div>
+      </li>
+      <li class="li_child_list" [class.opened]="group.opened">
+        <ul class="list child_list" [class.visibility0]="!group.opened">
+          <li *ngFor="let item of group.group_questions_map; let i = index;" class="selectable"
+            [id]="item.question.id"
+            (click)="selectItem(item)"
+            (dblclick)="editQuestion(item.question)"
+            [class.selected]="item.selected"
+            [class.height0]="item.hidden"
+            [class.drag_over]="item.alowDrop"
+            [class.not_active]="!item.question.is_active"
+            attr.data-tooltip="{{!item.question.is_active ? 'Not Active' : ''}}"
+            attr.data-tooltip-position="{{'bottom-start'}}"
+            draggable="true"
+            (dragstart)="onDragStart($event)"
+            (dragend)="onDragEnd($event)"
+            (mousedown)="onItemMouseDown(item)"
+            (drop)="dropOnItem($event, item)"
+            (dragover)="allowDropOnItem($event, item)"
+            (dragleave)="dragLeave(item)">
+            <span class="image">
+              <i class="material-icons">description</i>
+            </span>
+            <span class="item_name not-select"
+              [innerHTML]="item.question.title">
+            </span>
+          </li>
+        </ul>
+      </li>
+    </span>
+  </ul>
+</div>
+</div>
+<ngx-loading [show]="loading"></ngx-loading>
+
+
+
+
+

@@ -1,0 +1,99 @@
+.overflow-unset { overflow: unset !important }
+.not_one_completed, .timeout { background-color: #ffffbb !important }
+.completed { background-color: #d9fbde !important }
+.crossed_out { text-decoration: line-through !important }
+.invalid { background-color: #e69292a8 !important }
+.invalid .ag-row-hover { background-color: #e69292a8 !important }
+.required::after {
+  content: "required";
+  color: red;
+  font-weight: 600;
+}
+.invalid_field {
+  color: #e90004;
+  font-weight: 600;
+}
+.green { color: green; }
+.warning { color: #ffc107; }
+
+.custom-drag-ghost {
+  /* The original cloned element must not take place up in the page and must not be visible */
+  position: absolute;
+  top: -99999px;
+  left: -99999px;
+
+  /* Just for appearance */
+  display: block;
+  font-size: 13px;
+  font-weight: bold;
+  color: black;
+  padding: 0.05rem 25px;
+  background-color: #ebf5ff;
+  border: 1px solid #ddd;
+}
+
+.input, .textarea input, textarea  {
+  border: 1px solid #ccc !important;
+  box-shadow: none !important;
+}
+.input.with-error {
+  border: 1px solid #f44336 !important;
+}
+
+input[readonly] {
+  background-color:#dee2e6  !important;
+  color: #797979 !important;
+}
+
+html [type=button], button {
+  -webkit-appearance: none !important;
+}
+
+.form-content {
+  color: black;
+}
+
+.float-left { float: left !important }
+.hidden { display: none !important }
+.visuallyhidden { opacity: 0 !important }
+.relative { position: relative !important }
+.bold { font-weight: 600 !important }
+
+.mat-tab-label {
+  background: #4b9bd8fd;
+}
+.custom-tooltip {
+  position: absolute;
+  width: 150px;
+  height: 70px;
+  border: 1px solid cornflowerblue;
+  overflow: hidden;
+  pointer-events: none;
+  transition: opacity 1s;
+}
+
+.custom-tooltip.ag-tooltip-hiding {
+  opacity: 0;
+}
+
+.custom-tooltip p {
+  margin: 5px;
+  white-space: nowrap;
+}
+
+.custom-tooltip p:first-of-type {
+  font-weight: bold;
+}
+
+.backdrop {
+  z-index: 998 !important;
+}
+
+.spinner-three-bounce {
+  z-index: 999 !important;
+}
+
+.ag-icon.ag-hidden {
+    display: none !important;
+}
+

@@ -1,0 +1,32 @@
+<div class="user-page-wrapper">
+  <div class="user-page">
+    <app-header></app-header>
+    <div class="page-content">
+      <div class="q-title">{{questionnaire.title}}</div>
+      <div class="error-msg">{{errorMsg}}</div>
+      <app-register-form
+        [data]="data"
+        [btnText]="'Next&nbsp;>>'"
+        [completed]="completed"
+        [questionnaire]="questionnaire"
+        (save)="onSave($event)"></app-register-form>
+      <div class="page-footer">
+        <div class="text-footer">
+          <p>
+              Your email address and password will serve as your unique identification.
+              An email will be sent to you confirming these details.
+          </p>
+          <p>
+              <b class="extra-bold">Our Confidentiality Promise</b><br>
+              Your responses will be kept confidential. Your will remain confidential,
+              unless we receive your permission to share.
+          </p>
+          <p>
+              Once sufficient profiles have been completed we will share aggregated results with senior sponsoring members of your company.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ngx-loading [show]="loading"></ngx-loading>

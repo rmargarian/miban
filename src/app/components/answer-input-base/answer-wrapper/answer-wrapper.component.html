@@ -1,0 +1,23 @@
+<div class="wrapper_preview">
+  <div class="wrapper_preview_title">
+    <div>
+      <span class="displayBlockClass" [innerHtml]="questionText"></span>
+      <span *ngIf="isMandatory" class="star">*</span>
+    </div>
+    <span *ngIf="help" class="help" [innerHtml]="help"></span>
+    <a *ngIf="moreInfo" [attr.data-tooltip]="moreInfo" class="more_info_tooltip">?</a>
+    <span *ngIf="min_selected && isMandatory" class="help">
+      <small>Choose at least {{min_selected}} options</small>
+    </span>
+  </div>
+  <div class="wrapper_preview_content">
+    <ng-content></ng-content>
+    <app-textarea
+      [labelText]="labelText"
+      [rowsCount]="commentRows"
+      [control]="commentControl"
+      *ngIf="withComment">
+    </app-textarea>
+  </div>
+</div>
+

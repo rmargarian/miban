@@ -1,0 +1,14 @@
+<div class="report_header">
+  <h2 class="name_questionare">{{nameOfQuestionnaire}}</h2>
+  <div *ngFor="let company of companies">
+    <h3 class="company_name">{{company.title}} ({{company.companyKey}})</h3>
+  </div>
+  <h2 class="name_questionare">{{reportName}}</h2>
+</div>
+
+<div>
+  <div>
+    <app-report-renderer *ngIf="parsedReport" [report]="parsedReport"></app-report-renderer>
+  </div>
+</div>
+

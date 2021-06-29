@@ -1,0 +1,8 @@
+@import "../../../../assets/styles/dialog";
+
+:host {
+
+  .form-content {
+    app-form-input { width: 400px }
+  }
+}

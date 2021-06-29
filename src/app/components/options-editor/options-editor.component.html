@@ -1,0 +1,73 @@
+<app-config-block [header]=header>
+  <div class="config-block-content" [ngClass]="{'pfa_disabled': disabled}">
+    <app-icon-button
+      class="add_option"
+      iconClass="add"
+      label="Add Option"
+      [disabled]="disabled"
+      (clicked)="onAddOption()">
+    </app-icon-button>
+    <div class="options"
+         dragula="VAMPIRES"
+         (dragulaModelChange)="onChangeOrderPosition($event)"
+         [dragulaModel]="options">
+      <div class="option_row"
+           content-transclude-slot
+           *ngFor="let option of options; let i = index;">
+
+        <ng-container *ngFor="let column of optionsColumns">
+          <ng-container [ngSwitch]="column.inputType">
+            <div *ngSwitchDefault [ngStyle]="{'flex': column.widthRatio}">
+              <input
+                [type]="column.inputType"
+                [disabled]="disabled"
+                [value]="option[column.fieldName]"
+                class="inputs_style"
+                [ngClass]="{'with-error': !!checkErrorTooltipMessage(option, column)}"
+                (keyup)="optionChanged($event.target.value, option, column.fieldName, column.optionChangeHandler)"
+                attr.data-tooltip="{{checkErrorTooltipMessage(option, column)}}"
+                attr.data-tooltip-class="{{'error-tooltip'}}"
+                attr.data-tooltip-position="{{'bottom-start'}}"
+                attr.data-tooltip-position="bottom"
+                [required]="option[column.required]">
+            </div>
+
+            <div *ngSwitchCase="'radio'" class="radio_option">
+                <app-radio-button
+                  [disabled]="disabled"
+                  [option]="option"
+                  [valueField]="column.fieldName"
+                  (keyup)="optionChanged($event, option, column.fieldName, column.optionChangeHandler)"
+                ></app-radio-button>
+            </div>
+
+            <ng-container *ngSwitchCase="'text'">
+              <textarea
+                class="option_editor_textarea"
+                [placeholder]="column.placeholder ? column.placeholder : ''"
+                [rows]="rowsCount"
+                [disabled]="disabled"
+                [value]="option[column.fieldName]"
+                [ngStyle]="{
+                  'flex': column.widthRatio}"
+                [ngClass]="{'with-error': !!checkErrorTooltipMessage(option, column)}"
+                attr.data-tooltip="{{checkErrorTooltipMessage(option, column)}}"
+                attr.data-tooltip-class="{{'error-tooltip'}}"
+                attr.data-tooltip-position="{{'bottom-start'}}"
+                (keyup)="optionChanged($event.target.value, option, column.fieldName, column.optionChangeHandler)"
+                [required]="option[column.required]">
+              </textarea>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+        <app-icon-button
+          class="remove"
+          iconClass="remove"
+          [disabled]="disabled"
+          (clicked)="onRemoveOption(option)">
+        </app-icon-button>
+      </div>
+    </div>
+
+  </div>
+</app-config-block>

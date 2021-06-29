@@ -1,0 +1,23 @@
+@import "../../../../assets/styles/dialog";
+@import "../../../../assets/styles/colors";
+
+:host {
+
+  .dialog .message{
+    min-width: 300px;
+    font-size: 0.9em;
+  }
+
+  .dialog .form-content {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 85px;
+    overflow-x: hidden;
+  }
+
+  .dialog .form-footer {
+    text-align: center;
+  }
+}

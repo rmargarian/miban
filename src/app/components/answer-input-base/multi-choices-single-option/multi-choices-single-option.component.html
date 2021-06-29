@@ -1,0 +1,29 @@
+<app-answer-wrapper
+  [moreInfo]="moreInfo"
+  [questionText]="questionText"
+  [help]="help"
+  [isMandatory]="isMandatory"
+  [withComment]="withComment"
+  [labelText]="labelText"
+  [commentControl]="commentControl"
+  [commentRows]="commentRows">
+
+  <div *ngIf="notTooltip" class="error_message">{{errorMessage || ''}}</div>
+
+  <mat-radio-group
+    [formControl]="control"
+    class="radio-group"
+    [ngClass]="{'horizontaly': align, 'default': !align, 'with-error': errorMessage}"
+    attr.data-tooltip="{{!notTooltip ? errorMessage : ''}}"
+    attr.data-tooltip-position="{{tooltipPosition}}"
+    attr.data-tooltip-class="{{'error-tooltip'}}"
+    [ngClass]="{'with-error': errorMessage}">
+    <app-radio-button *ngFor="let option of options"
+                      [option]="option"
+                      [textField]="textField"
+                      [valueField]="valueField">
+    </app-radio-button>
+  </mat-radio-group>
+
+</app-answer-wrapper>
+

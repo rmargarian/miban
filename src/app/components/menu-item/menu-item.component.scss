@@ -1,0 +1,36 @@
+@import "~assets/styles/theme";
+@import "~assets/styles/colors";
+@import "~assets/styles/variables";
+
+button.mat-menu-item {
+  height: 27px;
+  font-size: 13px;
+  outline: 0;
+  border-radius: 0;
+  line-height: 1;
+}
+button:focus, button:active {
+  background: $selected !important;
+}
+button {
+  &.selected { background: $selected !important; }
+}
+.mat-menu-item:hover:not([disabled]),
+.mat-menu-item.cdk-program-focused:not([disabled]),
+.mat-menu-item.cdk-keyboard-focused:not([disabled]),
+.mat-menu-item-highlighted:not([disabled]) {
+  background: $hover;
+}
+/deep/ .mat-menu-panel {
+  max-height: 500px !important;
+  max-width: unset !important;
+  border: 0 !important;
+  min-height: auto !important;
+}
+/deep/ .mat-menu-content:not(:empty) {
+  padding: 0 !important;
+}
+/deep/ .cdk-overlay-pane {
+  transform: translateY(0px) !important;
+}
+

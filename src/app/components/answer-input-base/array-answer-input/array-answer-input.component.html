@@ -1,0 +1,34 @@
+<app-answer-wrapper [moreInfo]="moreInfo" [questionText]="questionText" [help]="help" [isMandatory]="isMandatory"
+  [withComment]="withComment" [labelText]="labelText" [commentRows]="commentRows" [commentControl]="commentControl">
+  <div *ngIf="notTooltip" class="error_message">{{errorMessage || ''}}</div>
+
+  <div class="radio-group-wrapper" [ngClass]="{'with-error': errorMessage}"
+    attr.data-tooltip-class="{{'error-tooltip'}}" attr.data-tooltip-position="{{tooltipPosition}}"
+    attr.data-tooltip="{{!notTooltip ? errorMessage : ''}}">
+    <table class="rTable">
+      <thead>
+        <tr>
+          <td [class.switchAlbumTD]="labelSetOptions.length > 7"></td>
+          <td *ngFor="let labelSetOption of labelSetOptions" class="array-table-cell array-table-text-cell">
+            {{labelSetOption[labelSetOptionTextField]}}
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let option of options">
+          <tr *ngIf="labelSetOptions.length > 7" [class.switchAlbum]="true" class="array-table-text-cell array-option-title-cell">
+            <td [colSpan]="labelSetOptions.length" [innerHtml]="option[textField]" class="colspan-opt"></td>
+          </tr>
+          <mat-radio-group [formControl]="control.controls[option.id]" class="array-table-row">
+            <td [class.switchAlbumTD]="labelSetOptions.length > 7" [innerHtml]="option[textField]"
+              class="array-table-text-cell array-option-title-cell"></td>
+            <td *ngFor="let labelSetOption of labelSetOptions" class="array-table-cell">
+              <app-radio-button [option]="labelSetOption" [textField]="''" [valueField]="labelSetOptionValueField">
+              </app-radio-button>
+            </td>
+          </mat-radio-group>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</app-answer-wrapper>

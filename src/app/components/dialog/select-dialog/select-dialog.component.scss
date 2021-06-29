@@ -1,0 +1,58 @@
+@import "../../../../assets/styles/dialog";
+@import "../../../../assets/styles/colors";
+
+:host {
+  .dialog .form-content {
+    padding: 0;
+  }
+  .form-footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.wrap {
+  height: auto;
+  border: 1px solid grey;
+  margin: 15px 20px;
+  padding: 10px;
+  position: static;
+  font-size: 0.85em;
+  span {
+    position: relative;
+    bottom: 22px;
+    background-color: white;
+    padding: 0px 5px;
+  }
+  .questionnaries {
+    display: flex;
+    align-items: baseline;
+
+    &:not(:last-child) {
+      margin-bottom: 5px;
+    }
+
+    mat-checkbox {
+      padding-left: 10px;
+      position: relative;
+      top: -1px;
+    }
+
+    .questionnaries_label {
+      text-align: right;
+      margin-bottom: 0;
+      margin-left: 5px;
+    }
+  }
+
+  &:last-child {
+    margin-bottom: 5px;
+  }
+}
+
+.radio_group{
+  display: flex;
+  flex-direction: column;
+  padding: 0px 15px;
+}
+

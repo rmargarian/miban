@@ -1,0 +1,18 @@
+<div class="report_header">
+  <h2 class="name_questionare">{{nameOfQuestionnaire}}</h2>
+  <ng-container *ngIf="!hideKeysAndAvg">
+    <div *ngFor="let company of companies">
+      <h3 class="company_name">{{company.title}} ({{company.companyKey}})</h3>
+    </div>
+  </ng-container>
+  <h2 class="name_questionare">{{reportName}}</h2>
+</div>
+
+<div [ngSwitch]="typeStatus">
+  <div *ngSwitchCase="TypeReport.DataOBJECT">
+    <app-report-renderer [report]="parsedReport"></app-report-renderer>
+  </div>
+  <div *ngSwitchCase="TypeReport.DataHTML">
+    <div class="report_container" [innerHtml]="report.html"></div>
+  </div>
+</div>

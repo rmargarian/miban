@@ -1,0 +1,27 @@
+@import "../../../../assets/styles/dialog";
+@import "../../../../assets/styles/colors";
+
+:host {
+  .dialog .form-content {
+    padding: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .form-footer {
+    display: flex;
+    width: calc(100% - 1px); // 1px for border
+    justify-content: center;
+  }
+
+  .message { font-weight: 800 }
+
+  app-form-input {
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  /deep/ .dialog .message {
+    font-weight: 400;
+  }
+}

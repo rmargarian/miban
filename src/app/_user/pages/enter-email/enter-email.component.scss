@@ -1,0 +1,114 @@
+@import "~assets/styles/user-page";
+
+$loaderWidth: 22px;
+
+:host {
+  width: 100%;
+
+  app-form-input {
+    margin-right: 5px;
+  }
+
+  /deep/ .label-block {
+    font-weight: 600;
+    padding: 0 !important;
+  }
+  .msg, .link { font-size: 14px !important }
+  .reg_btn {
+    /deep/ button.text-button { font-size: 16px !important }
+  }
+
+  .enter-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+  }
+
+  form { width: 100% }
+  .content-wrapper {
+    display: flex;
+    flex-direction: row;
+
+    .col-content {
+      padding: 40px 5px;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+
+      &.enter-email { flex: 1 }
+      .email-msg {
+        font-size: 14px;
+        text-align: center;
+        color: black;
+        width: 100%;
+      }
+    }
+
+    .email_container { height: 27px }
+
+    .line {
+      width: 4px;
+      border: 1px solid white;
+      border-radius: 50%;
+      background-image: linear-gradient(white, #013567, white);
+    }
+
+    .bottom-content {
+      width: 203px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+}
+
+.loader {
+  position: relative;
+  right: -355px;
+  top: -25px;
+  border: 3px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 3px solid $headerBlue;
+  border-bottom: 3px solid $headerBlue;
+  width: $loaderWidth;
+  height: $loaderWidth;
+  -webkit-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@media screen and (min-width: 810px) {
+  .content-wrapper {
+    .col-content {
+      min-width: 400px;
+      }
+  }
+  app-form-input {
+    width: 350px;
+  }
+}
+
+@media screen and (max-width: 810px) {
+  .loader {
+    right: -285px;
+  }
+  .content-wrapper .bottom-content {
+    margin-left: 65px;
+  }
+}
+
+@media screen and (max-width: 666px) {
+  .content-wrapper {
+    flex-direction: column !important;
+  }
+}

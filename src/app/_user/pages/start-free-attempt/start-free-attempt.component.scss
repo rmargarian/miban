@@ -1,0 +1,23 @@
+@import "~assets/styles/user-page";
+@import "~assets/styles/colors";
+@import "~assets/styles/variables";
+
+:host {
+  width: 100%;
+
+  .info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: $baseFont;
+    font-size: 14px;
+    color: black;
+
+    .info { 
+      margin-bottom: 10px;
+      text-align: center;
+    }
+  }
+
+  .m-b-20 { margin-bottom: 20px !important }
+}

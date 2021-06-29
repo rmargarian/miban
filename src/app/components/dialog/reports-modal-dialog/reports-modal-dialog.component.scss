@@ -1,0 +1,45 @@
+@import "../../../../assets/styles/dialog";
+@import "../../../../assets/styles/colors";
+
+:host {
+
+  mat-dialog-content{
+    display: block;
+    margin: 0 !important;
+    padding: 10px 0px;
+    max-height: none;
+  }
+
+  .dialog .message{
+    min-width: 300px;
+    font-size: 0.9em;
+  }
+
+  .dialog .form-content {
+    padding: 0px;
+    .list{
+      font-size: 0.85em;
+      width: 100%;
+      .report_row{
+        display: flex;
+        justify-content:flex-start;
+        align-items: flex-start;
+        padding: 0px 10px;
+        &:hover{background-color: rgba(188, 198, 211, 0.2)}
+      }
+      .report_item_style{margin-left: 5px;}
+      .report_date{width: 22%};
+      .report_abbr{width: 10%};
+      .report_item_name{
+        color: inherit;
+        cursor: pointer;
+        &:hover{text-decoration: underline;}}
+      .preview_btn{
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .dialog .form-footer {text-align: center;}
+}

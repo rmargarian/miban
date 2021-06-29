@@ -1,0 +1,10 @@
+<span ref="eCellWrapper" class="ag-cell-wrapper cell_content">
+  <span ref="eCellValue" class="ag-cell-value status_text"
+    [class.email_warning]="differentKey && !isRepeated"
+    [class.invalid_field]="invalidField"
+    [class.email_repeated]="isRepeated"
+    attr.data-tooltip="{{tooltip}}"
+    [attr.data-tooltip-class]="tooltipClass"
+    [attr.data-tooltip-position]="'bottom-start'">{{value}}
+  </span>
+</span>

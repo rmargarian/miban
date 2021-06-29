@@ -1,0 +1,19 @@
+<div class="dialog">
+  <div class="form-header">
+    <div class="header-text" appMatDialogDraggableTitle>{{title}}</div>
+    <app-icon-button iconClass="close" color="transparent" (clicked)="closeDialog()"></app-icon-button>
+  </div>
+  <div class="form-content">
+    <app-textarea [focus]="true" [rowsCount]="3" [control]="getControl('text')"></app-textarea>
+  </div>
+  <div class="form-footer">
+    <app-text-button
+      color="blue" type="submit" text="Ok"
+      (clicked)="closeDialog(form.controls['text'].value)">
+    </app-text-button>
+    <app-text-button
+      color="blue" type="submit"
+      text="Close" (clicked)="closeDialog()">
+    </app-text-button>
+  </div>
+</div>

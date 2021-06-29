@@ -1,0 +1,197 @@
+@import "~assets/styles/variables";
+
+.report_container, .report_header {
+  width: 900px;
+  margin: 0 auto;
+}
+
+/deep/ .results-table-group {
+  font-size: 11pt;
+  font-weight: bold;
+  font-family: $baseFont;
+}
+
+/deep/ .report_container {
+  ul.results, ul.questions {
+    font-family: $baseFont;
+    font-size: 9pt;
+    list-style-type: none;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  ul.answers {list-style-type: square;}
+
+  ul li {
+    width: 825px;
+    margin-bottom: 3px;
+  }
+  body {
+    font-size: 9pt;
+    font-family: $baseFont;
+    margin: 0 0 0 0;
+  }
+  td {
+    font-size: 9pt;
+    font-family: $baseFont;
+    padding: 4px;
+  }
+  input {
+    font-size: 8pt;
+    font-family: $baseFont;
+  }
+  select {
+    font-size: 8pt;
+    font-family: $baseFont;
+    min-width: 500px;
+  }
+  .header {
+    font-size: 14pt;
+    font-weight: bold;
+  }
+  .question-title {margin-top: 30px;}
+  .question-title, .question-title_img {
+    font: bold 14px $baseFont;
+    color: #2C2971;
+    display: block;
+    text-align: left;
+  }
+
+  .results-table {
+    width: 912px;
+    margin: 0 auto;
+  }
+  .results-table td[colspan='2']:hover {
+    background-color: rgba(255, 255, 0, 0.42);
+  }
+  .results-table tr.results-table-question-even:hover{background-color: inherit;}
+  .results-table-group {
+    font-size: 11pt;
+    font-weight: bold;
+    font-family: $baseFont;
+  }
+  .results-table-question-odd {background-color: #ffffff;}
+  .results-table-question-even {background-color: #ffffff;}
+  .title {display: none;}
+  .participant:hover {background: #F7F9CA;}
+  @media print {
+    .selector {display: none;}
+  }
+  @media print {
+    .title {display: block;}
+  }
+
+  .explanation ul li {list-style: none;}
+  .explanation li {list-style: none;}
+}
+
+.name_questionare, .company_name, .group_title {
+  font-family: $baseFont;
+  font-weight: bold;
+  font-size: 26px;
+  margin: 20px 0;
+}
+
+.group_title {margin: 40px 0;}
+
+.company_name {font-size: 26px;}
+
+.question_title , .answer_title, .comment_title{
+  font-family: $baseFont;
+  font-weight: bold;
+  font-size: 19px;
+  margin-bottom: 10px;
+}
+
+.answer_title {margin-bottom: 15px;}
+.report_header {
+  color: black;
+  font-size: 13px;
+  text-align: center;
+  padding-top: 15px;
+  font-weight: bold;
+}
+
+.user_presentation {
+  width: 100%;
+  font: bold 13px/15px $baseFont;
+
+  thead tr {
+    background-color: #eef6fb;
+    text-overflow: ellipsis;
+    color: #666;
+    font: bold 13px/15px $baseFont;
+    td {
+      .sort_btn {
+        padding: 7px 10px 7px 10px;
+        display: inline-flex;
+        width: 95%;
+        align-items: center;
+        cursor: pointer;
+        .arr_down, .arr_up {display: none;}
+      }
+      .sort_container_btn {
+        //display: none;
+        display: inline-flex;
+        height: 100%;
+        width: 25px;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid;
+        border-color: transparent silver transparent silver;
+        position: relative;
+        .modal_sort_menu {
+          position: absolute;
+          width: 130px;
+          height: 50px;
+          left: 0;
+          bottom: -50px;
+          padding: 5px;
+          i {font-size: 12px;}
+          //display: none;
+        }
+      }
+      .arrow_visible {display: block;}
+      &:hover .sort_container_btn {
+        //display: inline-flex;
+      }
+    }
+  }
+  tbody {
+    tr:nth-child(odd) {
+      font: normal 13px/15px $baseFont;
+      background-color: white;
+      border-color: #ededed transparent #ededed transparent;
+      border-style: solid;
+    }
+    tr:nth-child(even) {
+      font: normal 13px/15px $baseFont;
+      background-color: #fafafa;
+    }
+    td {padding: 5px 10px 4px 10px;}
+  }
+}
+
+li {
+  color: black;
+  font-size: 13px;
+  font-family: $baseFont;
+}
+
+.question_wrapper {margin-top: 40px;}
+
+.average-block {
+  text-align: center;
+  font-weight: bold;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/deep/ table:first-child{
+  tr:first-child{
+    td {font-weight: bold}
+  }
+}
+
+.report_container{width: 85%}
+

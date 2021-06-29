@@ -1,0 +1,18 @@
+.wrapper{
+  display: flex;
+  height: 100%;
+  min-width: 1200px;
+}
+
+.content{
+  flex-grow: 1;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: stretch;
+}
+
+/deep/ .mat-form-field-underline{height: 0px !important;}
+/deep/ .mat-form-field-wrapper {padding-bottom: 0px !important;}
+/deep/ .mat-form-field-appearance-legacy.mat-form-field-invalid:not(.mat-focused) .mat-form-field-ripple {
+  height: 0px !important;
+}

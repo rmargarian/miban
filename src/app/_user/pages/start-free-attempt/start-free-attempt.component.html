@@ -1,0 +1,45 @@
+<div class="user-page-wrapper">
+  <div class="user-page" id="user-page">
+    <app-header></app-header>
+    <div class="page-content">
+      <div *ngIf="currAttempt" class="attempt-content">
+        <div class="progress-container">
+        </div>
+        <div class="title_container">
+          <div class="empty"></div>
+          <div class="group-title">{{groups[currPageNumber - 1].title}}</div>
+          <div class="timer">{{passed_time | hms}}</div>
+        </div>
+        <div class="group-description" [innerHTML]="groups[currPageNumber - 1].description || ''"></div>
+        <div class="btn-wrapper">
+          <app-text-button color="blue" type="button" type="button" text={{backBtnText}} (clicked)="onBack()">
+          </app-text-button>
+          <app-text-button color="blue" *ngIf="formInvalid" type="button" text={{nextBtnText}} [isError]="true"
+            tooltip={{nextBtnTooltipText}}
+            [tooltipPosition]="'bottom'"
+            (click)="nextDisabledBtnClicked($event)"
+            (mouseout)="nextDisabledBtnMouseOut($event)"></app-text-button>
+          <app-text-button color="blue" *ngIf="!formInvalid" type="button" text={{nextBtnText}} (clicked)="onNext()"
+          ></app-text-button>
+        </div>
+        <app-group-page-free *ngIf="!loading || (loading && isFinished)"
+          [data]="data"
+          [showValidation]="showValidation"
+          (sizeChanged)="onSizeChanged($event)"
+          (formChanged)="onFormChanged($event)"
+          ></app-group-page-free>
+        <div *ngIf="!loading || (loading && isFinished)" class="btn-wrapper m-b-20">
+          <app-text-button color="blue" type="button" text={{backBtnText}} (clicked)="onBack()"></app-text-button>
+          <app-text-button color="blue" *ngIf="formInvalid" type="button" text={{nextBtnText}} [isError]="true"
+            tooltip={{nextBtnTooltipText}}
+            [tooltipPosition]="'bottom'"
+            (click)="nextDisabledBtnClicked($event)"
+            (mouseout)="nextDisabledBtnMouseOut($event)"></app-text-button>
+          <app-text-button color="blue" *ngIf="!formInvalid" type="button" text={{nextBtnText}} (clicked)="onNext()"
+          ></app-text-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ngx-loading [show]="loading"></ngx-loading>

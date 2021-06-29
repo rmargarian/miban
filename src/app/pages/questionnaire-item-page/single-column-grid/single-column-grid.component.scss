@@ -1,0 +1,8 @@
+:host {
+  ag-grid-angular {
+    height: 112px; /*4 rows */
+    width: 140px;
+    font-size: 11px;
+  }
+}
+/deep/ .ag-theme-balham .ag-header-cell-menu-button .ag-icon-menu { height: 21px !important }

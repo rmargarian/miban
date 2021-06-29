@@ -1,0 +1,37 @@
+<app-answer-wrapper
+  [moreInfo]="moreInfo"
+  [questionText]="questionText"
+  [help]="help"
+  [isMandatory]="isMandatory"
+  [labelText]="labelText"
+  [commentRows]="commentRows"
+  [withComment]="withComment"
+  [commentControl]="commentControl">
+  <div class="wrapper_slider">
+    <app-slider
+      [rangeFromValue]="rangeFromValue"
+      [rangeToValue]="rangeToValue"
+      [rangeInterval]="rangeInterval"
+      [control]="innerControl"
+      [displayValuesTooltips]="displayValuesTooltips"
+      [labelFormatter]="sliderLabelFormatter">
+    </app-slider>
+    <div *ngIf="displayLabels">
+      <div [ngSwitch]="sliderMode">
+        <div *ngSwitchCase="SliderMode.CUSTOM" class="wrapper_labels">
+          <div class="container_labels" *ngFor="let item of sliderTags">
+            <span> {{item.tag}}</span>
+          </div>
+        </div>
+        <div *ngSwitchCase="SliderMode.RANGE" class="wrapper_labels">
+          <div class="container_labels">
+            <span> {{rangeFromTag}}</span>
+          </div>
+          <div class="container_labels">
+            <span> {{rangeToTag}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-answer-wrapper>

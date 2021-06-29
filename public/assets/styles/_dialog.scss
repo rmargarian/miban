@@ -1,0 +1,68 @@
+@import "./theme";
+@import "./colors";
+@import "./variables";
+
+.dialog {
+  box-shadow: rgb(136, 136, 136) 0 0 6px;
+  border-radius: 2px;
+  border: 2px solid $primary;
+  /*user-select: none;*/
+
+  .form-content {
+    padding: 10px 10px;
+    max-height: 80vh;
+    overflow: auto;
+  }
+  .form-footer {
+    padding: 7px;
+    text-align: right;
+    background-color: #dfeaf2;
+    margin-top: 10px;
+
+    app-text-button{
+      margin-left: 5px;
+    }
+  }
+
+  .form-header {
+    color: white;
+    font-weight: bold;
+    font-family: $baseFont;
+    font-size: 13px;
+    padding: 0 5px;
+    background-color: $primary;
+    display: flex;
+
+    .header-text{
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  app-form-input:not(:last-child) {
+    margin-bottom: 5px;
+  }
+
+
+  .message {
+    text-align: center;
+    padding: 10px;
+    font-size: 13px;
+    color: black;
+  }
+
+  .image {
+    float: left;
+    padding: 10px 0 0 10px;
+    i {
+      color: $warning_red;
+      font-size: 44px;
+      font-weight: 600;
+    }
+  }
+}
+
+[appMatDialogDraggableTitle] {
+  cursor: move;
+}

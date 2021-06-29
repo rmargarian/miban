@@ -1,0 +1,16 @@
+@import "../../../../assets/styles/dialog";
+@import "../../../../assets/styles/colors";
+
+:host {
+  .form-content{
+    padding: 10px 10px;
+    max-height: 80vh;
+    height: auto;
+    overflow: hidden !important;
+  }
+  .input_div{
+    display: flex;
+    padding: 3px 0px 0px 0px;
+  }
+  .form-footer{margin-top: 0px !important;}
+}

@@ -1,0 +1,10 @@
+@import "~assets/styles/theme";
+
+.with-error {
+  border: 2px solid $warn !important;
+}
+
+.error_message {
+  font-size: 11px;
+  color: #f44336;
+}

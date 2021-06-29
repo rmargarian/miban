@@ -1,0 +1,43 @@
+@import "../../../../assets/styles/dialog";
+
+:host {
+  .passwordWithEye {
+    display: flex;
+  }
+
+  .eye {
+    /deep/ button.grey {
+      background: none;
+      background-image: none;
+      left: -5px;
+      bottom: 2px;
+    }
+  }
+
+  .passWithEye {
+    width: 100%;
+    margin-right: -26px;
+  }
+
+  .dialog .form-content {
+    overflow: hidden;
+  }
+
+  .dialog .form-footer {
+    margin-top: 0px;
+  }
+
+  .checkbox_container {
+    display: flex;
+    height: 25px;
+    align-items: center;
+    font-size: 13px;
+
+    span {
+      width: 93px;
+      display: inline-block;
+      text-align: right;
+      padding-right: 8px;
+    }
+  }
+}

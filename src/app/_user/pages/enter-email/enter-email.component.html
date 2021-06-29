@@ -1,0 +1,54 @@
+<div class="user-page-wrapper">
+  <div class="user-page">
+    <app-header></app-header>
+    <div class="page-content">
+      <div class="q-title large">
+        {{questionnaire.title}}
+        <div class="smaller">{{key.title}}</div>
+        <div class="error-msg">{{errorMsg}}</div>
+      </div>
+      <form [formGroup]="form" (ngSubmit)="continue()" *ngIf="form">
+        <div class="content-wrapper">
+          <div class="col-content">
+            <div class="msg">Is this your first profile, assessment or feedback?</div>
+            <app-text-button class="reg_btn" color="blue" type="button" text="Click to Register"
+              (clicked)="onRegister()"></app-text-button>
+          </div>
+          <div class="line"></div>
+          <div class="col-content flex-1">
+            <div class="msg">Already registered? Then please type or paste in your email and password:</div>
+            <div class="email_container">
+              <app-form-input label="Email:" labelWidth="70px">
+                <app-input [control]="getControl('email')" [validationErrors]="getControl('email').errors"
+                  [focus]="true" [isValidationByFocusOut]="true" input-transclude-slot></app-input>
+              </app-form-input>
+              <div *ngIf="validating" class="loader"></div>
+            </div>
+            <div class="email-msg" [innerHTML]="emailMsg"></div>
+            <div *ngIf="user && isAnotherKey" class="email-msg">
+              Your email address is associated with another key,
+            please <a href="javascript:void(0)" (click)="changeKey()">click here</a>
+            and check your mail box in order to move your email address from the old key
+            ({{user['company'].title}}) to the Key that you have entered ({{key.title}})
+            </div>
+            <div class="email-msg blue bold">{{passwdMsg}}</div>
+            <div class="email_container">
+              <app-form-input *ngIf="emailValid && user.passwd" label="Password:" labelWidth="70px">
+                <app-input [control]="getControl('passwd')" input-transclude-slot type="password"
+                  [validationErrors]="getControl('passwd').errors">
+                </app-input>
+              </app-form-input>
+            </div>
+
+            <div class="bottom-content">
+              <a *ngIf="emailValid && user.passwd" href="javascript:void(0)" class="link" (click)="forgotPassword()">
+                Password Reminder</a>
+              <app-text-button *ngIf="emailValid" color="blue" [disabled]="form.invalid" type="button" text="Next&nbsp;>>"
+                (clicked)="continue()"></app-text-button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

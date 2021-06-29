@@ -1,0 +1,16 @@
+<app-admin-toolbar>
+  <app-icon-button tooltip="Save configuration" class="toolbar-item save-btn" iconClass="save" 
+    [disabled]="parentForm.invalid" label="Save" (click)="save()"></app-icon-button>
+</app-admin-toolbar>
+
+<form class="content" [formGroup]="parentForm" *ngIf="parentForm" (ngSubmit)="save()">
+
+  <app-config-block header="Password Reminder Email" [info]="passInfo">
+    <app-config-field [inputs] = passRemind [parentForm]="parentForm"></app-config-field>
+  </app-config-block>
+
+  <app-config-block header="Change Key Association Reminder Email" [info]="changeInfo">
+    <app-config-field [inputs] = changeKey [parentForm]="parentForm" ></app-config-field>
+  </app-config-block>
+
+</form>

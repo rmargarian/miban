@@ -1,0 +1,14 @@
+@import '~@angular/material/theming';
+$my-theme-primary: mat-palette($mat-light-blue, 700, 300, 900);
+$my-theme-accent: mat-palette($mat-light-blue);
+$my-theme-warn: mat-palette($mat-red, 500, 400, 600);
+
+// Create your Sass color vars (will be available in all the project)
+$primary: mat-color($my-theme-primary);
+$accent: mat-color($my-theme-accent);
+$warn: mat-color($my-theme-warn);
+
+$custom-typography: mat-typography-config(
+  $font-family: 'Arial, verdana, sans-serif'
+);
+

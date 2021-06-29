@@ -1,0 +1,31 @@
+<span *ngIf="attempts.length > 0" ref="eCellWrapper" class="ag-cell-wrapper cell_content">
+  <span class="ag-selection-checkbox contact_btn"
+    (click)="onCanContactClicked()">
+      <span class="ag-icon ag-icon-checkbox-checked"
+            [attr.data-tooltip]="'Enable if participant can be contacted on ' + headerName"
+            [class.ag-hidden]="!checked"></span>
+      <span class="ag-icon ag-icon-checkbox-unchecked"
+            [attr.data-tooltip]="'Enable if participant can be contacted on ' + headerName"
+            [class.ag-hidden]="checked"></span>
+  </span>
+  <span *ngIf="attempts_limit === 1" ref="eCellValue" class="ag-cell-value status_text" [class.status_btn]="showStatusTooltip"
+      (click)="onUpdateStatusClicked(attempts[0].id, attempts[0].status)"
+      [attr.data-tooltip]="tooltip">{{status}}
+  </span>
+  <span *ngIf="attempts_limit > 1">
+    <span *ngFor="let attempt of attempts; let i=index;" ref="eCellValue" class="ag-cell-value status_text small"
+        [class.status_btn]="showStatusTooltip"
+        (click)="onUpdateStatusClicked(attempt.id, attempt.status)"
+        [attr.data-tooltip]="attempt.statusTooltip"
+        [class.not_clickable]="attempt.notClickable">({{i + 1}})</span>
+    <span ref="eCellValue" class="ag-cell-value status_text big not_clickable"
+        [class.status_btn]="true"
+        [attr.data-tooltip]="attempts.length + ' attempts taken out of ' + attempts_limit">
+        {{attempts.length}}/{{attempts_limit}}</span>
+  </span>
+  <span class="image">
+    <i class="material-icons rm_attempt_btn"
+      [attr.data-tooltip]="'Remove attempt'"
+      (click)="onDeleteAttempt()">close</i>
+  </span>
+</span>

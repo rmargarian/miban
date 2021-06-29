@@ -1,0 +1,137 @@
+<div class="dialog">
+  <div class="form-header">
+    <div class="header-text" appMatDialogDraggableTitle>{{data.header}}</div>
+    <app-icon-button iconClass="close" color="transparent" (clicked)="onClose()"></app-icon-button>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="save()" *ngIf="form">
+    <div class="form-content">
+      <app-form-input label="First Name:" labelWidth="120px" required="true">
+        <app-input [control]="getControl('first_name')"
+          [validationErrors]="getControl('first_name').errors"
+          [isValidationByFocusOut]="true"
+          [showValidationTriggered]="showValidation"
+          [focus]="true" input-transclude-slot></app-input>
+      </app-form-input>
+      <app-form-input label="Family Name:" labelWidth="120px" required="true">
+        <app-input [control]="getControl('last_name')"
+          [validationErrors]="getControl('last_name').errors"
+          [isValidationByFocusOut]="true"
+          [showValidationTriggered]="showValidation"
+          input-transclude-slot></app-input>
+      </app-form-input>
+      <app-form-input label="Email:" labelWidth="120px" required="true">
+        <app-input type="text" [control]="getControl('email')"
+          [validationErrors]="getControl('email').errors"
+          [showValidationTriggered]="showValidation"
+          [isValidationByFocusOut]="true" input-transclude-slot></app-input>
+      </app-form-input>
+      <app-form-input label="Key:" labelWidth="120px" required="true">
+        <app-select-input  [options]="data.keys" valueField='id' [validationErrors]="showValidation ? getControl('company_id').errors : null"
+                           textField='title'  [control]="getControl('company_id')" input-transclude-slot>
+        </app-select-input>
+      </app-form-input>
+      <app-form-input label="Password:" labelWidth="120px">
+        <app-input [control]="getControl('passwd')" input-transclude-slot></app-input>
+      </app-form-input>
+      <app-form-input label="Career Category:" labelWidth="120px" *ngIf="key.show_career_category">
+        <app-select-input  [options]="data.careers" valueField='id' [validationErrors]="showValidation ? getControl('career_category_id').errors : null"
+                           textField='name'  [control]="getControl('career_category_id')" [searchOn]="false"  input-transclude-slot>
+        </app-select-input>
+      </app-form-input>
+      <app-form-input label="Industry Sector:" labelWidth="120px" *ngIf="key.show_industry_sector">
+        <app-input [control]="getControl('industry_sector')" [validationErrors]="showValidation ? getControl('industry_sector').errors : null"
+          [readonly]="!key.edit_industry_sector" input-transclude-slot></app-input>
+      </app-form-input>
+      <app-form-input label="Job Title:" labelWidth="120px" *ngIf="key.show_job_title">
+        <app-input [control]="getControl('job_title')" [validationErrors]="showValidation ? getControl('job_title').errors : null"
+          [readonly]="!key.edit_job_title" input-transclude-slot></app-input>
+      </app-form-input>
+      <app-form-input label="Department:" labelWidth="120px" *ngIf="key.show_dept">
+        <app-input [control]="getControl('department')" [validationErrors]="showValidation ? getControl('department').errors : null"
+          [readonly]="!key.edit_dept" input-transclude-slot></app-input>
+      </app-form-input>
+      <app-form-input label="Manager:" labelWidth="120px" *ngIf="key.show_manager_name">
+        <app-input [control]="getControl('manager_name')" [validationErrors]="showValidation ? getControl('manager_name').errors : null"
+          [readonly]="!key.edit_manager_name" input-transclude-slot></app-input>
+      </app-form-input>
+      <app-form-input label="Training Course:" labelWidth="120px" *ngIf="key.show_training_cource">
+        <app-select-input  [options]="data.trainings" valueField='id' [validationErrors]="showValidation ? getControl('training_course_id').errors : null"
+                           textField='name'  [control]="getControl('training_course_id')" [searchOn]="false"  input-transclude-slot>
+        </app-select-input>
+      </app-form-input>
+      <app-form-input label="Country:" labelWidth="120px" *ngIf="key.show_country">
+        <app-select-input  [options]="data.countries" valueField='id' [validationErrors]="showValidation ? getControl('country_id').errors : null"
+          textField='name'  [control]="getControl('country_id')" input-transclude-slot>
+        </app-select-input>
+      </app-form-input>
+
+      <app-form-input label="State:" labelWidth="120px" *ngIf="countryId !== 3 && countryId !== 1 && key.show_state">
+        <app-input [control]="getControl('state_name')" [validationErrors]="showValidation ? getControl('state_name').errors : null"
+          [readonly]="!key.edit_state"  input-transclude-slot></app-input>
+      </app-form-input>
+      <app-form-input label="State:" labelWidth="120px" *ngIf="key.show_state && countryId === 3 || countryId === 1">
+        <app-select-input [options]="filteredStates" valueField='name' [validationErrors]="showValidation ? getControl('state_name').errors : null"
+          textField='name' [control]="getControl('state_name')" input-transclude-slot>
+        </app-select-input>
+      </app-form-input>
+
+      <app-form-input label="City:" labelWidth="120px" *ngIf="key.show_city">
+        <app-input [control]="getControl('city')" [validationErrors]="showValidation ? getControl('city').errors : null"
+          [readonly]="!key.edit_city" input-transclude-slot></app-input>
+      </app-form-input>
+      <app-form-input label="Currency:" labelWidth="120px">
+        <app-select-input [control]="getControl('currency_id')" [options]="data.currencies"
+                          textField="currency" valueField="id" input-transclude-slot>
+        </app-select-input>
+      </app-form-input>
+      <app-form-input label="Location:" labelWidth="120px">
+        <app-input [control]="getControl('p_location')" [validationErrors]="showValidation ? getControl('p_location').errors : null"
+          input-transclude-slot></app-input>
+      </app-form-input>
+      <app-form-input label="Date:" labelWidth="120px">
+        <app-date-picker [control]="getControl('p_date')" width="100%" [validationErrors]="showValidation ? getControl('p_date').errors : null"
+        input-transclude-slot></app-date-picker>
+      </app-form-input>
+      <app-form-input label="Date2:" labelWidth="120px">
+        <app-date-picker [control]="getControl('p_date2')" width="100%" input-transclude-slot></app-date-picker>
+      </app-form-input>
+      <app-form-input label="Groups:" labelWidth="120px">
+        <app-input [control]="getControl('p_groups')" input-transclude-slot></app-input>
+      </app-form-input>
+      <app-form-input label="Saved:" labelWidth="120px">
+        <app-input [control]="getControl('p_saved')" input-transclude-slot></app-input>
+      </app-form-input>
+      <app-form-input label="Notes:" labelWidth="120px">
+        <app-input  [control]="getControl('notes')" input-transclude-slot></app-input>
+      </app-form-input>
+      <div class="block-content">
+        <div class="label-block">Last Login:</div>
+        <div class="input-block">{{data.user.last_attempt | date:'dd MMM yyyy HH:mm:ss'}}</div>
+      </div>
+      <div *ngIf="isSuperAdmin" class="checkbox_container" content-transclude-slot>
+        <span>Admin Urls:</span>
+        <mat-checkbox class="custom_mat-checkbox blue" [disableRipple]="true" [checked]="isAdminUrls"
+          [attr.data-tooltip]="'Check to get urls with Admin Rights'" (change)="adminUrlsClicked($event)">
+        </mat-checkbox>
+      </div>
+      <div class="block-content relative">
+        <div class="label-block">Urls:</div>
+        <div *ngIf="data.type !== 'add'" class="input-block">
+          <div *ngFor="let url of urls; let i = index" class="url" ngxClipboard [cbContent]="url.url"
+          [attr.data-tooltip]="isAdminUrls && url.disabled ? 'Not registered' : 'Click to copy to clipboard'"
+          [class.disabled]="isAdminUrls && url.disabled"
+          (click)="copyUrlClicked(url)"
+          (mousedown)="mouseDownUrl($event)" (mouseup)="mouseUpUrl($event, url)">
+            {{url.acronym}}<span *ngIf="i < urls.length - 1">,&nbsp;</span>
+          </div>
+        </div>
+        <div id="box" class="box hidden">Url copied to clipboard</div>
+      </div>
+    </div>
+    <div class="form-footer">
+      <app-text-button color="blue" type="button" text="Save" [class.disabled]="form.invalid || validating" (clicked)="save()"></app-text-button>
+      <app-text-button color="blue" type="button" text="Close" (click)="onClose()"></app-text-button>
+    </div>
+
+  </form>
+</div>

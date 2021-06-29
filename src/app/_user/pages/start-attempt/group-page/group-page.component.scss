@@ -1,0 +1,33 @@
+@import "~assets/styles/variables";
+@import "~assets/styles/colors";
+@import "~assets/styles/user-page";
+
+:host {
+  width: 100%;
+
+  /deep/ .wrapper_preview {
+    margin: 15px 0 !important;
+
+    span {
+      font-size: 14px !important;
+      font-family: $baseFont;
+    }
+
+    .star {
+      font-size: 16px !important;
+    }
+
+    .help {
+      color: $userBlue !important;
+      small {
+        font-weight: 600 !important;
+      }
+    }
+
+ }
+
+ /deep/ .with-error {
+    border: 2px solid #f44336 !important;
+  }
+}
+

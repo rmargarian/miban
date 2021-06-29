@@ -1,0 +1,23 @@
+:host {
+  height: 100%;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+
+  /deep/ .mat-form-field-underline{height: 1px !important;}
+  /deep/ .mat-form-field-wrapper {padding-bottom: 1.25em !important;}
+}
+.incorrectSubmit{color: red;}
+.passwordWithEye {display: flex;}
+.eye{
+  /deep/ button.grey{background: none;}
+  margin-left: -2.1em;
+  margin-top: -0.15em;
+}
+
+/deep/ .visibility_off {
+  opacity: 0.5;
+}
+
+
+

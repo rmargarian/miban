@@ -1,0 +1,24 @@
+<div class="user-page-wrapper">
+  <div class="user-page">
+    <app-header></app-header>
+    <div class="page-content">
+      <div class="q-title">{{title}}</div>
+      <div class="error-msg">{{errorMsg$ | async}}</div>
+      <div class="msg">Please enter your <i>Key</i> in the box below.</div>
+      <div class="form-content">
+        <form [formGroup]="form" (ngSubmit)="onSave()" *ngIf="form">
+          <div class="enter-content">
+            <app-form-input label="Key:" labelWidth="40px" required="true">
+              <app-input [control]="getControl('key_code')" [validationErrors]="showValidation ? getControl('key_code').errors : null"
+                [focus]="true" input-transclude-slot></app-input>
+            </app-form-input>
+            <app-text-button color="blue" type="button" text="Next&nbsp;>>" (clicked)="onSave()"></app-text-button>
+          </div>
+        </form>
+      </div>
+      <div class="tip">Key is case sensitive</div>
+      <div class="tip contact_us">If you do not have a key, then please <a href="mailto:Calum.Coburn@negotiations.com">contact us</a> directly to
+          discuss creating one for your organisation.</div>
+    </div>
+  </div>
+</div>

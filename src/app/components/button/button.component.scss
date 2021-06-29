@@ -1,0 +1,90 @@
+@import "../../../assets/styles/theme";
+@import "../../../assets/styles/colors";
+@import "../../../assets/styles/variables";
+
+button{
+  outline: 0;
+  border-radius: 4px;
+  line-height: 1;
+}
+
+/*.mat-button:focus .mat-button-focus-overlay { background-color: transparent; }*/
+
+button.blue{
+  color: #fff;
+  background-color: $primary;
+  background-image: -webkit-linear-gradient(top,#4b9cd7,#3892d3 50%,#358ac8 51%,#3892d3);
+  background-image: -webkit-gradient(linear,50% 0,50% 100%,color-stop(0%,#4b9cd7),color-stop(50%,#3892d3),color-stop(51%,#358ac8),color-stop(100%,#3892d3));
+}
+
+button.grey {
+  color: $grey;
+  background: #f5f5f5;
+  background-image: -webkit-gradient(linear,50% 0,50% 100%,color-stop(0%,#f6f6f6),color-stop(50%,#f5f5f5),color-stop(51%,#e8e8e8),color-stop(100%,#f5f5f5));
+  background-image: -webkit-linear-gradient(top,#f6f6f6,#f5f5f5 50%,#e8e8e8 51%,#f5f5f5);
+}
+
+button.grey:focus {outline: 0 !important;}
+
+button.grey:active {
+  outline: 0 !important;
+  background: #d5d5f5;
+  background-image: -webkit-gradient(linear,50% 0,50% 100%,color-stop(0%,#f6f6f6),color-stop(50%,#d5d5f5),color-stop(51%,#e8e8e8),color-stop(100%,#d5d5f5));
+  background-image: -webkit-linear-gradient(top,#f6f6f6,#d5d5f5 50%,#e8e8e8 51%,#d5d5f5);
+}
+
+button.grey:hover {
+  outline: 0 !important;
+  background: #555555;
+  background-image: -webkit-gradient(linear,50% 0,50% 100%,color-stop(0%,#f6f6f6),color-stop(50%,#e8e8e8),color-stop(51%,#e8e8e8),color-stop(100%,#e8e8e8));
+  background-image: -webkit-linear-gradient(top,#f6f6f6,#e8e8e8 50%,#e8e8e8 51%,#e8e8e8);
+}
+
+button.transparent{background-color: transparent;}
+
+button.text-button {
+  min-width: 80px;
+  font-size: 13px;
+  padding: 7px 10px;
+  font-weight: 600;
+}
+
+button.icon-button{
+  width: 27px;
+  height: 27px;
+  line-height: 27px;
+  outline: 0;
+
+  mat-icon{font-size: 1.6em;}
+
+  &.pressed {
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #2c7dae), color-stop(50%, #0288d1), color-stop(51%, #0288d1), color-stop(100%, #2c7dae));
+    color: #2C2971;
+  }
+}
+
+/deep/ button span {
+  pointer-events: none
+}
+
+.mat-tooltip {@extend %tooltip_style;}
+.mat-tooltip-handset {margin: 0 !important;}
+
+.mat-icon-button {
+  border-radius: 4px !important;
+  i { font-size: 18px }
+}
+mat-icon{margin-top: -1px}
+
+img {
+  filter: brightness(0) invert(1);
+  margin: 0 0 2px 0;
+}
+
+:host{
+  display: inline-block;
+  background-color: unset;
+}
+
+
+

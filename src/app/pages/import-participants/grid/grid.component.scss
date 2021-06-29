@@ -1,0 +1,39 @@
+:host {
+  .grid_container { height: 178px; }//7 rows
+  ag-grid-angular {
+    height: 100%;
+    width: 100%;
+    font-size: 13px;
+  }
+  /deep/ .ag-theme-balham .ag-header-cell-menu-button .ag-icon-menu { height: 21px !important }
+  /deep/.ag-theme-balham .ag-cell,
+  /deep/ .ag-theme-balham .ag-header-cell,
+  /deep/ .ag-theme-balham .ag-header-group-cell {
+    line-height: 20px !important;
+    padding-left: 7px;
+  }
+  /deep/ .ag-theme-balham .ag-header-cell-resize::after,
+  /deep/ .ag-theme-balham .ag-header-cell::after,
+  /deep/ .ag-theme-balham .ag-header-group-cell::after {
+    margin-top: 2px;
+  }
+  /deep/ .ag-theme-balham .ag-root { border: none }
+
+
+  /deep/ .ag-body-viewport.ag-layout-auto-height .ag-center-cols-clipper,
+  /deep/ .ag-body-viewport.ag-layout-auto-height .ag-center-cols-container {
+    min-height: 80px !important;
+  }
+
+  /deep/ .ag-center-cols-viewport {
+    min-height: 80px !important;
+  }
+ // /deep/ .ag-layout-auto-height.ag-body-container { min-height: 20px; }
+
+  /deep/ .ag-body-viewport.ag-layout-auto-height .ag-center-cols-container {
+    padding-bottom: 20px;
+  }
+}
+
+
+

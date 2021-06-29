@@ -1,0 +1,22 @@
+.wrapper_slider {
+  width: 80%;
+  margin: 0 auto;
+  padding: 50px 0;
+}
+#custom_slider {
+  width: 100%;
+  padding: 0;
+}
+.wrapper_labels {
+  width: calc(100% + 5px);
+  display: flex;
+  justify-content: space-between;
+}
+.container_labels {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+.wrapper_comment {
+  width: 80%;
+  margin: 0 auto;
+}

@@ -1,0 +1,64 @@
+<div class="user-page-wrapper">
+  <div class="user-page">
+    <app-header></app-header>
+    <div class="page-content">
+      <div *ngIf="isOutOfLimit">
+        <div class="q-title">Thank You</div>
+        <div class="error-msg">You've timed out. All your responses were saved.
+          If you believe this was in error or experienced technical difficulties
+          and would like to re-open your Profile, please contact us.
+        </div>
+      </div>
+      <div *ngIf="isFinished" class="info-container">
+        <div class="q-title">Thank You</div>
+        <div class="info">You've successfully completed and saved your "{{questionnaire.title}}".</div>
+        <a href="https://www.negotiations.com/">Go to Home Page</a>
+        <div>or</div>
+        <a href="https://www.negotiations.com/training/">Go to Training Courses</a>
+      </div>
+      <div *ngIf="!isFinished && !isOutOfLimit && currAttempt" class="attempt-content">
+        <div class="progress-container">
+          <div class="progress-outer">
+            <div [ngStyle]="{'width': avaliablePercentage + '%'}" class="progress-inner"
+              [ngClass]="{'not_full': currPageNumber !== totalPageNumber}"></div>
+            <div class="progress-value" [ngClass]="{'white': avaliablePercentage > 70}">
+              {{avaliablePercentage}}%
+            </div>
+          </div>
+        </div>
+        <div class="title_container">
+          <div class="empty"></div>
+          <div class="group-title">{{groups[currPageNumber - 1].title}}</div>
+          <div class="timer">{{remaining_time | hms}} remaining</div>
+        </div>
+        <div class="group-description" [innerHTML]="groups[currPageNumber - 1].description || ''"></div>
+        <div class="btn-wrapper">
+          <app-text-button color="blue" [disabled]="isAdmin && currPageNumber === 1" type="button" type="button" text={{backBtnText}} (clicked)="onBack()"></app-text-button>
+          <app-text-button color="blue" *ngIf="formInvalid" type="button" text={{nextBtnText}} [isError]="true"
+            tooltip={{nextBtnTooltipText}}
+            [tooltipPosition]="'bottom'"
+            (click)="nextDisabledBtnClicked($event)"
+            (mouseout)="nextDisabledBtnMouseOut($event)"></app-text-button>
+          <app-text-button color="blue" *ngIf="!formInvalid" type="button" text={{nextBtnText}} (clicked)="onNext()"
+          ></app-text-button>
+        </div>
+        <app-group-page *ngIf="!loading || (loading && finishing)"
+          [showValidation]="showValidation"
+          [isAdmin]="isAdmin"
+          [data]="data"
+          (formChanged)="onFormChanged($event)"></app-group-page>
+        <div *ngIf="!loading || (loading && finishing)" class="btn-wrapper m-b-20">
+          <app-text-button color="blue" [disabled]="isAdmin && currPageNumber === 1" type="button" text={{backBtnText}} (clicked)="onBack()"></app-text-button>
+          <app-text-button color="blue" *ngIf="formInvalid" type="button" text={{nextBtnText}} [isError]="true"
+            tooltip={{nextBtnTooltipText}}
+            [tooltipPosition]="'bottom'"
+            (click)="nextDisabledBtnClicked($event)"
+            (mouseout)="nextDisabledBtnMouseOut($event)"></app-text-button>
+          <app-text-button color="blue" *ngIf="!formInvalid" type="button" text={{nextBtnText}} (clicked)="onNext()"
+          ></app-text-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ngx-loading [show]="loading"></ngx-loading>

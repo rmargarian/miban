@@ -1,0 +1,58 @@
+@import "../../../../assets/styles/colors";
+@import "../../../../assets/styles/variables";
+
+:host {
+
+  .ag-icon {
+    &.ag-hidden {
+      display: none !important;
+    }
+  }
+
+  .image i {
+    position: absolute;
+    right: 2px;
+    top: 3px;
+    color: $grey;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .status_btn {
+    &:hover {
+        background: $headerBlue;
+        color: #fff;
+        cursor: pointer;
+    }
+    &:active {
+      background: #0289d1ab;
+      color: #fff;
+    }
+  }
+
+  .status_text {
+    position: relative;
+    top: -1px;
+    padding: 0 1px;
+    margin-left: 2px !important;
+    display: unset !important;
+
+    &.small {
+      font-size: 11px;
+      top: -2px;
+    }
+    &.big {
+      font-size: 15px;
+      top: 0;
+    }
+
+    &.not_clickable:hover {
+      background: unset;
+      color: #000;
+    }
+  }
+
+  .rm_attempt_btn {
+    &:hover { color: red !important }
+  }
+}

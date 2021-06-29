@@ -1,0 +1,27 @@
+<app-admin-toolbar>
+  <app-icon-button tooltip="Create new" class="toolbar-item" iconClass="add" (clicked)="addQuestion()"></app-icon-button>
+  <app-icon-button tooltip="Delete selected" class="toolbar-item" iconClass="remove" [disabled]="!selectedRow" (clicked)="removeQuestion()"></app-icon-button>
+  <app-icon-button tooltip="Clone" [disabled]="!selectedRow" class="toolbar-item" iconClass="control_point_duplicate" (clicked)="clone()"></app-icon-button>
+  <app-icon-button tooltip="Reload grid" class="toolbar-item" iconClass="refresh" (clicked)="refresh()"></app-icon-button>
+  <span> | </span>
+  <app-search-input [focus]="true" id="search-input" [filterFormControl]="filterFormControl" #search (changes)='filter($event)' [debounceTime]="700"></app-search-input>
+</app-admin-toolbar>
+
+<div class="content">
+  <ag-grid-angular
+    #agGrid
+    style="width: 100%; height: 94vh"
+    class="ag-theme-balham"
+    [rowData]="displayedData"
+    [context]="context"
+    [frameworkComponents]="frameworkComponents"
+    [columnDefs]="columnDefs"
+    rowSelection="single"
+    [overlayNoRowsTemplate] = "overlayNoRowsTemplate"
+    [gridOptions]="gridOptions"
+    (gridReady)="onGridReady($event)">
+  </ag-grid-angular>
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+</div>
+
+

@@ -1,0 +1,104 @@
+@import "~assets/styles/theme";
+@import "~assets/styles/colors";
+@import "~assets/styles/variables";
+
+/deep/ .mat-tab-group {
+  font-size: 13px;
+  font-family: $baseFont;
+  color: #000;
+
+  .mat-tab-label-container {
+    &::after {
+      content: '';
+      height: 5px;
+      width: 100%;
+      background-color: #add2ed;
+      position: absolute;
+      bottom: 0;
+    }
+  }
+  .mat-tab-header {
+    background: $headerBlue;
+    height: calc(#{$tabHeight} + 5px);
+    border: none;
+  }
+
+  .mat-tab-label {
+    height: $tabHeight;
+    background: #4b9bd8fd;
+    border-radius: 6px 6px 0 0;
+    margin-right: 2px;
+    color: #fff;
+    opacity: 1;
+    font-weight: 600;
+    min-width: unset;
+    padding: 0 12px;
+    font-size: 13px;
+    font-family: $baseFont;
+
+    &:hover {
+      background: #68afe6;
+    }
+
+    &.mat-tab-label-active {
+      background-color: #add2ed !important;
+      color: #157fcc;
+    }
+  }
+
+  .mat-ink-bar { display: none }
+
+  fieldset {
+    border: 1px solid #b5b8c8;
+    padding: 10px;
+    margin: 15px 20px;
+
+    legend {
+      width: auto;
+      font-size: 13px;
+      font-family: $baseFont;
+      padding: 0 2px;
+    }
+  }
+
+  app-form-input { margin-bottom: 5px }
+
+  .input {
+    &.textarea{
+      height: 69px;
+      resize: vertical !important;
+    }
+  }
+
+  app-form-input.flex-start {
+    /deep/ .input-content{
+      align-items: flex-start;
+    }
+  }
+
+  .emails-content app-form-input textarea { min-height: 140px !important }
+  .mat-tab-body { height: calc(100vh - (#{$headerHeight} + #{$tabHeight} + 5px));}
+
+  .input_content {
+    display: flex;
+    max-width: 700px;
+
+    .input_select {
+      margin-right: 20px;
+      flex: 1;
+    }
+  }
+}
+
+@-moz-document url-prefix() {
+  fieldset {
+    position: relative;
+    top: 10px;
+    padding-top: 25px !important;
+  }
+  fieldset>legend {
+    position: absolute;
+    top: -10px;
+    background: white;
+  }
+}

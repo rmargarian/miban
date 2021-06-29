@@ -1,0 +1,54 @@
+@import "../assets/styles/colors";
+@import "../assets/styles/theme";
+@import "../assets/styles/variables";
+
+/deep/ .custom_mat-checkbox{
+  padding: 0px 2.5px;
+  /deep/ .mat-checkbox-frame{
+    background-color: white;
+    border: 0px;
+  }
+  /deep/ .mat-checkbox-inner-container{
+    width: 12px;
+    height: 12px;
+    border: 1px solid $black;
+    box-sizing: content-box;
+  }
+  /deep/ .mat-checkbox-layout{
+    margin: 0;
+    padding: 0px;
+  }
+
+  &.mat-checkbox-disabled .mat-checkbox-layout{
+    opacity: 0.5;
+  }
+  /deep/ .mat-checkbox-label{
+    color: black;
+    /*font-size: 1em;*/
+    font-size: 13px;
+    font-family: $baseFont;
+  }
+  /deep/ .mat-checkbox-background{border-radius: 4px;}
+  /deep/ .mat-checkbox-checked .mat-accent .mat-checkbox-background{background-color: white;}
+  /deep/ .mat-checkbox-checkmark{
+    background-color: white;
+    border-radius: 4px;
+  }
+  /deep/ .mat-checkbox-checkmark-path{stroke: $black !important;}
+
+  &.blue {
+    /deep/ .mat-checkbox-inner-container{
+      border: 1px solid $headerBlue;
+    }
+    /deep/ .mat-checkbox-checkmark-path{stroke: $headerBlue !important;}
+  }
+}
+
+/deep/ .mat-form-field-appearance-legacy .mat-form-field-suffix .mat-datepicker-toggle-default-icon {
+  height: 20px;
+  margin-right: 5px;
+}
+
+/deep/ .mat-form-field-suffix .mat-icon-button {
+  width: 24px !important;
+}

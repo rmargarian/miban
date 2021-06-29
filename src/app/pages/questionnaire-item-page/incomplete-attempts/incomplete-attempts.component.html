@@ -1,0 +1,17 @@
+<ag-grid-angular
+  class="ag-theme-balham"
+  suppressDragLeaveHidesColumns="true"
+  #agGrid
+  [gridOptions]="gridOptions"
+  [context]="context"
+  rowDeselection="true"
+
+  [frameworkComponents]="frameworkComponents"
+  after-sort-changed.call="sortChanged"
+  suppressNoRowsOverlay
+  rowSelection="multiple">
+</ag-grid-angular>
+
+<ngx-loading [show]="(isLoading$ | async) || loading"></ngx-loading>
+
+

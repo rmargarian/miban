@@ -1,0 +1,4 @@
+<input type="file" #file accept={{accept}} style="display: none" (change)="onChange($event)">
+<app-input type="text" [control]="control" [validationErrors]="showValidation ? control.errors : null" [readonly]="true"
+  input-transclude-slot></app-input>
+<app-text-button color="blue" type="button" text="Select File" (clicked)="selectFile()"></app-text-button>

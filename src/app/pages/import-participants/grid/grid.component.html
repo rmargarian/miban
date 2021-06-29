@@ -1,0 +1,15 @@
+<div [id]="gridContainerId">
+  <ag-grid-angular
+    #agGrid
+    class="ag-theme-balham"
+    domLayout="autoHeight"
+    [context]="context"
+    [frameworkComponents]="frameworkComponents"
+    [columnDefs]="columnDefs"
+    [gridOptions]="gridOptions"
+    [rowData]="data"
+    suppressHorizontalScroll
+    suppressNoRowsOverlay
+    suppressLoadingOverlay
+  ></ag-grid-angular>
+</div>

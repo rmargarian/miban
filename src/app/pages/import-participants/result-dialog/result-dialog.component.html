@@ -1,0 +1,22 @@
+<div class="dialog">
+  <div class="form-header">
+    <div class="header-text" appMatDialogDraggableTitle>{{data.title}}</div>
+    <app-icon-button iconClass="close" color="transparent" (clicked)="closeDialog()"></app-icon-button>
+  </div>
+  <form [formGroup]="form">
+    <div class="form-content">
+      <div class="info">Entries Inserted: {{insertedUsers.length}}</div>
+      <app-grid *ngIf="insertedUsers.length" [data]="insertedUsers" [isResult]="true"></app-grid>
+      <div class="info">Entries Updated: {{updatedUsers.length}}</div>
+      <div class="info">Entries Ignored: {{ignored}}</div>
+      <div class="info">Entries Exists: {{exists}}</div>
+      <div *ngIf="logs.length" class="info bold">Import log:</div>
+      <div *ngIf="logs.length" class="logs_container">
+        <div *ngFor="let log of logs">{{log}}</div>
+      </div>
+    </div>
+    <div class="form-footer">
+      <app-text-button color="blue" type="submit" text="Close" (click)="closeDialog()"></app-text-button>
+    </div>
+  </form>
+</div>

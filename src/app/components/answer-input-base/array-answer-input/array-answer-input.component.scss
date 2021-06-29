@@ -1,0 +1,78 @@
+@import '../answer-input-base.component.scss';
+
+:host {
+
+  .array-table-row {
+    display: table-row;
+    border-bottom: solid white 5px;
+    vertical-align: middle;
+  }
+
+  .array-table-cell {
+    text-align: center;
+    padding: 8px 5px;
+    line-height: 14px;
+  }
+
+  .array-option-title-cell {
+    padding: 0 15px 0 5px;
+    text-align: right;
+    min-width: 100px;
+
+    .colspan-opt {
+      text-align: left;
+      padding-left: 7px;
+      height: 20px;
+      vertical-align: bottom;
+    }
+  }
+
+  .array-table-text-cell {
+    font-size: 12px;
+    vertical-align: middle;
+  }
+
+  app-radio-button {
+    margin-bottom: 0;
+  }
+
+
+  /deep/ .mat-radio-label {
+    justify-content: center;
+  }
+
+  /deep/ .mat-radio-label .mat-radio-container,
+  /deep/ .mat-radio-button.mat-accent .mat-radio-outer-circle,
+  /deep/ .mat-radio-button.mat-accent .mat-radio-inner-circle {
+    margin-left: 2px;
+  }
+
+}
+
+@media screen and (max-width: 500px) {
+  .switchAlbum {
+    display: table-row !important;
+  }
+
+  .switchLandscape {
+    display: none !important;
+  }
+
+  .switchAlbumTD {
+    display: none !important;
+  }
+}
+
+@media screen and (min-width: 501px) {
+  .switchAlbum {
+    display: none !important;
+  }
+
+  .switchLandscape {
+    display: table-row !important;
+  }
+
+  .switchAlbumTD {
+    display: table-cell !important;
+  }
+}

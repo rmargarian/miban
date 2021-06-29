@@ -1,0 +1,23 @@
+.block{
+  border: 1px solid #b5b8c8;
+  margin-top: 20px;
+  padding-right: 10px;
+  .header{
+    font-size: 0.75em;
+    background-color: white;
+    position: relative;
+    bottom: 15px;
+    left: 10px;
+    padding: 0px 7px;
+  }
+  .form-fields{padding: 10px 15px;}
+  /deep/ .input-content{
+    display: flex;
+    align-items: flex-start;
+  }
+  .info{
+    font-size: 0.8em;
+    padding-left: 8em;
+    padding-bottom: 10px;
+  }
+}

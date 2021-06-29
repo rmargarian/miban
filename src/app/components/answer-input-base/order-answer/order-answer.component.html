@@ -1,0 +1,84 @@
+<app-answer-wrapper
+  [moreInfo]="moreInfo"
+  [questionText]="questionText"
+  [help]="help"
+  [isMandatory]="isMandatory"
+  [labelText]="labelText"
+  [commentRows]="commentRows"
+  [withComment]="withComment"
+  [commentControl]="commentControl">
+
+  <div *ngIf="notTooltip" class="error_message">{{errorMessage || ''}}</div>
+
+  <div class="wrapper_order-answer"
+       [ngClass]="{'with-error': errorMessage}"
+       attr.data-tooltip-class="{{'error-tooltip'}}"
+       attr.data-tooltip-position="{{tooltipPosition}}"
+       attr.data-tooltip="{{!notTooltip ? errorMessage : ''}}">
+    <div class="choices_container ">
+      <div class="col_header">Options:</div>
+      <div class="border_choices">
+        <ng-container *ngFor="let option of options">
+          <div class="choices_box yourChoices"
+             
+          [class.selectedChoice]="selectedUnOrderedOption && option.id === selectedUnOrderedOption.id"
+          [class.height0]="option.hided"
+          (click)="showSelectedSlot(option, TypeContainerChoices.YourChoices)"
+          (dblclick)="selectedSlotChoice(option, TypeContainerChoices.YourChoices)">
+       <span *ngIf="!option.hided">
+           {{option[textField]}}
+       </span>
+     </div>
+        </ng-container>
+        
+      </div>
+    </div>
+
+    <div class="btn_container">
+      <div class="wrapper_btn">
+
+        <div class="btns-row">
+          <button mat-icon-button [disableRipple]="true"
+                  [disabled]="!selectedOrderedOption || orderedOptions.length === 0"
+                  (click)="selectedSlotChoice(selectedOrderedOption, TypeContainerChoices.YourRanking)">
+            <mat-icon >arrow_back</mat-icon>
+          </button>
+          <button mat-icon-button [disableRipple]="true"
+                  [disabled]="!selectedUnOrderedOption || options.length === 0"
+                  (click)="selectedSlotChoice(selectedUnOrderedOption, TypeContainerChoices.YourChoices)">
+            <mat-icon >arrow_forward</mat-icon>
+          </button>
+        </div>
+
+        <div class="btns-row">
+          <button mat-icon-button [disableRipple]="true"
+                  [disabled]="!selectedOrderedOption || orderedOptions.indexOf(selectedOrderedOption) === 0"
+                  (click)="moveSelectedSlotChoice(selectedUnOrderedOption || selectedOrderedOption, 'top')">
+            <mat-icon >arrow_upward</mat-icon>
+          </button>
+          <button mat-icon-button [disableRipple]="true"
+                  [disabled]="!selectedOrderedOption || orderedOptions.indexOf(selectedOrderedOption) === orderedOptions.length - 1"
+                  (click)="moveSelectedSlotChoice(selectedUnOrderedOption || selectedOrderedOption,  'bottom')">
+            <mat-icon >arrow_downward</mat-icon>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="choices_container ">
+      <div class="col_header">Your Ranking</div>
+      <div class="border_choices">
+        <ol>
+          <li class="choices_box orderedChoices"
+              *ngFor="let option of orderedOptions; let i = index"
+              [class.selectedChoice]="option === selectedOrderedOption"
+              (click)="showSelectedSlot(option, TypeContainerChoices.YourRanking)"
+              (dblclick)="selectedSlotChoice(option, TypeContainerChoices.YourRanking)">
+            <span>{{option[textField]}}</span>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</app-answer-wrapper>

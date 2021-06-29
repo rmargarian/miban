@@ -1,0 +1,12 @@
+@import "~assets/styles/theme";
+@import "~assets/styles/colors";
+@import "~assets/styles/variables";
+
+:host {
+  color: black;
+  font-size: 13px;
+
+  .text {
+    padding: 10px;
+  }
+}

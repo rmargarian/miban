@@ -1,0 +1,32 @@
+<app-answer-wrapper
+  [moreInfo]="moreInfo"
+  [questionText]="questionText"
+  [help]="help"
+  [isMandatory]="isMandatory"
+  [withComment]="withComment"
+  [labelText]="labelText"
+  [commentControl]="commentControl"
+  [commentRows]="commentRows"
+  [min_selected]="min_selected">
+
+  <div *ngIf="notTooltip" class="error_message">{{errorMessage || ''}}</div>
+
+  <ng-container>
+  <div class="checkboxes-group-wrapper"
+    [ngClass]="{'horizontaly': align, 'default': !align, 'with-error': errorMessage}"
+    >
+    <mat-checkbox
+      (change)="change()"
+      class="custom_mat-checkbox"
+      [disableRipple]="true"
+      *ngFor="let option of options; let i=index"
+      [formControl]="control.controls[option.id]"
+      attr.data-tooltip="{{!notTooltip ? errorMessage : ''}}"
+      attr.data-tooltip-position="{{tooltipPosition}}"
+      attr.data-tooltip-class="{{'error-tooltip'}}"
+      [value]="control.controls[option.id][valueField]">
+      <span [innerHtml]="options[i][textField]"></span>
+    </mat-checkbox>
+  </div>
+</ng-container>
+</app-answer-wrapper>

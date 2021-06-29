@@ -1,0 +1,149 @@
+<div class="report_container" #agGridTable>
+  <ag-grid-angular
+    style="width: 100%"
+    domLayout="autoHeight"
+    class="ag-theme-balham main_grid"
+    [class.hide_users]="hideUsers"
+    [rowData]="rowData"
+    [columnDefs]="columnDefs"
+    [gridOptions]="gridOptions"
+    [frameworkComponents]="frameworkComponents"
+    >
+  </ag-grid-angular>
+  <br>
+  <div class="report-body" #reportBody>
+    <div *ngFor="let group of questionnaireGroups">
+      <h2 class="group_title"
+          *ngIf="group.title"
+          [innerHtml]="group.title">
+      </h2>
+
+      <div *ngFor="let question of group.questions" class="question_wrapper">
+        <div *ngIf="question.chart !== undefined">
+          <h4 *ngIf="question.chart" class="question_title" [innerHtml]="question.title"></h4>
+          <div>
+            <app-bar-chart
+              *ngIf="question.chart.series[0].type === 'bar' &&
+                question.chart.series[0].stacked === false &&
+                question.questionGraphType !== questionGraphType.BAR_HORIZONTAL"
+              [parentRef]="parentRef"
+              [data]="question.chart.data"
+              [usersInfoMap]="usersInfoMap"
+              [maxDataValue]="question.chart.maxDataValue"
+              [series]="question.chart.series"
+              [axes]="question.chart.axes"
+              [usersFieldKey]="usersFieldKey"
+              [enableTooltip]="checkQuestionnaireType !== questionnaireType.PROFILE || enableTooltip"
+              [hideEmptyResponses]="hideEmptyResponses && question.is_sort_hide"
+              [color]="report.color">
+            </app-bar-chart>
+          </div>
+          <div>
+            <app-bar-chart-horizontal
+              *ngIf="question.chart.series[0].type === 'bar' &&
+                question.chart.series[0].stacked === false &&
+                question.questionGraphType === questionGraphType.BAR_HORIZONTAL"
+              [parentRef]="parentRef"
+              [data]="question.chart.data"
+              [usersInfoMap]="usersInfoMap"
+              [maxDataValue]="question.chart.maxDataValue"
+              [series]="question.chart.series"
+              [axes]="question.chart.axes"
+              [usersFieldKey]="usersFieldKey"
+              [enableTooltip]="checkQuestionnaireType !== questionnaireType.PROFILE || enableTooltip"
+              [hideEmptyResponses]="hideEmptyResponses && question.is_sort_hide"
+              [color]="report.color">
+            </app-bar-chart-horizontal>
+          </div>
+
+          <div>
+            <app-radar-chart
+              [parentRef]="parentRef"
+              *ngIf="question.chart.series[0].type === 'radar'"
+              [data]="question.chart.data"
+              [groupAnswersByCompany]="question.chart.groupAnswersByCompany"
+              [usersInfoMap]="usersInfoMap"
+              [series]="question.chart.series"
+              [fields]="question.chart.fields"
+              [axes]="question.chart.axes"
+              [usersFieldKey]="usersFieldKey"
+              [enableTooltip]="checkQuestionnaireType !== questionnaireType.PROFILE || enableTooltip">
+            </app-radar-chart>
+          </div>
+
+          <div>
+            <app-pie-chart
+              *ngIf="question.chart.series[0].type === 'pie' &&
+                  (question.chart.data[0].participants.length || question.chart.data[1].participants.length)"
+              [parentRef]="parentRef"
+              [data]="question.chart.data"
+              [usersInfoMap]="usersInfoMap"
+              [fields]="question.chart.fields"
+              [usersFieldKey]="usersFieldKey"
+              [enableTooltip]="checkQuestionnaireType !== questionnaireType.PROFILE || enableTooltip">
+            </app-pie-chart>
+            <div *ngIf="question.chart.series[0].type === 'pie' &&
+              (!question.chart.data[0].participants.length && !question.chart.data[1].participants.length)">
+              No Answers
+            </div>
+          </div>
+
+          <div>
+            <app-stacked-bar-chart
+              *ngIf="question.chart.series[0].type === 'bar' && question.chart.series[0].stacked === true"
+              [parentRef]="parentRef"
+              [data]="question.chart.data"
+              [usersInfoMap]="usersInfoMap"
+              [maxDataValue]="question.chart.maxDataValue"
+              [series]="question.chart.series"
+              [usersFieldKey]="usersFieldKey"
+              [axes]="question.chart.axes"
+              [axesColors]="question.chart.colors"
+              [questionnaireType]="checkQuestionnaireType"
+              [isFaces]="getIsFaces()"
+              [isForEmail]="isForEmail"
+              [fields]="question.chart.fields"
+              [enableTooltip]="checkQuestionnaireType !== questionnaireType.PROFILE || enableTooltip">
+            </app-stacked-bar-chart>
+          </div>
+
+          <h6 class="average-block"
+              *ngIf="showScores(question)">
+            {{Math.round( question.userScore * 10 ) / 10}} / {{Math.round( question.maxScore * 10 ) / 10}} =
+            {{mathRoundInPercentage(question.userScore, question.maxScore)}}%
+          </h6>
+        </div>
+        <div *ngIf="question.answers !== undefined">
+          <h4 class="answer_title" [innerHtml]="question.title"></h4>
+          <app-answers-renderer
+            [enableTooltip]="checkQuestionnaireType !== questionnaireType.PROFILE || enableTooltip"
+            [answers]="question.answers"
+            [showHeader]="true"
+            [parentRef]="parentRef"
+            [usersInfoMap]="usersInfoMap"
+            [questionGraphType]="question.questionGraphType"
+            [hideEmptyResponses]="hideEmptyResponses && question.is_sort_hide"
+            [color]="report.color">
+          </app-answers-renderer>
+        </div>
+        <div *ngIf="question.comments !== undefined">
+          <h4 class="comment_title">Comments:</h4>
+          <app-answers-renderer
+            [showHeader]="false"
+            [parentRef]="parentRef"
+            [enableTooltip]="checkQuestionnaireType !== questionnaireType.PROFILE || enableTooltip"
+            [answers]="question.comments"
+            [usersInfoMap]="usersInfoMap"
+            [questionGraphType]="question.questionGraphType"
+            [hideEmptyResponses]="hideEmptyResponses && question.is_sort_hide"
+            [color]="report.color">
+          </app-answers-renderer>
+        </div>
+
+        <div *ngIf="question.is_cloud && showCloud">
+          <svg [id]="'cloud_' + question.id"></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

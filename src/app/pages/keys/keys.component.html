@@ -1,0 +1,42 @@
+<app-admin-toolbar>
+  <app-icon-button tooltip="Create new" class="toolbar-item" iconClass="add" (clicked)="addKey()"></app-icon-button>
+  <app-icon-button tooltip="Delete selected" class="toolbar-item" iconClass="remove" [class.disabled]="!selectedRow"
+                   (clicked)="removeKey($event)"></app-icon-button>
+  <app-icon-button tooltip="Reload" class="toolbar-item" iconClass="refresh" (clicked)="refresh()"></app-icon-button>
+  <app-icon-button tooltip="Clone" [class.disabled]="!selectedRow" class="toolbar-item" iconClass="control_point_duplicate" (clicked)="clone($event)"></app-icon-button>
+  <span class="separator"> | </span>
+  <app-icon-button tooltip="Participant summary" class="toolbar-item" iconClass="pie_chart"
+                   [class.disabled]="!selectedRow" (clicked)="exportParticipantsSummary($event)"></app-icon-button>
+  <app-icon-button tooltip="Best negotiators" class="toolbar-item" iconClass="people"
+                   [class.disabled]="!selectedRow" (clicked)="exportBestNegotiators($event)"></app-icon-button>
+  <span class="separator"> | </span>
+  <app-search-input [filterFormControl]="filterFormControl" id="search-input" #search (changes)='filter($event)'
+                    [focus]="true" [debounceTime]="700"></app-search-input>
+  <span> | </span>
+  <mat-checkbox
+    class="custom_mat-checkbox blue days-filter"
+    [disableRipple]="true"
+    [disabled]="disableSelectAll"
+    [(ngModel)]="selectAll"
+    (change)="toggleSelectAll(selectAll)">
+  </mat-checkbox>
+  <span style="color: white; white-space: nowrap">Show > 270d</span>
+</app-admin-toolbar>
+<div id="msg_box" class="box hidden" [ngStyle]="{'left': pageX + 'px'}">Please make a selection first</div>
+
+<ag-grid-angular
+  class="ag-theme-balham"
+  suppressDragLeaveHidesColumns="true"
+  #agGrid
+  [rowData]="displayedData"
+  [gridOptions]="gridOptions"
+  [context]="context"
+  [frameworkComponents]="frameworkComponents"
+  after-sort-changed.call="sortChanged"
+  suppressNoRowsOverlay
+  toolPanelSuppressGroups
+  (gridReady)="onGridReady($event)"
+  rowSelection="single">
+</ag-grid-angular>
+
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>

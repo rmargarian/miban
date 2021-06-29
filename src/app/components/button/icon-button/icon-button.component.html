@@ -1,0 +1,24 @@
+<button mat-icon-button
+        class="icon-button"
+        (click)="onClick($event)"
+        (mousedown)="mouseDown($event)"
+        [disableRipple]="true"
+        [disabled]="disabled"
+        label="label"
+        attr.data-tooltip="{{tooltip}}"
+        attr.data-tooltip-delay="{{tooltipDelay}}"
+        attr.data-tooltip-class="{{isError ? 'error-tooltip' : ''}}"
+        type="{{type}}"
+        [ngClass]="{
+          blue: color === 'blue',
+          grey: color === 'grey',
+          transparent: color === 'transparent',
+          pressed: pressed
+        }">
+
+  <img *ngIf="imgSrc" src="{{imgSrc}}">
+  <mat-icon *ngIf="iconClass" [ngClass]="iconClass">{{iconClass}}</mat-icon>
+  <i *ngIf="faIconClass" [ngClass]="faIconClass"></i>
+  <span *ngIf="label">{{label}}</span>
+</button>
+

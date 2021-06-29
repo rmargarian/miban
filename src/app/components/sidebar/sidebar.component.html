@@ -1,0 +1,98 @@
+<div class="container-fluid">
+    <ul class="list">
+      <app-sb-profiles [data]="profiles"
+        [parentRoute]="routes.PROFILES" [route$]="route$" [qId$]="qId$"></app-sb-profiles>
+      <app-sb-profiles [data]="assessments"
+        [parentRoute]="routes.ASSESSMENTS" [route$]="route$" [qId$]="qId$"></app-sb-profiles>
+      <app-sb-profiles [data]="feedback"
+        [parentRoute]="routes.FEEDBACK" [route$]="route$" [qId$]="qId$"></app-sb-profiles>
+      <li class="selectable" [class.selected]="(route$ | async) === routes.QUESTIONS">
+        <a (click)="navigate(routes.QUESTIONS)">
+          <div class="single_item">
+            <span class="image">
+              <i class="material-icons">help_outline</i>
+            </span>
+            <span class="item_name">Questions</span>
+          </div>
+      </a>
+      </li>
+      <li class="selectable" [class.selected]="(route$ | async) === routes.KEYS">
+        <a (click)="navigate(routes.KEYS)">
+          <div class="single_item">
+            <span class="image">
+              <i class="material-icons">vpn_key</i>
+            </span>
+            <span class="item_name">Keys</span>
+          </div>
+        </a>
+      </li>
+      <li class="selectable" [class.selected]="(route$ | async) === routes.PARTICIPANTS">
+        <a (click)="navigate(routes.PARTICIPANTS, keyId)">
+          <div class="single_item">
+            <span class="image">
+              <i class="material-icons">people</i>
+            </span>
+            <span class="item_name">Participants</span>
+          </div>
+        </a>
+      </li>
+      <li class="selectable" [class.selected]="(route$ | async) === routes.IMPORT_PARTICIPANTS">
+        <a (click)="navigate(routes.IMPORT_PARTICIPANTS)">
+          <div class="single_item">
+            <span class="image">
+              <i class="material-icons">cloud_upload</i>
+            </span>
+            <span class="item_name">Import Participants</span>
+          </div>
+        </a>
+      </li>
+      <li class="selectable" [class.selected]="(route$ | async) === routes.CLIENTS">
+        <a (click)="navigate(routes.CLIENTS)" target="_blank">
+          <div class="single_item">
+            <span class="image">
+              <i class="material-icons">assignment</i>
+            </span>
+            <span class="item_name">Reports</span>
+          </div>
+      </a>
+      </li>
+      <li class="selectable" [class.selected]="(route$ | async) === routes.CONFIGURATION">
+        <a (click)="navigate(routes.CONFIGURATION)">
+          <div class="single_item">
+            <span class="image">
+              <i class="material-icons">settings</i>
+            </span>
+            <span class="item_name">Configuration</span>
+          </div>
+        </a>
+      </li>
+      <li class="selectable" [class.selected]="(route$ | async) === routes.TRAINING_COURSES">
+        <a (click)="navigate(routes.TRAINING_COURSES)">
+          <div class="single_item">
+            <span class="image">
+              <i class="material-icons">list_alt</i>
+            </span>
+            <span class="item_name">Training Courses</span>
+          </div>
+        </a>
+      </li>
+      <li class="selectable" [class.selected]="(route$ | async) === routes.USER_ADMIN">
+        <a (click)="navigate(routes.USER_ADMIN)">
+          <div class="single_item">
+            <span class="image">
+              <i class="material-icons">person</i>
+            </span>
+            <span class="item_name">User Administration</span>
+          </div>
+        </a>
+      </li>
+      <li class="selectable" (click)="logout()">
+        <div class="single_item">
+          <span class="image">
+            <i class="material-icons">lock</i>
+          </span>
+          <span class="item_name">Logout</span>
+        </div>
+      </li>
+    </ul>
+</div>

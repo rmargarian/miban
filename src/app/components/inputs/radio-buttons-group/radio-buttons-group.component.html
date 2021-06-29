@@ -1,0 +1,7 @@
+<app-radio-button
+  *ngFor="let option of items"
+  [valueField]="valueField"
+  [textField]="textField"
+  [disabled]="!option.enabled"
+  [option]="option">
+</app-radio-button>

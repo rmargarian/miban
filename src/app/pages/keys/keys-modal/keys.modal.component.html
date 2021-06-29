@@ -1,0 +1,314 @@
+<div class="dialog">
+  <div class="form-header">
+    <div class="header-text" appMatDialogDraggableTitle>{{data.header}}</div>
+    <app-icon-button iconClass="close" color="transparent" (clicked)="closeDialog()"></app-icon-button>
+  </div>
+  <form [formGroup]="form" (ngSubmit)='save()' *ngIf="form">
+    <div class="form-content keys-form">
+
+      <app-form-input
+        label="Key Description:"
+        labelWidth="125px"
+        required="true">
+        <app-input [control]="getControl('title')" [validationErrors]="showValidation ? getControl('title').errors : null"
+                   [focus]="true" input-transclude-slot>
+        </app-input>
+        <div class="content_width" content-transclude-slot></div>
+      </app-form-input>
+
+      <div class="one_row">
+        <app-form-input
+          label="Key:"
+          labelWidth="125px"
+          required="true">
+          <app-input [control]="getControl('company_key')" [validationErrors]="showValidation ? getControl('company_key').errors : null"
+                     input-transclude-slot></app-input>
+        </app-form-input>
+
+        <app-form-input
+          class="last"
+          label="Report Pswd:"
+          labelWidth="100px">
+          <app-input [control]="getControl('reports_pass')" input-transclude-slot></app-input>
+        </app-form-input>
+        <div class="content_width" content-transclude-slot></div>
+      </div>
+
+      <app-form-input
+        label="Administrator:"
+        labelWidth="125px">
+        <app-input [control]="getControl('admin')" input-transclude-slot>
+        </app-input>
+        <div class="content_width" content-transclude-slot></div>
+      </app-form-input>
+
+      <app-form-input
+        class="one_row"
+        label="Admin Email:"
+        labelWidth="125px"
+        required="true">
+        <app-input [control]="getControl('admin_email')"
+                   [validationErrors]="showValidation ? getControl('admin_email').errors : null"
+                   input-transclude-slot>
+        </app-input>
+        <span class="email_postfix" content-transclude-slot>@negotiations.com</span>
+      </app-form-input>
+
+      <app-form-input
+        label="Sponsor 1st Name:"
+        labelWidth="125px">
+        <app-input [control]="getControl('sponsor_name')" input-transclude-slot>
+        </app-input>
+        <div class="content_width" content-transclude-slot></div>
+      </app-form-input>
+
+      <app-form-input
+        label="Email:"
+        labelWidth="125px">
+        <app-input input-transclude-slot [control]="getControl('email')"
+            [isValidationByFocusOut]="true"></app-input>
+        <div class="content_width" content-transclude-slot>
+          <span class="span_sh">SH</span>
+          <span class="span_ed">ED</span>
+          <span class="span_mn">MN</span>
+        </div>
+      </app-form-input>
+
+      <app-form-input
+        label="Industry Sector:"
+        labelWidth="125px">
+        <app-input input-transclude-slot [control]="getControl('industry_sector')"
+                   ></app-input>
+        <div class="checkboxes" class="content_width" content-transclude-slot>
+          <mat-checkbox [formControl]="form.controls['show_industry_sector']" class="custom_mat-checkbox"
+                        [checked]="data.key.show_industry_sector" [disableRipple]="true"></mat-checkbox>
+          <mat-checkbox [formControl]="form.controls['edit_industry_sector']" class="custom_mat-checkbox"
+                        [checked]="data.key.edit_industry_sector" [disableRipple]="true"></mat-checkbox>
+          <mat-checkbox [formControl]="form.controls['mn_industry_sector']" class="custom_mat-checkbox"
+                        [checked]="data.key.mn_industry_sector" [disableRipple]="true"></mat-checkbox>
+        </div>
+      </app-form-input>
+
+      <app-form-input
+        label="Career Category: "
+        labelWidth="125px">
+        <app-select-input [control]="getControl('c_category')"
+                          [options]="data.career_category"
+                          input-transclude-slot
+                          textField="name" valueField="id">
+        </app-select-input>
+
+        <div class="checkboxes" class="content_width" content-transclude-slot>
+          <mat-checkbox [formControl]="form.controls['show_career_category']" class="custom_mat-checkbox"
+                        [checked]="data.key.show_career_category" [disableRipple]="true"></mat-checkbox>
+          <mat-checkbox [formControl]="form.controls['edit_career_category']" class="custom_mat-checkbox"
+                        [checked]="data.key.edit_career_category" [disableRipple]="true"></mat-checkbox>
+          <mat-checkbox [formControl]="form.controls['mn_career_category']" class="custom_mat-checkbox"
+                        [checked]="data.key.mn_career_category" [disableRipple]="true"></mat-checkbox>
+        </div>
+      </app-form-input>
+
+      <app-form-input
+        label="Training Date: "
+        labelWidth="125px">
+        <app-date-picker [control]="getControl('training_date')" width="100%" input-transclude-slot></app-date-picker>
+        <div class="checkboxes_to_datepicker content_width" style="justify-content: space-between"
+             content-transclude-slot>
+          <mat-checkbox [formControl]="form.controls['show_training_date']" class="custom_mat-checkbox"
+                        [checked]="data.key.show_training_date" [disableRipple]="true"></mat-checkbox>
+          <mat-checkbox [formControl]="form.controls['mn_training_date']" class="custom_mat-checkbox"
+                        [checked]="data.key.mn_training_date" [disableRipple]="true"></mat-checkbox>
+        </div>
+      </app-form-input>
+
+      <app-form-input
+        label="Training Course: "
+        labelWidth="125px">
+        <app-select-input [control]="getControl('training_course_id')"
+                          [options]="data.training_courses"
+                          input-transclude-slot
+                          textField="name" valueField="id">
+        </app-select-input>
+
+        <div class="checkboxes" class="content_width" content-transclude-slot>
+          <mat-checkbox [formControl]="form.controls['show_training_cource']" class="custom_mat-checkbox"
+                        [checked]="data.key.show_training_cource" [disableRipple]="true"></mat-checkbox>
+          <mat-checkbox [formControl]="form.controls['edit_training_cource']" class="custom_mat-checkbox"
+                        [checked]="data.key.show_training_cource" [disableRipple]="true"></mat-checkbox>
+          <mat-checkbox [formControl]="form.controls['mn_training_cource']" class="custom_mat-checkbox"
+                        [checked]="data.key.mn_training_cource" [disableRipple]="true"></mat-checkbox>
+        </div>
+      </app-form-input>
+
+      <app-form-input
+        label="Country: "
+        labelWidth="125px">
+        <app-select-input [control]="getControl('country_id')"
+                          [options]="data.countries"
+                          input-transclude-slot
+                          textField="name" valueField="id">
+        </app-select-input>
+
+        <div class="checkboxes" class="content_width" content-transclude-slot>
+          <mat-checkbox [formControl]="form.controls['show_country']" class="custom_mat-checkbox"
+                        [checked]="data.key.show_country" [disableRipple]="true"></mat-checkbox>
+          <mat-checkbox [formControl]="form.controls['edit_country']" class="custom_mat-checkbox"
+                        [checked]="data.key.edit_country" [disableRipple]="true"></mat-checkbox>
+          <mat-checkbox [formControl]="form.controls['mn_country']" class="custom_mat-checkbox"
+                        [checked]="data.key.mn_country" [disableRipple]="true"></mat-checkbox>
+        </div>
+      </app-form-input>
+
+      <app-form-input
+        label="State: "
+        labelWidth="125px">
+        <app-input *ngIf="countryId !== 3 && countryId !== 1"
+                   [control]="getControl('state_name')"
+                   input-transclude-slot></app-input>
+        <app-select-input [options]="filteredStates" valueField='name'
+                          *ngIf="countryId === 3 || countryId === 1"
+                          textField='name' [control]="getControl('state_name')" input-transclude-slot>
+        </app-select-input>
+        <div class="checkboxes" class="content_width" content-transclude-slot>
+          <mat-checkbox [formControl]="form.controls['show_state']" class="custom_mat-checkbox"
+                        [checked]="data.key.show_state" [disableRipple]="true"></mat-checkbox>
+          <mat-checkbox [formControl]="form.controls['edit_state']" class="custom_mat-checkbox"
+                        [checked]="data.key.edit_state" [disableRipple]="true"></mat-checkbox>
+          <mat-checkbox [formControl]="form.controls['mn_state']" class="custom_mat-checkbox"
+                        [checked]="data.key.mn_state" [disableRipple]="true"></mat-checkbox>
+        </div>
+      </app-form-input>
+
+      <app-form-input
+        label="City: "
+        labelWidth="125px">
+        <app-input [control]="getControl('city')"
+                   input-transclude-slot></app-input>
+        <div class="checkboxes" class="content_width" content-transclude-slot>
+          <mat-checkbox [formControl]="form.controls['show_city']" class="custom_mat-checkbox"
+                        [checked]="data.key.show_city" [disableRipple]="true"></mat-checkbox>
+          <mat-checkbox [formControl]="form.controls['edit_city']" class="custom_mat-checkbox"
+                        [checked]="data.key.edit_city" [disableRipple]="true"></mat-checkbox>
+          <mat-checkbox [formControl]="form.controls['mn_city']" class="custom_mat-checkbox"
+                        [checked]="data.key.mn_city" [disableRipple]="true"></mat-checkbox>
+        </div>
+      </app-form-input>
+
+      <app-form-input
+        label="Department: "
+        labelWidth="125px">
+        <app-input [control]="getControl('department')"
+                   input-transclude-slot></app-input>
+        <div class="checkboxes" class="content_width" content-transclude-slot>
+          <mat-checkbox [formControl]="form.controls['show_dept']" class="custom_mat-checkbox"
+                        [checked]="data.key.show_dept" [disableRipple]="true"></mat-checkbox>
+          <mat-checkbox [formControl]="form.controls['edit_dept']" class="custom_mat-checkbox"
+                        [checked]="data.key.edit_dept" [disableRipple]="true"></mat-checkbox>
+          <mat-checkbox [formControl]="form.controls['mn_dept']" class="custom_mat-checkbox"
+                        [checked]="data.key.mn_dept" [disableRipple]="true"></mat-checkbox>
+        </div>
+      </app-form-input>
+
+      <app-form-input
+        label="Job Title: "
+        labelWidth="125px">
+        <app-input [control]="getControl('job_title')"
+                   input-transclude-slot></app-input>
+        <div class="checkboxes" class="content_width" content-transclude-slot>
+          <mat-checkbox [formControl]="form.controls['show_job_title']" class="custom_mat-checkbox"
+                        [checked]="data.key.show_job_title" [disableRipple]="true"></mat-checkbox>
+          <mat-checkbox [formControl]="form.controls['edit_job_title']" class="custom_mat-checkbox"
+                        [checked]="data.key.edit_job_title" [disableRipple]="true"></mat-checkbox>
+          <mat-checkbox [formControl]="form.controls['mn_job_title']" class="custom_mat-checkbox"
+                        [checked]="data.key.mn_job_title" [disableRipple]="true"></mat-checkbox>
+        </div>
+      </app-form-input>
+
+      <app-form-input
+        label="Manager: "
+        labelWidth="125px">
+        <app-input [control]="getControl('manager_name')"
+                   input-transclude-slot></app-input>
+        <div class="checkboxes" class="content_width" content-transclude-slot>
+          <mat-checkbox [formControl]="form.controls['show_manager_name']" class="custom_mat-checkbox"
+                        [checked]="data.key.show_manager_name" [disableRipple]="true"></mat-checkbox>
+          <mat-checkbox [formControl]="form.controls['edit_manager_name']" class="custom_mat-checkbox"
+                        [checked]="data.key.edit_manager_name" [disableRipple]="true"></mat-checkbox>
+          <mat-checkbox [formControl]="form.controls['mn_manager_name']" class="custom_mat-checkbox"
+                        [checked]="data.key.mn_manager_name" [disableRipple]="true"></mat-checkbox>
+        </div>
+      </app-form-input>
+
+      <div class="one_row">
+        <app-form-input
+          label="Rpt Currency:"
+          labelWidth="125px"
+          [required]='true'>
+          <app-select-input [control]="getControl('currency_id')"
+                            [validationErrors]="showValidation ? getControl('currency_id').errors : null"
+                            [options]="data.currency"
+                            input-transclude-slot
+                            textField="currency" valueField="id">
+          </app-select-input>
+        </app-form-input>
+
+        <app-form-input
+          class="last"
+          label="FE Currency:"
+          labelWidth="100px">
+          <app-select-input [control]="getControl('fe_currency_id')"
+                            [options]="data.currency"
+                            input-transclude-slot
+                            textField="currency" valueField="id">
+          </app-select-input>
+        </app-form-input>
+
+        <div class="content_width"></div>
+      </div>
+
+      <app-form-input
+        label="Profiles:"
+        labelWidth="125px">
+        <app-select-input [control]="getControl('profiles')"
+                          [options]="data.questionnaires.profiles"
+                          input-transclude-slot
+                          type="multi"
+                          placeholder="Profiles"
+                          textField="title" valueField="id">
+        </app-select-input>
+        <div class="content_width" content-transclude-slot></div>
+      </app-form-input>
+
+      <app-form-input
+        label="Assessments:"
+        labelWidth="125px">
+        <app-select-input [control]="getControl('assessments')"
+                          [options]="data.questionnaires.assessments"
+                          input-transclude-slot
+                          type="multi"
+                          placeholder="Assessments"
+                          textField="title" valueField="id">
+        </app-select-input>
+        <div class="content_width" content-transclude-slot></div>
+      </app-form-input>
+
+      <app-form-input
+        label="Feedback:"
+        labelWidth="125px">
+        <app-select-input [control]="getControl('feedbacks')"
+                          [options]="data.questionnaires.feedbacks"
+                          input-transclude-slot
+                          type="multi"
+                          placeholder="Feedbacks"
+                          textField="title" valueField="id">
+        </app-select-input>
+        <div class="content_width" content-transclude-slot></div>
+      </app-form-input>
+
+    </div>
+    <div class="form-footer">
+      <app-text-button color="blue" type="button" text="Save" (clicked)="save()"></app-text-button>
+      <app-text-button color="blue" type="submit" text="Close" (click)="closeDialog()"></app-text-button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,11 @@
+@import "../../../../assets/styles/dialog";
+@import "../../../../assets/styles/colors";
+
+:host {
+  .dialog .form-content {padding: 15px 10px;}
+
+  .form-footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

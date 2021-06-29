@@ -1,0 +1,24 @@
+@import "~assets/styles/user-page";
+
+:host {
+  width: 100%;
+
+  app-form-input {
+    margin-right: 5px;
+  }
+  /deep/ .label-block {
+    font-weight: 600;
+  }
+  .enter-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  app-form-input {
+    min-width: 400px;
+  }
+}

@@ -1,0 +1,17 @@
+<div class="text_wrapper">
+  <h4 *ngIf="showHeader">Answers:</h4>
+  <ul class="answer_list" #graphContainer>
+    <ng-container *ngFor="let answer of data">
+      <li *ngIf="answer && answer.spleted">
+        <span *ngFor="let line of answer.spleted" class="span_answer"
+          (mouseover)="onMouseOver($event, answer)"
+          (mouseout)="onMouseOut($event, answer)"
+          (mousemove)="onMouseMove($event, answer)"
+        >
+          {{line}}<br>
+        </span>
+      </li>
+    </ng-container>
+    
+  </ul>
+</div>

@@ -1,0 +1,165 @@
+  <fieldset>
+    <legend>Invitation & Reminder emails</legend>
+    <div class="input_content">
+      <app-form-input label="Key:" labelWidth="100px" class="input_select" [required]="true">
+        <app-select-input
+          valueField='id'
+          textField='title'
+          placeholder="Select a Key..."
+          groupBy="typeStr"
+          [options]="allKeys"
+          [groupValue]="groupValueFn"
+          [control]="keysControl"
+          [validationErrors]="showValidation ? keysControl.errors : null"
+          [searchOn]="true"
+          [focus]="true"
+          input-transclude-slot>
+        </app-select-input>
+      </app-form-input>
+      <app-icon-button tooltip="Refresh Key" class="toolbar-item" iconClass="refresh" (click)="refresh()"></app-icon-button>
+    </div>
+    <div class="radio-filters">
+        <mat-radio-group [formControl]="selectStatusControl" class="radio_group">
+          <app-radio-buttons-group class="radio_group" [items]="selectStatuses"></app-radio-buttons-group>
+        </mat-radio-group>
+        <div class="separetor">|</div>
+        <mat-radio-group [formControl]="sortStatuseControl" class="radio_group">
+          <app-radio-buttons-group class="radio_group" [items]="sortStatuses"></app-radio-buttons-group>
+        </mat-radio-group>
+    </div>
+    <fieldset class="fieldset-filters" [class.not-show]="!filtersActive">
+      <legend>
+        <mat-checkbox class="custom_mat-checkbox blue" [disableRipple]="true" [disabled]="!rowData.length" class="custom_mat-checkbox"
+          [checked]="filtersActive" (change)="triggerFilterActive()" content-transclude-slot>
+          <span class="show_all">Filters</span>
+        </mat-checkbox>
+      </legend>
+      <div class="grid-filters">
+          <app-single-column-grid
+          input-transclude-slot
+          [rowMultiSelect]="true"
+          [type]='gridFilters.P_LOCATION'
+          [headerTitle]="'Location'"
+          [data]="allFilters.p_location"
+          [selectedRows]="appliedFilters.p_location"
+          [suppressHorizontalScroll]="true"
+          (filterChanged)="onFilterChanged($event)">
+        </app-single-column-grid>
+        <app-single-column-grid
+          input-transclude-slot
+          [rowMultiSelect]="true"
+          [type]='gridFilters.P_DATE'
+          [headerTitle]="'Date'"
+          [data]="allFilters.p_date"
+          [selectedRows]="appliedFilters.p_date"
+          [suppressHorizontalScroll]="true"
+          (filterChanged)="onFilterChanged($event)">
+        </app-single-column-grid>
+        <app-single-column-grid
+          input-transclude-slot
+          [rowMultiSelect]="true"
+          [type]='gridFilters.P_GROUPS'
+          [headerTitle]="'Groups'"
+          [data]="allFilters.p_groups"
+          [selectedRows]="appliedFilters.p_groups"
+          [suppressHorizontalScroll]="true"
+          (filterChanged)="onFilterChanged($event)">
+        </app-single-column-grid>
+        <app-single-column-grid
+          input-transclude-slot
+          [rowMultiSelect]="true"
+          [type]='gridFilters.P_SAVED'
+          [headerTitle]="'Saved'"
+          [data]="allFilters.p_saved"
+          [selectedRows]="appliedFilters.p_saved"
+          [suppressHorizontalScroll]="true"
+          (filterChanged)="onFilterChanged($event)">
+        </app-single-column-grid>
+      </div>
+    </fieldset>
+    <div class="grid_wrapper">
+      <div class="column">
+        <div class="selected">{{selectedRowsCount}} selected</div>
+        <div class="export_btns_container">
+          <app-icon-button [class.disabled]="!selectedRowsCount" tooltip="Export detailed responses" class="toolbar-item"
+            iconClass="cloud_download" (click)="exportDetailed($event)"></app-icon-button>
+        </div>
+      </div>
+      <div id="msg_box" class="box hidden" [ngStyle]="{'left': pageX + 'px', 'top': pageY + 'px'}">Please make a selection first</div>
+      <ag-grid-angular
+        class="ag-theme-balham"
+        #agGrid
+        [gridOptions]="gridOptions"
+        [frameworkComponents]="frameworkComponents"
+        rowDeselection="true"
+        suppressNoRowsOverlay
+        rowSelection="multiple">
+      </ag-grid-angular>
+    </div>
+    <app-form-input *ngIf="!isRes" label="Email(s):" labelWidth="100px">
+      <app-input type="email" [control]="emailControl" [validationErrors]="emailControl.errors" input-transclude-slot></app-input>
+    </app-form-input>
+    <div class="instruction" *ngIf="!isRes">
+      Use commas or semi-colons to separate email addresses
+    </div>
+  </fieldset>
+  <fieldset *ngIf="!isRes">
+    <legend>Invitation emails</legend>
+    <app-send-emails-fieldset
+      [item]="item"
+      [templates]="invTemplates"
+      [type]="templateType.INV"
+      [chosenTemplate]="invTemplate"
+      [enabledSend]="enabledSend"
+      (refresh)="getTemplates()"
+      (chosen)="templateUpdated(templateType.INV, $event)"
+      (send)="onSend($event)"></app-send-emails-fieldset>
+  </fieldset>
+  <fieldset *ngIf="!isRes">
+    <legend>Reminder emails</legend>
+    <app-send-emails-fieldset
+      [item]="item"
+      [templates]="remTemplates"
+      [type]="templateType.REM"
+      [chosenTemplate]="remTemplate"
+      [enabledSend]="enabledSend"
+      (refresh)="getTemplates()"
+      (chosen)="templateUpdated(templateType.REM, $event)"
+      (send)="onSend($event)"></app-send-emails-fieldset>
+  </fieldset>
+  <fieldset *ngIf="isRes">
+    <legend>Result emails</legend>
+    <app-send-emails-fieldset
+      [item]="item"
+      [templates]="resInvTemplates"
+      [type]="templateType.INV_RES"
+      [chosenTemplate]="resTemplate"
+      [enabledSend]="enabledSend"
+      (refresh)="getTemplates()"
+      (chosen)="templateUpdated(templateType.INV_RES, $event)"
+      (send)="onSend($event)">
+    </app-send-emails-fieldset>
+  </fieldset>
+  <fieldset>
+    <legend>Copy from</legend>
+    <div class="input_content">
+      <app-form-input label="PFA:" labelWidth="100px" class="input_select">
+        <app-select-input
+          [options]="allQuestionnaires"
+          valueField='id'
+          groupBy="typeStr"
+          [groupValue]="groupValueFn"
+          [control]="qControl"
+          placeholder="Please select or type" textField='title' [searchOn]="true" input-transclude-slot>
+        </app-select-input>
+      </app-form-input>
+      <app-text-button [disabled]="!selsectedQid" color="blue" text="Copy" (click)="onCopy()"></app-text-button>
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>Template parameters</legend>
+    <div class="template_content">
+      {{templateInfo}}
+    </div>
+  </fieldset>
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '1px' }"></ngx-loading>

@@ -1,0 +1,43 @@
+@import "~ag-grid-community/dist/styles/ag-grid.css";
+@import "~ag-grid-community/dist/styles/ag-theme-balham.css";
+@import "assets/styles/theme";
+@import "assets/styles/colors";
+@import "assets/styles/variables";
+
+.ag-theme-balham, .ag-header-container {
+  font-family: $baseFont;
+  font-size: 14px;
+}
+
+.ag-theme-balham .ag-header-cell-label {
+  font-family: $baseFont;
+}
+
+.color-blue { color: $blue }
+
+.ag-theme-balham .ag-icon-checkbox-checked,
+.ag-theme-balham .ag-icon-checkbox-unchecked {
+  background-size: 18px 18px;
+}
+
+.ag-theme-balham .ag-selection-checkbox span {
+  position: relative;
+  top: 2px;
+  margin-right: 0px;
+}
+
+.ag-theme-balham .ag-row-hover {
+  background-color: $hover !important;
+
+  &.invalid { background-color: #e69292a8 !important }
+}
+.ag-theme-balham .ag-row-selected {
+  background-color: $selected !important;
+  border-bottom: 1px solid #fff;
+
+  &.invalid { background-color: #e69292a8 !important }
+}
+
+.ag-theme-balham .ag-row {
+  border-width: 1px 0 0;
+}

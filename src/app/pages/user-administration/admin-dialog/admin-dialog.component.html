@@ -1,0 +1,75 @@
+<div class="dialog">
+  <div class="form-header">
+    <div class="header-text" appMatDialogDraggableTitle>{{data.header}}</div>
+    <app-icon-button iconClass="close" color="transparent" (clicked)="closeDialog()"></app-icon-button>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="save()">
+    <div class="form-content">
+      <app-form-input
+        label="Full Name:"
+        labelWidth="90px"
+        required="true">
+        <app-input [control]="getControl('name')" [validationErrors]="showValidation ? getControl('name').errors : null"
+                    [focus]="true" input-transclude-slot></app-input>
+      </app-form-input>
+
+      <app-form-input
+        label="Username:"
+        labelWidth="90px"
+        required="true">
+        <app-input [control]="getControl('username')" [validationErrors]="showValidation ? getControl('username').errors : null"
+                   input-transclude-slot></app-input>
+      </app-form-input>
+
+      <app-form-input
+        label="Password:"
+        labelWidth="90px"
+        [required]="data.type === 'add'">
+        <app-password-input [control]="getControl('password')"
+                            [validationErrors]="showValidation ? getControl('password').errors : null"
+                            input-transclude-slot>
+        </app-password-input>
+      </app-form-input>
+
+      <app-form-input
+        *ngIf="showConfirmPass"
+        label="Confirm"
+        labelWidth="90px"
+        [required]="data.type === 'add'">
+        <app-password-input [control]="getControl('confirm_password')"
+                            [validationErrors]="showValidation ? getControl('confirm_password').errors : null"
+                            input-transclude-slot>
+        </app-password-input>
+      </app-form-input>
+
+      <app-form-input
+        label="Email:"
+        labelWidth="90px"
+        required="true">
+        <app-input [control]="getControl('email')" [validationErrors]="getControl('email').errors"
+          [showValidationTriggered]="showValidation" [isValidationByFocusOut]="true" input-transclude-slot></app-input>
+      </app-form-input>
+
+      <app-form-input
+        label="Currency:"
+        required="true"
+        labelWidth="90px">
+        <app-select-input [options]="data.currencies"
+                          valueField="id" textField="currency"
+                          [control]="getControl('currency_country')"
+                          [validationErrors]="showValidation ? getControl('currency_country').errors : null"
+                          input-transclude-slot></app-select-input>
+      </app-form-input>
+      <div class="checkbox_container" content-transclude-slot>
+        <span>Super Admin:</span>
+        <mat-checkbox [formControl]="getControl('is_super')" class="custom_mat-checkbox blue"
+          [disableRipple]="true" [checked]="data.admin.is_super">
+        </mat-checkbox>
+      </div>
+    </div>
+    <div class="form-footer">
+      <app-text-button color="blue" type="button" text="Save" (clicked)="save()"></app-text-button>
+      <app-text-button color="blue" type="submit" text="Close" (click)="closeDialog()"></app-text-button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,24 @@
+@import "../../../../assets/styles/dialog";
+
+:host {
+
+  .form-content {
+    .info {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+  }
+
+  app-form-input { width: 330px }
+
+  /deep/ input.mat-input-element,
+  /deep/.mat-form-field {
+    width: 200px !important;
+  }
+
+  .one-row {
+    display: flex;
+    margin: 0;
+   }
+}

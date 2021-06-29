@@ -1,0 +1,45 @@
+<app-admin-toolbar>
+  <app-icon-button tooltip="Create new" class="toolbar-item" iconClass="add" (click)="addUser()"></app-icon-button>
+  <app-icon-button [class.disabled]="!selectedRowsCount" tooltip="Delete selected" class="toolbar-item" iconClass="remove" (click)="removeUsers($event)"></app-icon-button>
+  <app-icon-button tooltip="Reload" class="toolbar-item" iconClass="refresh" (click)="refresh()"></app-icon-button>
+  <div class="separator">|</div>
+  <app-icon-button [class.disabled]="!selectedRowsCount" tooltip="Participant summary" class="toolbar-item" iconClass="pie_chart" (click)="exportSummary($event)"></app-icon-button>
+  <app-icon-button [class.disabled]="!selectedRowsCount || !keysOptions.length" tooltip="Export detailed responses" class="toolbar-item" iconClass="cloud_download"
+    (click)="exportDetailed($event)"></app-icon-button>
+  <app-icon-button [class.disabled]="!selectedRowsCount" tooltip="Best negotiators" class="toolbar-item" iconClass="people"
+    (click)="exportBestNegotiators($event)"></app-icon-button>
+  <app-icon-button [class.disabled]="!selectedRowsCount" tooltip="Change status of selected participants" class="toolbar-item" iconClass="list" (click)="changeSelectedStatus($event)"></app-icon-button>
+  <app-icon-button [class.disabled]="!selectedRowsCount" tooltip="Update fields for selected participants" class="toolbar-item" iconClass="calendar_view_day" (click)="updateSelectedFields($event)"></app-icon-button>
+  <app-icon-button [class.disabled]="!selectedRowsCount" tooltip="Move participants" class="toolbar-item" iconClass="arrow_forward" (clicked)="moveUsersToOtherKey($event)"></app-icon-button>
+  <div class="separator">|</div>
+  <app-select-input [options]="keysOptions"  [focus]="!companyId" valueField='id' textField="value" [control]="keysControl" placeholder="Select a Key...">
+  </app-select-input>
+  <mat-checkbox class="custom_mat-checkbox blue" [disableRipple]="true" [checked]="showAll" (change)="onShowAll()">
+    <span class="show_all">Show all</span>
+  </mat-checkbox>
+  <div class="separator">|</div>
+  <app-search-input *ngIf="companyId" [focus]="companyId" id="search-input" [filterFormControl]="filterFormControl" (keyup)="onQuickFilterChanged($event)"
+    (clear)='onClear()' [debounceTime]="700"></app-search-input>
+  <app-select-input *ngIf="!companyId" [options]="participantsOptions" valueField='id' textField="value" [control]="participantsControl"
+    (keyup)="findParticipants($event)" placeholder="Search Participant"></app-select-input>
+  <div class="separator">|</div>
+  <div class="users_count">{{countText}}:&nbsp;{{selectedIds.length > 1 ? selectedIds.length : users_count }}</div>
+</app-admin-toolbar>
+<div id="msg_box" class="box hidden" [ngStyle]="{'left': pageX + 'px'}">Please make a selection first</div>
+<ag-grid-angular
+  *ngIf="companyId"
+  class="ag-theme-balham"
+  suppressDragLeaveHidesColumns="true"
+  #agGrid
+  [gridOptions]="gridOptions"
+  [context]="context"
+  rowDeselection="true"
+  [frameworkComponents]="frameworkComponents"
+  after-sort-changed.call="sortChanged"
+  suppressNoRowsOverlay
+  rowSelection="multiple">
+</ag-grid-angular>
+
+<ngx-loading [show]="(isLoading$ | async) || loading"></ngx-loading>
+
+

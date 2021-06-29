@@ -1,0 +1,26 @@
+<div class="dialog">
+  <div class="form-header">
+    <div class="header-text">{{data.title}}</div>
+    <app-icon-button iconClass="close" color="transparent" (clicked)="closeDialog()"></app-icon-button>
+  </div>
+  <div class="form-content">
+    <mat-dialog-content class="list">
+      <div class="report_row" *ngFor="let report of data.list">
+        <div class="report_item_style report_date">{{changeDateFormate(report.dt)}}</div>
+        <div class="report_item_style" style="width: 55%;">
+          <a target="_blank" [href]="'/clients/' + report.code" class="report_item_name ">
+            {{report.name}}</a>
+        </div>
+        <div class="report_item_style report_abbr">
+          {{(report['reportQuestionnaire'] && report['reportQuestionnaire'].abbreviation) ? report['reportQuestionnaire'].abbreviation : ''}}
+        </div>
+        <span class="preview_btn report_item_style" (click)="rename(report)">Rename</span>
+        <span class="preview_btn report_item_style" (click)="delete(report.id)">Delete</span>
+      </div>
+    </mat-dialog-content>
+  </div>
+  <div class="form-footer">
+  </div>
+</div>
+
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>

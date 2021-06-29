@@ -1,0 +1,28 @@
+<app-admin-toolbar>
+  <app-icon-button tooltip="Create new" class="toolbar-item" iconClass="add" (clicked)="addTrainingCourse()"></app-icon-button>
+  <app-icon-button tooltip="Delete selected" class="toolbar-item" iconClass="remove" [disabled]="!selectedRow"
+                   (clicked)="removeTrainingCourse(selectedRow)"></app-icon-button>
+  <app-icon-button tooltip="Clone" class="toolbar-item" iconClass="control_point_duplicate" [disabled]="!selectedRow" (clicked)="cloneTrainingCourse()"></app-icon-button>
+  <app-icon-button tooltip="Reload" class="toolbar-item" iconClass="refresh" (clicked)="refresh()"></app-icon-button>
+  <span class="separator"> | </span>
+  <app-search-input [focus]="true" [filterFormControl]="filterFormControl" id="search-input" #search (changes)='filter($event)' [debounceTime]="700"></app-search-input>
+</app-admin-toolbar>
+
+  <ag-grid-angular
+    #agGrid
+    class="ag-theme-balham"
+    [rowData]="displayedData"
+    [columnDefs]="columnDefs"
+    [rowDragManaged]="true"
+    [animateRows]="true"
+    rowSelection="single"
+    suppressDragLeaveHidesColumns="true"
+    [gridOptions]="gridOptions"
+    (rowDragEnd)="onRowDragEnd($event)"
+    (gridReady)="onGridReady($event)">
+  </ag-grid-angular>
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+
+
+
+

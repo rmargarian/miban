@@ -1,0 +1,32 @@
+<div class="dialog">
+  <div class="form-header">
+    <div class="header-text" appMatDialogDraggableTitle>Change Status, Attempts Limit and Report Completion of selected Participants</div>
+    <app-icon-button iconClass="close" color="transparent" (clicked)="closeDialog()"></app-icon-button>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="save()">
+    <div class="form-content">
+      <div class="group" formGroupName={{quest.id}} *ngFor="let quest of questionnaires">
+        <span class="title">{{quest.abbreviation}}:</span>
+        <app-form-input>
+          <app-select-input  [options]="statuses" valueField='value' textField='name' placeholder="Select Status"
+            [control]="getControl(quest.id).get('status')" [searchOn]="false"  input-transclude-slot>
+          </app-select-input>
+        </app-form-input>
+        <app-form-input>
+          <app-select-input  [options]="values" valueField='name' textField='name' placeholder="Attempts Limit"
+            [control]="getControl(quest.id).get('limit')" [searchOn]="false"  input-transclude-slot>
+          </app-select-input>
+        </app-form-input>
+        <app-form-input>
+          <app-select-input  [options]="values" valueField='name' textField='name' placeholder="Report Completion"
+            [control]="getControl(quest.id).get('report')" [searchOn]="false"  input-transclude-slot>
+          </app-select-input>
+        </app-form-input>
+      </div>
+    </div>
+    <div class="form-footer">
+      <app-text-button color="blue" type="button" text="Update" (clicked)="save()"></app-text-button>
+      <app-text-button color="blue" type="submit" text="Close" (click)="closeDialog()"></app-text-button>
+    </div>
+  </form>
+</div>

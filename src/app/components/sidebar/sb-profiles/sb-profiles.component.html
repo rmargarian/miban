@@ -1,0 +1,22 @@
+<li (click)="openFolder($event)" [class.opened]="folderOpened">
+  <div class="selectable" [class.selected]="(route$ | async) === parentRoute && !(qId$ | async)">
+    <span class="expander" (click)="triggerFolder($event)">
+      <i class="fas fa-chevron-right"></i>
+    </span>
+    <span class="image">
+      <i class="material-icons">folder</i>
+    </span>
+    <span class="item_name">{{capitalizeFirstLetter(parentRoute)}}</span>
+  </div>
+</li>
+<li class="li_child_list" [class.opened]="folderOpened">
+  <ul class="list child_list" [class.visibility0]="!folderOpened">
+    <li *ngFor="let item of data; let i = index;" class="selectable" (click)="itemChosen(item, $event)"
+    [class.selected]="(route$ | async) === parentRoute && (qId$ | async) === item.id">
+      <span class="image">
+        <i class="material-icons">list_alt</i>
+      </span>
+      <span class="item_name">{{item.title}}</span>
+    </li>
+  </ul>
+</li>

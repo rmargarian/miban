@@ -1,0 +1,36 @@
+<div class="dialog">
+  <form [formGroup]="logInForm" (ngSubmit)="login()">
+    <div class="form-header">PFA login</div>
+    <div class="form-content">
+      <mat-form-field class="full-width">
+        <input placeholder="Username" matInput formControlName="username" #username="matInput">
+        <mat-error *ngIf="f.username.errors && f.username.errors.required">
+          User name is <strong>required</strong>
+        </mat-error>
+        <mat-hint class="incorrectSubmit" *ngIf="errorMessage">
+          {{incorrectUser}}
+        </mat-hint>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <div class="passwordWithEye">
+          <input placeholder="Password" matInput formControlName="password" type="password" [type]="passWordType">
+          <app-icon-button (mousedown)="passwordToogle()" (mouseup)="passwordToogle()" class='eye' [iconClass]="passwordClass"></app-icon-button>
+        </div>
+        <mat-error *ngIf="f.password.errors && f.password.errors.required">
+          Password is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="f.password.errors && f.password.errors.minlength">
+          Min 8 characters required
+        </mat-error>
+        <mat-hint class="incorrectSubmit" *ngIf="errorMessage">
+          {{incorrectPass}}
+        </mat-hint>
+      </mat-form-field>
+
+    </div>
+    <div class="form-footer">
+      <app-text-button color="blue" type="submit" text="Login"></app-text-button>
+    </div>
+  </form>
+</div>

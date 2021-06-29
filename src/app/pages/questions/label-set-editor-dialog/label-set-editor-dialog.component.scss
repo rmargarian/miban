@@ -1,0 +1,18 @@
+@import "../../../../assets/styles/dialog";
+@import "../../../../assets/styles/colors";
+
+:host {
+
+  .message {
+    font-size: 17px;
+  }
+
+  .dialog .form-content {
+    padding: 0;
+    display: flex;
+    padding: 0px 10px 10px 10px;
+    flex-direction: column;
+
+    app-config-block{margin-bottom: 20px;}
+  }
+}

@@ -1,0 +1,58 @@
+<app-admin-toolbar>
+  <div>Import Participants</div>
+</app-admin-toolbar>
+<div class="import-wrapper" id="import-wrapper">
+  <div class="content">
+    <div class="header">Step 1: Select the file</div>
+    <div class="text">
+      File must be '.xls' or '.xlsx' spreadsheet format.
+      If the 'password' field is empty (i.e. "") then the participant will be prompted
+      to create a password on first login if you send the participant a unique link.
+    </div>
+    <div class="text">
+      <u>Note:</u> If you have left the password field blank, and you send out a general /profiles/ url email,
+      then you must tell the participant to enter a blank space when prompted for a password,
+      and then to create a password (i.e. not the best route as this is confusing).
+    </div>
+    <div class="text">
+      The order of the fields must be:
+    </div>
+    <div class="headers">
+      <span>Field order: Name, Family Name, Email, Job Title, Department, Manager, Password, Date, Location</span>
+    </div>
+    <div class="text">
+      <u>Note:</u> Job Title, Department, Manager, Password, Date and Location are optional fields.<br/>
+      <u>Note:</u> Date must have <b>d/m/Y</b> format. Invalid date will be replaced on current date.
+    </div>
+    <div class="form-wrapper block_margin">
+      <div class="input-wrapper">
+        <div class="label">File:<span class="star">*</span></div>
+        <app-file-input #file [control]="getControl('file')" [showValidation]="showValidation" [accept]="'.xlsx,.xls'"
+          (chosen)="fileChosen($event)"></app-file-input>
+      </div>
+      <div class="error_message">{{fileErrorMessage}}</div>
+      <div class="input-wrapper">
+        <div class="label">Key:<span class="star">*</span></div>
+        <app-select-input  [options]="keys" valueField='id' textField="value" [control]="getControl('key')" placeholder="Select a Key..."
+          [focus]="true" [validationErrors]="showValidation ? getControl('key').errors : null" input-transclude-slot>
+        </app-select-input>
+      </div>
+      <app-text-button color="blue" type="button" text="Next" class="top-7" (clicked)="uploadFile()"></app-text-button>
+    </div>
+    <div *ngIf="showSecond" class="block_margin">
+      <div class="header">Step 2: The headers match the data?</div>
+      <app-grid [data]="gridUsers" [companyId]="companyId"></app-grid>
+      <app-text-button color="blue" [disabled]="showThird" type="button" text="Back" class="right-5 top-10" (clicked)="backSecond()"></app-text-button>
+      <app-text-button color="blue" [disabled]="showThird" type="button" text="Next" class="top-10" (clicked)="nextSecond()"></app-text-button>
+    </div>
+    <div *ngIf="showThird" class="block_margin">
+      <div class="header">Step 3: How many participants will be imported?</div>
+      <div>You will be importing <b>{{validUsers.length}}</b> ({{createCount}} new, {{updateCount}} update) participant(s) from {{users.length}}</div>
+      <div *ngIf="invalidUsersCount"><b>{{invalidUsersCount}}</b> have(has) invalid First name / Last name / Email</div>
+      <div *ngIf="repeatedEmails.length"><b>{{repeatedEmails.length}}</b> Email(s) repeated</div>
+      <app-text-button color="blue" type="button" text="Back" class="right-5 top-10" (clicked)="backThird()"></app-text-button>
+      <app-text-button color="blue" [disabled]="!validUsers.length" type="button" text="Next" class="top-10" (clicked)="nextThird()"></app-text-button>
+    </div>
+  </div>
+  <ngx-loading [show]="loading"></ngx-loading>
+</div>

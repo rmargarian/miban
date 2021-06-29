@@ -1,0 +1,9 @@
+export enum QuestionType {
+  MULTIPLE_CHOISE_MULTI_OPTIONS = 1,
+  MULTIPLE_CHOISE_SINGLE_OPTION = 2,
+  ARRAY = 3,
+  ORDER = 4,
+  TEXT = 5,
+  NUMERIC = 6,
+  SLIDER = 8,
+}

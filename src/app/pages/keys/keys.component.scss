@@ -1,0 +1,51 @@
+@import "~assets/styles/variables";
+
+span {color: white;}
+
+.days-filter {margin-left: 5px;}
+
+#search-input {
+  background-color: white;
+  border-radius: 4px;
+}
+
+:host {
+  height: 100%;
+
+  .box {
+    position: absolute;
+    top: 70px;
+    left: 320px;
+    background: #0288d1;
+    border-radius: 6px;
+    color: white;
+    text-align: center;
+    padding: 4px;
+    transition: all 3s ease;
+    z-index: 1000000;
+    width: 300px;
+  }
+
+  app-icon-button {
+    &.disabled {
+      /deep/ .mat-icon {
+        color: rgba(0, 0, 0, 0.26) !important;
+      }
+    }
+  }
+}
+
+/deep/ .ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value {
+  font-size: 12px;
+}
+
+ag-grid-angular { height: calc(100% - #{$headerHeight}) }
+/deep/ .ag-theme-balham .ag-pinned-left-header { z-index: 1; background-color: #f5f7f7; }
+/deep/ .ag-theme-balham .ag-cell.overflow_unset { overflow: unset; }
+/deep/ .ag-theme-balham .ag-header-viewport { overflow: unset; }
+/deep/ .ag-theme-balham .ag-row-even {
+  &:hover { z-index: 1 }
+}
+/deep/ .ag-theme-balham .ag-row-odd {
+  &:hover { z-index: 1 }
+}

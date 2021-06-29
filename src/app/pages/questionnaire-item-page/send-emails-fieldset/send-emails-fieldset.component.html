@@ -1,0 +1,56 @@
+<div class="form-content emails-content">
+  <div class="input_content">
+    <app-form-input label="Templates:" labelWidth="100px" class="input_select">
+      <app-select-input [options]="templates" valueField='id' [control]="templatesControl" placeholder="Please select or type"
+        textField='email_desc' [searchOn]="true" input-transclude-slot>
+      </app-select-input>
+    </app-form-input>
+    <app-icon-button tooltip="Create template" class="toolbar-item" iconClass="add" (clicked)="addTemplate()"></app-icon-button>
+    <app-icon-button tooltip="Delete template" class="toolbar-item" iconClass="remove" [disabled]="!selectedTemplate"
+      (clicked)="deleteTemplate()"></app-icon-button>
+    <app-icon-button tooltip="Clone template" class="toolbar-item" iconClass="control_point_duplicate" [disabled]="!selectedTemplate"
+      (clicked)="cloneTemplate()"></app-icon-button>
+    <app-icon-button [tooltip]="'Save template'"
+      class="toolbar-item" iconClass="save"
+      [class.disabled]="form.invalid || validating || (selectedTemplate && formPristine)"
+      (clicked)="editTemplate()"></app-icon-button>
+  </div>
+  <form [formGroup]="form" flex>
+    <div class="form-content">
+      <app-form-input label="Description:" labelWidth="100px" required="true">
+        <app-input [control]="getControl('email_desc')" [validationErrors]="showValidation ? getControl('email_desc').errors : null"
+          input-transclude-slot></app-input>
+      </app-form-input>
+      <app-form-input label="Subject:" labelWidth="100px" required="true">
+        <app-input [control]="getControl('email_subject')" [validationErrors]="showValidation ? getControl('email_subject').errors : null"
+          input-transclude-slot></app-input>
+      </app-form-input>
+      <app-form-input label="Message:" labelWidth="100px" class="flex-start" required="true">
+        <app-textarea [control]="getControl('tpl_content')" [validationErrors]="showValidation ? getControl('tpl_content').errors : null"
+          input-transclude-slot></app-textarea>
+      </app-form-input>
+    </div>
+  </form>
+  <div class="send_bottom">
+    <app-text-button color="blue" text="Send"
+            tooltip={{sendBtnTooltipText}}
+            [tooltipPosition]="'bottom-start'"
+            (click)="onSend($event)"
+            (mouseout)="sendBtnOut($event)">
+    </app-text-button>
+    <mat-checkbox *ngIf="selectedTemplate"
+      class="custom_mat-checkbox"
+      [disableRipple]="true"
+      [(ngModel)]="important"
+      (ngModelChange)="onUpdateImportant()" content-transclude-slot>
+      <span class="show_all">Important</span>
+    </mat-checkbox>
+    <mat-checkbox *ngIf="!selectedTemplate"
+      class="custom_mat-checkbox"
+      [disableRipple]="true"
+      [(ngModel)]="important"
+      content-transclude-slot>
+      <span class="show_all">Important</span>
+    </mat-checkbox>
+  </div>
+</div>

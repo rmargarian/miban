@@ -1,0 +1,40 @@
+<app-admin-toolbar>
+  <app-icon-button tooltip="Create new" class="toolbar-item" iconClass="add" (click)="add()"></app-icon-button>
+  <app-icon-button tooltip="Save" [disabled]="form.invalid" class="toolbar-item" iconClass="save" (click)="save()"></app-icon-button>
+</app-admin-toolbar>
+<form [formGroup]="form" flex *ngIf="form">
+  <mat-tab-group #tabGroup>
+    <mat-tab label="Setup">
+      <fieldset>
+        <legend>{{qName}} Editor</legend>
+        <div class="form-content" *ngIf="tabGroup.selectedIndex === 0">
+          <app-form-input label="Title:" labelWidth="100px" required="true">
+            <app-input [control]="getControl('title')" [validationErrors]="getControl('title').errors "
+              [focus]="true" input-transclude-slot></app-input>
+          </app-form-input>
+          <app-form-input label="Acronym:" labelWidth="100px">
+            <app-input [control]="getControl('abbreviation')" [validationErrors]="getControl('abbreviation').errors "
+              input-transclude-slot (onkeypress)="return (this.value.length < this.maxLength)" [maxlength]="4"></app-input>
+          </app-form-input>
+          <app-form-input label="Description:" labelWidth="100px" class="flex-start">
+            <app-textarea [control]="getControl('description')" input-transclude-slot></app-textarea>
+          </app-form-input>
+          <app-form-input label="Welcome:" labelWidth="100px" class="flex-start">
+            <app-textarea [control]="getControl('welcome')" input-transclude-slot></app-textarea>
+          </app-form-input>
+        </div>
+      </fieldset>
+    </mat-tab>
+    <mat-tab label="Configuration">
+      <fieldset>
+        <legend>Maximum Time Allowed</legend>
+        <div class="form-content" *ngIf="tabGroup.selectedIndex === 1">
+          <app-form-input label="Timeout (mins):" labelWidth="100px" required="true">
+            <app-input [control]="getControl('incomplete_timeout')" [validationErrors]="getControl('incomplete_timeout').errors "
+              [focus]="true" [type]="'number'" [min]="1" (keydown)="numericKeyDown($event)" input-transclude-slot></app-input>
+          </app-form-input>
+        </div>
+      </fieldset>
+    </mat-tab>
+  </mat-tab-group>
+</form>

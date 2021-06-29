@@ -1,0 +1,22 @@
+<div class="dialog">
+  <div class="form-header">
+    <div class="header-text" appMatDialogDraggableTitle>{{title}}</div>
+    <app-icon-button iconClass="close" color="transparent" (clicked)="closeDialog()"></app-icon-button>
+  </div>
+  <div class="form-content">
+    <div class="report" *ngFor="let report of reports">
+      <span>{{report.companyName}}</span>
+      <div class="link">
+        <a href="{{report.link}}" target="_blank">{{report.link}}</a>
+        <app-text-button
+          color="blue" text="Copy"
+          #copyTooltip="matTooltip" matTooltip="{{message}}"
+          (clicked)="copyLink(report.link)">
+        </app-text-button>
+      </div>
+    </div>
+  </div>
+  <div class="form-footer">
+    <app-text-button color="blue" type="submit" text="Ok" (clicked)="closeDialog()"></app-text-button>
+  </div>
+</div>

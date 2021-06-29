@@ -1,0 +1,14 @@
+<button
+  class="text-button"
+  (click)="onClick($event)"
+  (mousedown)="mouseDown($event)"
+  [disableRipple]="true"
+  attr.data-tooltip="{{tooltip}}"
+  attr.data-tooltip-class="{{isError ? 'error-tooltip' : ''}}"
+  attr.data-tooltip-position="{{tooltipPosition}}"
+  [disabled]="disabled"
+  type="{{type}}"
+  [ngClass]="{blue: color === 'blue',grey: color === 'grey'}"
+  mat-button>
+  {{text}}
+</button>

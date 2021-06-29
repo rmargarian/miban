@@ -1,0 +1,41 @@
+pipeline {
+    agent none
+    stages {
+        stage('Prepare') {
+            agent {
+                node {
+                    label 'docker'
+                    customWorkspace '/home/forge/tmp-pfa'
+                }
+            }
+            steps {
+                sh 'docker-compose -f docker-compose.yml down'
+                sh 'docker-compose -f docker-compose.yml rm'
+            }
+        }
+        stage('Build') {
+            agent {
+                node {
+                    label 'docker'
+                    customWorkspace '/home/forge/tmp-pfa'
+                }
+            }
+            steps {
+                checkout scm
+                sh 'docker-compose -f docker-compose.yml up -d --build'
+                sh 'composer install -n --no-progress --no-suggest --prefer-dist'
+            }
+        }
+        stage('Testing') {
+            agent {
+                node {
+                    label 'docker'
+                    customWorkspace '/home/forge/tmp-pfa'
+                }
+            }
+            steps {
+                sh 'docker-compose run php php vendor/bin/codecept run'
+            }
+        }
+    }
+}

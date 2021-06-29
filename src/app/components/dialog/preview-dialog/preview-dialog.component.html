@@ -1,0 +1,109 @@
+<div class="dialog">
+  <div class="form-header">
+    <div class="header-text">
+      Question Preview
+    </div>
+    <app-icon-button iconClass="close" color="transparent" (clicked)="closeDialog()"></app-icon-button>
+  </div>
+  <div class="form-content">
+    <div class="full_width" [ngSwitch]="data.formValue.type">
+      <app-multi-choices-single-option *ngSwitchCase="QuestionType.MULTIPLE_CHOISE_SINGLE_OPTION"
+                                       [questionText]="data.formValue.title"
+                                       [help]="data.formValue.help"
+                                       [moreInfo]="data.formValue.more_info"
+                                       [isMandatory]="data.formValue.is_mandatory"
+                                       [options]="data.question_answer_options"
+                                       [labelText]="data.formValue.is_comment_label ? data.formValue.comment_label : ''"
+                                       [withComment]="data.formValue.is_commented"
+                                       [commentRows]="data.formValue.comment_row"
+                                       [align]="data.formValue.is_vertical_alig"
+                                       [commentControl]="checklistItemsForm.controls['commentControl']"
+                                       [control]="checklistItemsForm.controls['singleOption']">
+
+      </app-multi-choices-single-option>
+      <app-multi-choices-multi-options *ngSwitchCase="QuestionType.MULTIPLE_CHOISE_MULTI_OPTIONS"
+                                       [questionText]="data.formValue.title"
+                                       [help]="data.formValue.help"
+                                       [moreInfo]="data.formValue.more_info"
+                                       [isMandatory]="data.formValue.is_mandatory"
+                                       [options]="data.question_answer_options"
+                                       [labelText]="data.formValue.is_comment_label ? data.formValue.comment_label : ''"
+                                       [withComment]="data.formValue.is_commented"
+                                       [commentRows]="data.formValue.comment_row"
+                                       [align]="data.formValue.is_vertical_alig"
+                                       [commentControl]="checklistItemsForm.controls['commentControl']"
+                                       [control]="checklistItemsForm.controls['multipleOptions']">
+
+      </app-multi-choices-multi-options>
+      <app-array-answer-input *ngSwitchCase="QuestionType.ARRAY"
+                              [questionText]="data.formValue.title"
+                              [help]="data.formValue.help"
+                              [moreInfo]="data.formValue.more_info"
+                              [isMandatory]="data.formValue.is_mandatory"
+                              [labelText]="data.formValue.is_comment_label ? data.formValue.comment_label : ''"
+                              [withComment]="data.formValue.is_commented"
+                              [commentRows]="data.formValue.comment_row"
+                              [options]="data.question_answer_options"
+                              [labelSetOptions]="data.labelSetOptions"
+                              [commentControl]="checklistItemsForm.controls['commentControl']"
+                              [control]="checklistItemsForm.controls['arrayControl']">
+
+      </app-array-answer-input>
+      <app-text-answer-input *ngSwitchCase="QuestionType.TEXT"
+                             [questionText]="data.formValue.title"
+                             [help]="data.formValue.help"
+                             [moreInfo]="data.formValue.more_info"
+                             [isMandatory]="data.formValue.is_mandatory"
+                             [labelText]="data.formValue.is_comment_label ? data.formValue.comment_label : ''"
+                             [commentRows]="data.formValue.comment_row"
+                             [control]="checklistItemsForm.controls['text']"
+      ></app-text-answer-input>
+
+      <app-numeric-answer-input *ngSwitchCase="QuestionType.NUMERIC"
+                                [questionText]="data.formValue.title"
+                                [help]="data.formValue.help"
+                                [moreInfo]="data.formValue.more_info"
+                                [isMandatory]="data.formValue.is_mandatory"
+                                [labelText]="data.formValue.is_comment_label ? data.formValue.comment_label : ''"
+                                [withComment]="data.formValue.is_commented"
+                                [commentRows]="data.formValue.comment_row"
+                                [control]="checklistItemsForm.controls['number']"
+                                [commentControl]="checklistItemsForm.controls['commentControl']"
+      ></app-numeric-answer-input>
+
+      <app-slider-answer-input *ngSwitchCase="QuestionType.SLIDER"
+                               [questionText]="data.formValue.title"
+                               [help]="data.formValue.help"
+                               [moreInfo]="data.formValue.more_info"
+                               [rangeFromValue]="data.formValue.range_from_value"
+                               [rangeToValue]="data.formValue.range_to_value"
+                               [rangeInterval]="data.formValue.range_interval"
+                               [sliderMode]='data.formValue.slider_mode'
+                               [rangeFromTag]="data.formValue.range_from_tag"
+                               [rangeToTag]="data.formValue.range_to_tag"
+                               [displayValuesTooltips]="data.formValue.show_tooltips"
+                               [displayValuesPercentage]="data.formValue.range_percentages"
+                               [sliderTags]="data.sliderTags "
+                               [displayLabels]="data.formValue.show_labels"
+                               [withComment]="data.formValue.is_commented"
+                               [isMandatory]="data.formValue.is_mandatory"
+                               [commentRows]="data.formValue.comment_row ? data.formValue.comment_row : ''"
+                               [commentControl]="checklistItemsForm.controls['commentControl']"
+                               [control]="checklistItemsForm.controls['sliderControl']"
+                               [labelText]="data.formValue.is_comment_label ? data.formValue.comment_label : ''"
+
+      ></app-slider-answer-input>
+      <app-order-answer *ngSwitchCase="QuestionType.ORDER"
+                        [help]="data.formValue.help"
+                        [moreInfo]="data.formValue.more_info"
+                        [isMandatory]="data.formValue.is_mandatory"
+                        [questionText]="data.formValue.title"
+                        [options]="data.question_answer_options"
+                        [control]="checklistItemsForm.controls['orderOptionControl']"
+                        [withComment]="data.formValue.is_commented"
+                        [commentControl]="checklistItemsForm.controls['commentControl']"
+                        [labelText]="data.formValue.is_comment_label ? data.formValue.comment_label : ''"
+      ></app-order-answer>
+    </div>
+  </div>
+</div>
